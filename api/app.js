@@ -5,15 +5,19 @@ const createError = require('http-errors');
 const logger = require('morgan');
 const express = require('express');
 const passport = require('passport');
-const session = require('./config/session.config');
+
 require('./config/passport.config');
 require('./config/db.config');
+const cors = require('./config/cors.config');
+const session = require('./config/session.config');
+
 
 const app = express();
 
 app.use(express.json());
 app.use(logger('dev'));
 app.use(session);
+app.use(cors);
 app.use(passport.initialize());
 app.use(passport.session());
 

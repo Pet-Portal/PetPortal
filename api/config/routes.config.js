@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const pets = require('../controllers/pets.controller');
 const users = require('../controllers/users.controller');
+const pets = require('../controllers/pets.controller');
+const ratings = require('../controllers/ratings.controller');
+const posts = require('../controllers/posts.controller');
 
 const secure = require('../middlewares/secure.middleware');
+
 
 //PETS ROUTES
 
@@ -24,6 +27,20 @@ router.put('/users/:id', users.update);
 router.post('/login', users.login);
 router.post('/logout', users.logout);
 router.get('/activate', users.activate);
+
+
+//POSTS ROUTES
+
+router.get('/posts', posts.list);
+router.post('/posts', posts.create);
+router.get('/posts/:id', posts.get);
+router.delete('/posts/:id', posts.delete);
+router.put('/posts/:id', posts.update);
+
+
+//RATINGS ROUTES
+
+router.post('/ratings/:sitterName', ratings.create);
 
 
 module.exports = router;

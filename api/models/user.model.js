@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^.{8,}$/;
 const bcrypt = require('bcrypt');
+const Rating = require('../models/rating.model');
 const admins = (process.env.ADMINS_EMAIL || '')
     .split(',')
     .map(admin => admin.trim());
@@ -31,14 +32,31 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ["Pet Owner", "Pet Sitter", "admin"],
-        required: "A user role is required"
+        enum: ["guest", "admin"],
+        default: 'guest'
     },
+    location: {
+        type: {
+          type: String,
+          enum: ['Point'],
+          default: 'Point'
+        },
+        coordinates: {
+          type: [Number],
+          required: 'Your location is required',
+          validate: {
+            validator: function([lng, lat]) {
+              return isFinite(lng) && isFinite(lat) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
+            },
+            message: props => `Invalid location coordinates`
+          }
+        }
+      },
     verified: {
         date: Date,
         token: {
             type: String,
-            default: () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+            default: () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         },
     }
 }, {
@@ -49,6 +67,7 @@ const userSchema = new Schema({
             delete ret._id;
             delete ret.__v;
             delete ret.password;
+            ret.location = ret.location.coordinates;
             return ret
         }
     },
@@ -74,6 +93,16 @@ userSchema.pre('save', function (next) {
         });
     } else {
         next();
+    }
+});
+
+userSchema.virtual('ratings', {
+    ref: Rating.modelName,
+    localField: '_id',
+    foreignField: 'sitter',
+    options: {
+        sort: { createdAt: -1 },
+        limit: 10
     }
 });
 

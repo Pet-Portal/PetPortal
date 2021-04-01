@@ -4,6 +4,11 @@ const passport = require('passport');
 const mailer = require('../config/mailer.config');
 
 module.exports.create = (req, res, next) => {
+    const { location } = req.body;
+    req.body.location = {
+        type: 'Point',
+        coordinates: location
+    }
     User.findOne({ email: req.body.email })
         .then(user => {
             if (user) {
@@ -16,7 +21,13 @@ module.exports.create = (req, res, next) => {
                     })
             }
         })
-        .catch(next)
+        .catch(error => {
+            if (error.errors && error.errors['location.coordinates']) {
+              error.errors.location = error.errors['location.coordinates'];
+              delete error.errors['location.coordinates'];
+            }
+            next(error);
+          })
 };
 
 module.exports.list = (req, res, next) => {
