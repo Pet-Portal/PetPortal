@@ -31,7 +31,19 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.list = (req, res, next) => {
-    User.find()
+
+    const criteria = {};
+  if (req.query.role) {
+    criteria.role = req.query.role;
+  } else if (req.query.name) {
+    criteria.name = req.query.name;
+  } else if (req.query.email) {
+    criteria.email = req.query.email;
+  } else if (req.query.createdAt) {
+    criteria.createdAt = req.query.createdAt;
+  }
+
+    User.find(criteria)
         .then(users => {
             res.status(200).json(users)
         })
