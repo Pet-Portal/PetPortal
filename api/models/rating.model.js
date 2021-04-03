@@ -20,7 +20,7 @@ const ratingSchema = new Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
         },
-        pet: {
+        userRated: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }

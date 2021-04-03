@@ -40,7 +40,11 @@ router.put('/posts/:id', posts.update);
 
 //RATINGS ROUTES
 
-router.post('/ratings/:sitterName', ratings.create);
+router.post('/ratings/:userName', ratings.create);
+router.delete('/ratings/:id', ratings.delete);
+router.get('/ratings', ratings.list);
+router.put('/ratings/:id', ratings.update);
+router.get('/ratings/:id', ratings.get);
 
 
 module.exports = router;

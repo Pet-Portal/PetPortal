@@ -99,7 +99,7 @@ userSchema.pre('save', function (next) {
 userSchema.virtual('ratings', {
     ref: Rating.modelName,
     localField: '_id',
-    foreignField: 'sitter',
+    foreignField: 'user',
     options: {
         sort: { createdAt: -1 },
         limit: 10

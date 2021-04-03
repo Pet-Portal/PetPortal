@@ -1,13 +1,12 @@
 const createError = require('http-errors');
-const mongoose = require('mongoose');
 const Rating = require('../models/rating.model');
 const User = require('../models/user.model');
 
 module.exports.create = (req, res, next) => {
 
-    const { sitterName } = req.params;
+    const { userName } = req.params;
     console.log(req.params)
-    User.findOne({ name: sitterName })
+    User.findOne({ name: userName })
         .populate({
             path: 'ratings',
             populate: {
@@ -23,18 +22,43 @@ module.exports.create = (req, res, next) => {
             } else if (idChecked) {
                 createError(401, 'You have already rated this user')
             } else {
-                Rating.create(req.body)
+                Rating.create({...req.body, user: req.user.id, userRated: userRated.id})
                     .then(rating => {
-                        res.status(201).json({...rating, user: req.user.id, sitter: userRated.id})
+                        res.status(201).json(rating)
                     })
                     .catch(next)
             }
         })
 
+            //En React hay que pasarle el userName en los params para poder hacer la valoración.
+};
 
+module.exports.delete = (req, res, next) => {
+    Rating.findByIdAndDelete(req.params.id)
+        .then(rating => res.status(204).json({}))
+        .catch(next)
 };
 
 module.exports.list = (req, res, next) => {
+    Rating.find()
+        .then(ratings => res.status(200).json(ratings))
+        .catch(next)
+};
 
-}
+module.exports.update = (req, res, next) => {
+    Rating.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        .then(rating => {
+            if (rating) res.json(rating)
+            else next(createError(404, 'Rating not found'))
+        })
+        .catch(next)
+};
 
+module.exports.get = (req, res, next) => {
+    Rating.findById(req.params.id)
+        .then(rating => {
+            if (!rating) createError(404, 'Rating not found')
+            else res.json(rating)
+        })
+        .catch(next)
+};
