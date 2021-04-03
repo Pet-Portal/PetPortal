@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Rocky needs one day of cares",
+        "description": "The family travels in Holidays for 1 week and Rocky needs someone to look after him",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "state": "posted",
+        "start": "2021-05-04T15:34:17.124+00:00",
+        "end": "2021-05-14T15:34:17.124+00:00",
+        "user": "ironhackermodulo3@gmail.com",
+        "pet": "Rocky"
+    },
+    {
+        "title": "Mini needs a house for the weekend",
+        "description": "Family is out of town for the weekend and Mini should not stay alone at home",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "state": "posted",
+        "start": "2021-05-04T15:34:17.124+00:00",
+        "end": "2021-05-06T15:34:17.124+00:00",
+        "user": "alex@example.com",
+        "pet": "Mini"
+    }
+]

@@ -3,6 +3,7 @@ const Pet = require('../models/pet.model');
 
 module.exports.list = (req, res, next) => {
   Pet.find()
+    .populate('owner')
     .then(pet => res.json(pet))
     .catch(next)
 };
@@ -18,7 +19,10 @@ module.exports.get = (req, res, next) => {
 
 module.exports.create = (req, res, next) => {
   Pet.create({...req.body, user: req.user})
-    .then(pet => res.status(201).json(pet))
+    .then(pet => {
+      console.log('USER', req.user)
+      res.status(201).json(pet)
+    })
     .catch(next)
 };
 

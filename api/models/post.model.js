@@ -63,6 +63,10 @@ const postSchema = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    pet: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Pet'
     }
 }, {
     timestamps: true,

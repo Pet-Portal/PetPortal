@@ -4,6 +4,7 @@ const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"
 const PASSWORD_PATTERN = /^.{8,}$/;
 const bcrypt = require('bcrypt');
 const Rating = require('../models/rating.model');
+const Pet = require('../models/pet.model');
 const admins = (process.env.ADMINS_EMAIL || '')
     .split(',')
     .map(admin => admin.trim());
@@ -82,6 +83,22 @@ const userSchema = new Schema({
     }
 })
 
+userSchema.virtual('ratings', {
+    ref: Rating.modelName,
+    localField: '_id',
+    foreignField: 'user',
+    options: {
+        sort: { createdAt: -1 },
+        limit: 10
+    }
+});
+
+userSchema.virtual('pets', {
+    ref: Pet.modelName,
+    localField: '_id',
+    foreignField: 'owner'
+});
+
 userSchema.pre('save', function (next) {
     if (admins.includes(this.email)) {
         this.role = 'admin';
@@ -96,15 +113,7 @@ userSchema.pre('save', function (next) {
     }
 });
 
-userSchema.virtual('ratings', {
-    ref: Rating.modelName,
-    localField: '_id',
-    foreignField: 'user',
-    options: {
-        sort: { createdAt: -1 },
-        limit: 10
-    }
-});
+
 
 userSchema.methods.checkPassword = function (passwordToCheck) {
   return bcrypt.compare(passwordToCheck, this.password);
