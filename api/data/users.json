@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Alex",
+        "email": "alex@example.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Juan",
+        "email": "ironhackermodulo3@gmail.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    }
+]

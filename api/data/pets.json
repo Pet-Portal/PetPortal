@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Rocky",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Rocky is a schäfferhund very friendly",
+        "species": "Dog",
+        "age": 4,
+        "gender": "male",
+        "owner": "ironhackermodulo3@gmail.com"
+    },
+    {
+        "name": "Ruffus",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Ruffus is a Persian cat very friendly",
+        "species": "Cat",
+        "age": 2,
+        "gender": "male",
+        "owner": "alex@example.com"
+    },
+    {
+        "name": "Mini",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Mini is a Cocker Spaniel very friendly",
+        "species": "Dog",
+        "age": 5,
+        "gender": "female",
+        "owner": "alex@example.com"
+    },
+    {
+        "name": "Donatelo",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Donatelo is a turtle very friendly",
+        "species": "Turtle",
+        "age": 8,
+        "gender": "male",
+        "owner": "ironhackermodulo3@gmail.com"
+    }
+]

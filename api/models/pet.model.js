@@ -31,10 +31,14 @@ const petSchema = new Schema({
     required: 'Your pet species is required',
     enum: ['Dog', 'Cat', 'Bird', 'Fish', 'Turtle', 'Hamster', 'Horse']
   },
+  gender: {
+    type: String,
+    enum: ['male', 'female']
+  },
   age: {
     type: Number
   },
-  user: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
