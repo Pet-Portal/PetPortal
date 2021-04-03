@@ -30,6 +30,11 @@ const userSchema = new Schema({
             return "https://res.cloudinary.com/djbn7xax3/image/upload/v1617121010/PetPortal/avatar_aowbin.png"
         }
     },
+    interests:{
+        type: String,
+        required: 'A display of interests is required',
+        minlength: [5, 'Your interest needs at least 5 chars']
+    },
     role: {
         type: String,
         enum: ["guest", "admin"],

@@ -90,6 +90,13 @@ it("find all user email", async () => {
 
   expect(res.body.length).toBe(1);
 });
+/*
+it("find all user interst", async () => {
+  const res = await request.get("/api/users?interest= ");
+
+  expect(res.body.length).toBe(1);
+});
+*/
 
 it("find all user createdAt", async () => {
     const res = await request.get("/api/users?createdAt=2021-04-01T16:58:42.238+00:00");
