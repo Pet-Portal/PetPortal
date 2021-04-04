@@ -10,5 +10,59 @@
         "email": "ironhackermodulo3@gmail.com",
         "password": "123456789",
         "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Jeremy",
+        "email": "jeremy@mail.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Lisa",
+        "email": "lisathesuedout@mail.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Sara",
+        "email": "sararea@mail.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Leonard",
+        "email": "elleonardo@mailito.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Alba",
+        "email": "albatros34@mailito.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Ona",
+        "email": "onacloud@mailexample.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Jack",
+        "email": "elpesparrrago@mailito.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Claudia",
+        "email": "caludini@mail.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
+    },
+    {
+        "name": "Nicolas",
+        "email": "nikon25@mail.com",
+        "password": "123456789",
+        "location.coordinates": [50, 50]
     }
 ]
