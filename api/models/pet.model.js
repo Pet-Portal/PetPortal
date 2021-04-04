@@ -34,7 +34,7 @@ const petSchema = new Schema({
   age: {
     type: Number
   },
-  user: {
+  owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }

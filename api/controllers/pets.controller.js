@@ -9,6 +9,10 @@ module.exports.list = (req, res, next) => {
     criteria.age = req.query.age;
   } else if (req.query.name) {
     criteria.name = req.query.name;
+  }else if (req.query.gender) {
+    criteria.gender = req.query.gender;
+  }else if (req.query.owner) {
+    criteria.owner = req.query.owner;
   }
 
   Pet.find(criteria)

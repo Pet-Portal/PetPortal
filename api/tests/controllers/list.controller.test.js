@@ -28,8 +28,19 @@ it("find all pets Name Rocky", async () => {
   const res = await request.get("/api/pets?name=Rocky");
 
   expect(res.body.length).toBe(1);
+}); 
+/*
+  it("find all pets gender", async () => {
+    const res = await request.get("/api/pets?gender=male");
+  
+    expect(res.body.length).toBe(1);
 }) 
-
+    it("find all pets owner", async () => {
+      const res = await request.get("/api/pets?owner=ironhackermodulo3@gmail.com");
+    
+      expect(res.body.length).toBe(1);
+}) 
+*/
 
 //POSTS
   it("fetch all posts", async () => {
@@ -62,6 +73,20 @@ it("find all post end", async () => {
   
     expect(res.body.length).toBe(1);
   });
+/*
+  it("find all post user", async () => {
+    const res = await request.get("/api/posts?user=ironhackermodulo3@gmail.com");
+  
+    expect(res.body.length).toBe(1);
+  });
+
+  it("find all post pet", async () => {
+    const res = await request.get("/api/posts?pet=Rocky");
+  
+    expect(res.body.length).toBe(1);
+      });
+*/
+
 
 
 //USERS

@@ -19,6 +19,10 @@ module.exports.list = (req, res, next) => {
     criteria.start = req.query.start;
   } else if (req.query.end) {
     criteria.end = req.query.end;
+  }else if (req.query.user) {
+    criteria.user = req.query.user;
+  }else if (req.query.pet) {
+    criteria.pet = req.query.pet;
   }
 
   Post.find(criteria)
