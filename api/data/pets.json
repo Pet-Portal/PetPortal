@@ -23,7 +23,7 @@
         "description": "Mini is a Cocker Spaniel very friendly",
         "species": "Dog",
         "age": 5,
-        "gender": "female",
+        "gender": "Female",
         "owner": "alex@example.com"
     },
     {
@@ -32,7 +32,124 @@
         "description": "Donatelo is a turtle very friendly",
         "species": "Turtle",
         "age": 8,
-        "gender": "male",
+        "gender": "Male",
         "owner": "ironhackermodulo3@gmail.com"
+    },
+    {
+        "name": "Rafael",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Rafael like to stay long hours in his little lake",
+        "species": "Turtle",
+        "age": 3,
+        "gender": "Male",
+        "owner": "jeremy@mail.com"
+    },
+    {
+        "name": "Spertselin",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Spertselin like to play with his sister",
+        "species": "Dog",
+        "age": 6,
+        "gender": "Male",
+        "owner": "lisathesuedout@mail.com"
+    },
+    {
+        "name": "Spertselina",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Spertselin don't like to play with her brother at all",
+        "species": "Dog",
+        "age": 6,
+        "gender": "Female",
+        "owner": "lisathesuedout@mail.com"
+    },
+    {
+        "name": "Sindy",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Plays all day long with the gang!",
+        "species": "Cat",
+        "age": 5,
+        "gender": "Female",
+        "owner": "sararea@mail.com"
+    },
+    {
+        "name": "Mindy",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "She likes to watch all day long the brids Through the window",
+        "species": "Cat",
+        "age": 8,
+        "gender": "Female",
+        "owner": "sararea@mail.com"
+    },
+    {
+        "name": "Michu",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "He just like to ingnor me and play",
+        "species": "Cat",
+        "age": 10,
+        "gender": "Male",
+        "owner": "sararea@mail.com"
+    },
+    {
+        "name": "Miguelangelo",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Miguelangelo hangs out all day long on my garden",
+        "species": "Turtle",
+        "age": 15,
+        "gender": "Male",
+        "owner": "elleonardo@mailito.com"
+    },
+    {
+        "name": "Nemo",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Nemo plays all day with the mirror",
+        "species": "Fish",
+        "age": 1,
+        "gender": "Male",
+        "owner": "albatros34@mailito.com"
+    },
+    {
+        "name": "Splinter",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "He like to whatch and play with the Tortules of Leaonard and Jeremy",
+        "species": "Hamster",
+        "age": 2,
+        "gender": "male",
+        "owner": "onacloud@mailexample.com"
+    },
+    {
+        "name": "Blackpearl",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Likes to swim around the Treasure Chest",
+        "species": "Fish",
+        "age": 2,
+        "gender": "Female",
+        "owner": "elpesparrrago@mailito.com"
+    },
+    {
+        "name": "Piolin",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Don't like the name Silvestre",
+        "species": "Bird",
+        "age": 5,
+        "gender": "Male",
+        "owner": "caludini@mail.com"
+    },
+    {
+        "name": "Filex",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Likes to sings all day long",
+        "species": "Bird",
+        "age": 4,
+        "gender": "Male",
+        "owner": "nikon25@mail.com"
+    },
+    {
+        "name": "Manfred",
+        "image": "https://res.cloudinary.com/djbn7xax3/image/upload/v1617295726/PetPortal/scha%CC%88fferhund_oetymo.jpg",
+        "description": "Runs all day long in the garden",
+        "species": "Dog",
+        "age": 6,
+        "gender": "Male",
+        "owner": "nikon25@mail.com"
     }
 ]
