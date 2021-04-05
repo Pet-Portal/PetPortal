@@ -51,8 +51,8 @@ router.get('/ratings/:id', ratings.get);
 
 router.post('/messages/:postId', messages.create);
 router.delete('/messages/:id', messages.delete);
-router.get('/messages/:postId', messages.list);
+router.get('/posts/:postId/messages', messages.list);
 router.put('/messages/:id', messages.update);
-router.get('/messages/:id', messages.get);
+router.get('/messages/details/:id', messages.get);
 
 module.exports = router;

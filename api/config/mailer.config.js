@@ -20,3 +20,14 @@ module.exports.sendValidationEmail = (email, activationToken, name) => {
             html: `<h1>Hi ${name}</h1> <p>Click on the button below to activate your account ❤️</p> <a href="${appUrl}/activate?token=${activationToken}" style="padding: 10px 20px; color: white; background-color: pink; border-radius: 5px;">Click here</a>`
         });
 };
+
+
+module.exports.sendMessageEmail = (email, title, text, name, from, post) => {
+    transport
+        .sendMail({
+            to: email,
+            from: 'PetPortal Team <ironhackermodulo3@gmail.com>',
+            subject: 'New message in your post!',
+            html: `<h1>Hi ${name}</h1> <p>You got a new message from ${from} at your post: "${post}"!</p> <h3>Message:</h3> <p><b>Title: </b>${title}</p><p>Text: ${text}</p>`
+        })
+}
