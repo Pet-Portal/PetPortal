@@ -5,6 +5,7 @@ const pets = require('../controllers/pets.controller');
 const ratings = require('../controllers/ratings.controller');
 const posts = require('../controllers/posts.controller');
 const messages = require('../controllers/messages.controller');
+const storageUsers = require('./storageUsers.config');
 const secure = require('../middlewares/secure.middleware');
 
 
@@ -23,7 +24,7 @@ router.get('/users', users.list);
 router.post('/users', users.create);
 router.get('/users/:id', users.get);
 router.delete('/users/:id', users.delete);
-router.put('/users/:id', users.update);
+router.put('/users/:id', storageUsers.single('avatar'), users.update);
 router.post('/login', users.login);
 router.post('/logout', users.logout);
 router.get('/activate', users.activate);
