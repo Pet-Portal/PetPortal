@@ -18,7 +18,7 @@ module.exports.get = (req, res, next) => {
 };
 
 module.exports.create = (req, res, next) => {
-  Pet.create({...req.body, user: req.user})
+  Pet.create({ ...req.body, user: req.user })
     .then(pet => {
       console.log('USER', req.user)
       res.status(201).json(pet)

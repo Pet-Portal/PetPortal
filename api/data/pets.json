@@ -23,7 +23,7 @@
         "description": "Mini is a Cocker Spaniel very friendly",
         "species": "Dog",
         "age": 5,
-        "gender": "Female",
+        "gender": "female",
         "owner": "alex@example.com"
     },
     {
@@ -32,7 +32,7 @@
         "description": "Donatelo is a turtle very friendly",
         "species": "Turtle",
         "age": 8,
-        "gender": "Male",
+        "gender": "male",
         "owner": "ironhackermodulo3@gmail.com"
     },
     {
@@ -41,7 +41,7 @@
         "description": "Rafael like to stay long hours in his little lake",
         "species": "Turtle",
         "age": 3,
-        "gender": "Male",
+        "gender": "male",
         "owner": "jeremy@mail.com"
     },
     {
@@ -50,7 +50,7 @@
         "description": "Spertselin like to play with his sister",
         "species": "Dog",
         "age": 6,
-        "gender": "Male",
+        "gender": "male",
         "owner": "lisathesuedout@mail.com"
     },
     {
@@ -59,7 +59,7 @@
         "description": "Spertselin don't like to play with her brother at all",
         "species": "Dog",
         "age": 6,
-        "gender": "Female",
+        "gender": "female",
         "owner": "lisathesuedout@mail.com"
     },
     {
@@ -68,7 +68,7 @@
         "description": "Plays all day long with the gang!",
         "species": "Cat",
         "age": 5,
-        "gender": "Female",
+        "gender": "female",
         "owner": "sararea@mail.com"
     },
     {
@@ -77,7 +77,7 @@
         "description": "She likes to watch all day long the brids Through the window",
         "species": "Cat",
         "age": 8,
-        "gender": "Female",
+        "gender": "female",
         "owner": "sararea@mail.com"
     },
     {
@@ -86,7 +86,7 @@
         "description": "He just like to ingnor me and play",
         "species": "Cat",
         "age": 10,
-        "gender": "Male",
+        "gender": "male",
         "owner": "sararea@mail.com"
     },
     {
@@ -95,7 +95,7 @@
         "description": "Miguelangelo hangs out all day long on my garden",
         "species": "Turtle",
         "age": 15,
-        "gender": "Male",
+        "gender": "male",
         "owner": "elleonardo@mailito.com"
     },
     {
@@ -104,7 +104,7 @@
         "description": "Nemo plays all day with the mirror",
         "species": "Fish",
         "age": 1,
-        "gender": "Male",
+        "gender": "male",
         "owner": "albatros34@mailito.com"
     },
     {
@@ -122,7 +122,7 @@
         "description": "Likes to swim around the Treasure Chest",
         "species": "Fish",
         "age": 2,
-        "gender": "Female",
+        "gender": "female",
         "owner": "elpesparrrago@mailito.com"
     },
     {
@@ -131,7 +131,7 @@
         "description": "Don't like the name Silvestre",
         "species": "Bird",
         "age": 5,
-        "gender": "Male",
+        "gender": "male",
         "owner": "caludini@mail.com"
     },
     {
@@ -140,7 +140,7 @@
         "description": "Likes to sings all day long",
         "species": "Bird",
         "age": 4,
-        "gender": "Male",
+        "gender": "male",
         "owner": "nikon25@mail.com"
     },
     {
@@ -149,7 +149,7 @@
         "description": "Runs all day long in the garden",
         "species": "Dog",
         "age": 6,
-        "gender": "Male",
+        "gender": "male",
         "owner": "nikon25@mail.com"
     }
 ]
