@@ -4,7 +4,7 @@ const users = require('../controllers/users.controller');
 const pets = require('../controllers/pets.controller');
 const ratings = require('../controllers/ratings.controller');
 const posts = require('../controllers/posts.controller');
-
+const messages = require('../controllers/messages.controller');
 const secure = require('../middlewares/secure.middleware');
 
 
@@ -46,5 +46,13 @@ router.get('/ratings', ratings.list);
 router.put('/ratings/:id', ratings.update);
 router.get('/ratings/:id', ratings.get);
 
+
+//MESSAGES ROUTES
+
+router.post('/messages/:postId', messages.create);
+router.delete('/messages/:id', messages.delete);
+router.get('/posts/:postId/messages', messages.list);
+router.put('/messages/:id', messages.update);
+router.get('/messages/details/:id', messages.get);
 
 module.exports = router;
