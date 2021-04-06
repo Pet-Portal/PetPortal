@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('./user.model');
+const Pet = require('./pet.model');
+const Post = require('./post.model');
 
 const ratingSchema = new Schema(
     {
@@ -15,14 +18,26 @@ const ratingSchema = new Schema(
         },
         text: {
             type: String,
+            required: 'Text is required'
         },
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-        },
-        userRated: {
-            type: mongoose.Schema.Types.ObjectId,
+        owner: {
+            type: Schema.Types.ObjectId,
             ref: 'User'
+        },
+        post: {
+            type: Schema.Types.ObjectId,
+            ref: Post.modelName,
+            required: 'Post is required'
+        },
+        reference: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            refPath: 'referenceModelName'
+        },
+        referenceModelName: {
+            type: String,
+            required: true,
+            enum: ['User', 'Pet']
         }
     }, {
     timestamps: true,

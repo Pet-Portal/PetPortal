@@ -23,46 +23,35 @@ module.exports.create = (req, res, next) => {
         })
         .catch(error => {
             if (error.errors && error.errors['location.coordinates']) {
-              error.errors.location = error.errors['location.coordinates'];
-              delete error.errors['location.coordinates'];
+                error.errors.location = error.errors['location.coordinates'];
+                delete error.errors['location.coordinates'];
             }
             next(error);
-          })
+        })
 };
 
 module.exports.list = (req, res, next) => {
     User.find()
-        .then(users => {
-            res.status(200).json(users)
-        })
+        .then(users => res.json(users))
         .catch(next)
 };
 
-module.exports.get = (req, res, next) => {
-    User.findById(req.params.id)
-        .then(user => {
-            res.status(200).json(user)
-        })
-        .catch(next);
-};
+module.exports.get = (req, res, next) => res.status(200).json(req.foundedUser);
 
 module.exports.delete = (req, res, next) => {
-    User.findByIdAndDelete(req.params.id)
-        .then(user => res.status(204).end())
+    req.foundUser.delete()
+        .then(() => res.status(204).end())
         .catch(next)
-};
+}
 
 module.exports.update = (req, res, next) => {
-    const { id } = req.params;
+    if (req.file) {
+        req.body.avatar = req.file.path
+    }
+    Object.assign(req.foundUser, req.body);
 
-    User.findByIdAndUpdate(id, {...req.body, avatar: req.file.path}, { new: true })
-        .then(user => {
-            if (!req.file) {
-                next(createError(404, 'No file uploaded!'));
-                return;
-            }
-            return res.status(202).json(user)
-        })
+    req.foundUser.save()
+        .then(user => res.json(user))
         .catch(next)
 };
 
@@ -89,9 +78,9 @@ module.exports.activate = (req, res, next) => {
     ).then(user => {
         if (!user) {
             next(createError(404, 'Invalid activation token'));
-        } /* else {
-            res.redirect('/login');
-        } */
+        } else {
+            next();
+        }
     }).catch(next);
 };
 

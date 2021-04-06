@@ -6,6 +6,7 @@ const ratings = require('../controllers/ratings.controller');
 const posts = require('../controllers/posts.controller');
 const messages = require('../controllers/messages.controller');
 const storageUsers = require('./storageUsers.config');
+const usersMid = require('../middlewares/users.middleware');
 const secure = require('../middlewares/secure.middleware');
 
 
@@ -20,40 +21,31 @@ router.put('/pets/:id', pets.update);
 
 //USERS ROUTES
 
-router.get('/users', users.list);
+router.get('/users', secure.isAuthenticated, users.list);
 router.post('/users', users.create);
-router.get('/users/:id', users.get);
-router.delete('/users/:id', users.delete);
-router.put('/users/:id', storageUsers.single('avatar'), users.update);
+router.get('/users/:id', usersMid.userExists, secure.isAuthenticated, users.get);
+router.delete('/users/:id', usersMid.userExists, secure.isAuthenticated, users.delete);
+router.put('/users/:id', usersMid.userExists, secure.isAuthenticated, storageUsers.single('avatar'), users.update);
 router.post('/login', users.login);
-router.post('/logout', users.logout);
+router.post('/logout', secure.isAuthenticated, users.logout);
 router.get('/activate', users.activate);
 
 
 //POSTS ROUTES
 
 router.get('/posts', posts.list);
-router.post('/posts', posts.create);
-router.get('/posts/:id', posts.get);
-router.delete('/posts/:id', posts.delete);
-router.put('/posts/:id', posts.update);
+router.post('/posts', secure.isAuthenticated, posts.create);
+router.get('/posts/:id', secure.isAuthenticated, posts.get);
+router.delete('/posts/:id', secure.isAuthenticated, posts.delete);
+router.put('/posts/:id', secure.isAuthenticated, posts.update);
+router.post('/posts/:postId/ratings', secure.isAuthenticated, ratings.create)
 
-
-//RATINGS ROUTES
-
-router.post('/ratings/:userName', ratings.create);
-router.delete('/ratings/:id', ratings.delete);
-router.get('/ratings', ratings.list);
-router.put('/ratings/:id', ratings.update);
-router.get('/ratings/:id', ratings.get);
 
 
 //MESSAGES ROUTES
 
-router.post('/messages/:postId', messages.create);
-router.delete('/messages/:id', messages.delete);
+router.post('/posts/:postId/messages', messages.create);
 router.get('/posts/:postId/messages', messages.list);
-router.put('/messages/:id', messages.update);
-router.get('/messages/details/:id', messages.get);
+
 
 module.exports = router;

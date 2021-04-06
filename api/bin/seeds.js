@@ -24,17 +24,19 @@ mongoose.connection.once('open', () => {
             return Pet.create(petsWithOwnerIds)
                 .then(pets => {
                     console.info(`- Added ${pets.length} pets`)
-                    const postWithUserIds = postsData.map(post => {
-                        post.user = users.find(user => user.email === post.user);
-                        post.pet = pets.find(pet => pet.name === post.pet);
-                        return post
-                    })
-                    return Post.create(postWithUserIds)
+                    return Promise.resolve([users, pets])
                 })
-                .then(posts => console.info(`- Added ${posts.length} posts`))
-                .then(() => console.info(`- All data created!`))
-                .catch(error => console.error(error))
-                .then(() => process.exit(0))
         })
-
+        .then(([users, pets]) => {
+            const postWithUserIds = postsData.map(post => {
+                post.user = users.find(user => user.email === post.user);
+                post.pet = pets.find(pet => pet.name === post.pet);
+                return post
+            })
+            return Post.create(postWithUserIds)
+        })
+        .then(posts => console.info(`- Added ${posts.length} posts`))
+        .then(() => console.info(`- All data created!`))
+        .catch(error => console.error(error))
+        .then(() => process.exit(0))
 });

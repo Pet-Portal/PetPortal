@@ -4,7 +4,7 @@ const Pet = require('../models/pet.model');
 module.exports.list = (req, res, next) => {
   Pet.find()
     .populate('owner')
-    .then(pet => res.json(pet))
+    .then(pets => res.json(pets))
     .catch(next)
 };
 

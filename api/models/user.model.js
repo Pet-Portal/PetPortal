@@ -86,7 +86,7 @@ const userSchema = new Schema({
 userSchema.virtual('ratings', {
     ref: Rating.modelName,
     localField: '_id',
-    foreignField: 'user',
+    foreignField: 'owner',
     options: {
         sort: { createdAt: -1 },
         limit: 10
