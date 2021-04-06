@@ -55,8 +55,14 @@ module.exports.delete = (req, res, next) => {
 module.exports.update = (req, res, next) => {
     const { id } = req.params;
 
-    User.findByIdAndUpdate(id, req.body, { new: true })
-        .then(user => res.status(202).json(user))
+    User.findByIdAndUpdate(id, {...req.body, avatar: req.file.path}, { new: true })
+        .then(user => {
+            if (!req.file) {
+                next(createError(404, 'No file uploaded!'));
+                return;
+            }
+            return res.status(202).json(user)
+        })
         .catch(next)
 };
 

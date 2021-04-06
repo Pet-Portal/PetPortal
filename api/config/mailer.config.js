@@ -22,12 +22,12 @@ module.exports.sendValidationEmail = (email, activationToken, name) => {
 };
 
 
-module.exports.sendMessageEmail = (email, title, text, name, from, post) => {
+module.exports.sendMessageEmail = (email, title, text, price, name, from, post) => {
     transport
         .sendMail({
             to: email,
             from: 'PetPortal Team <ironhackermodulo3@gmail.com>',
             subject: 'New message in your post!',
-            html: `<h1>Hi ${name}</h1> <p>You got a new message from ${from} at your post: "${post}"!</p> <h3>Message:</h3> <p><b>Title: </b>${title}</p><p>Text: ${text}</p>`
+            html: `<h1>Hi ${name}</h1> <p>You got a new message from ${from} at your post: "${post}"!</p> <h3>Message:</h3> <p><b>Title: </b>${title}</p><p>Text: ${text}</p><h4>Price: ${price}€ per day`
         })
 }

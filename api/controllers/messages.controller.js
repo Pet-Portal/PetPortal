@@ -7,7 +7,7 @@ module.exports.create = (req, res, next) => {
     const { postId } = req.params;
     Promise.all([Post.findById(postId).populate('user'), Message.create({ ...req.body, user: req.user.id, post: postId })])
         .then(([post, message]) => {
-            mailer.sendMessageEmail(post.user.email, message.title, message.text, post.user.name, req.user.name, post.title)
+            mailer.sendMessageEmail(post.user.email, message.title, message.text, message.price, post.user.name, req.user.name, post.title)
             return res.status(201).json(message)
         })
         .catch(next)

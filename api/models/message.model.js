@@ -13,6 +13,10 @@ const messageSchema = new Schema({
         required: 'Text is required',
         minlength: [20, 'Text needs at least 20 chars']
     },
+    price: {
+        type: Number,
+        required: 'Price per day is required'
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
