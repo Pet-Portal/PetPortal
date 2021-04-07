@@ -36,7 +36,7 @@ module.exports.list = (req, res, next) => {
         .catch(next)
 };
 
-module.exports.get = (req, res, next) => res.status(200).json(req.foundedUser);
+module.exports.get = (req, res, next) => res.status(200).json(req.foundUser);
 
 module.exports.delete = (req, res, next) => {
     req.foundUser.delete()

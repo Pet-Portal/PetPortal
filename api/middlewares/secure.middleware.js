@@ -7,3 +7,13 @@ module.exports.isAuthenticated = (req, res, next) => {
     next(createError(401, 'user is not authenticated'))
   }
 };
+
+module.exports.checkRole = (role) => {
+  return (req, res, next) => {
+      if (req.user.role === role) {
+          next();
+      } else {
+          next(createError(403, 'Path is forbidden'));
+      };
+  };
+};

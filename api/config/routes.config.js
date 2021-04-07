@@ -7,21 +7,23 @@ const posts = require('../controllers/posts.controller');
 const messages = require('../controllers/messages.controller');
 const storageUsers = require('./storageUsers.config');
 const usersMid = require('../middlewares/users.middleware');
+const petsMid = require('../middlewares/pets.middleware');
+const postsMid = require('../middlewares/posts.middleware');
 const secure = require('../middlewares/secure.middleware');
 
 
 //PETS ROUTES
 
-router.get('/pets', pets.list);
-router.post('/pets', pets.create);
-router.get('/pets/:id', pets.get);
-router.delete('/pets/:id', pets.delete);
-router.put('/pets/:id', pets.update);
+router.get('/users/:userId/pets', secure.isAuthenticated, pets.list);
+router.post('/pets', secure.isAuthenticated, pets.create);
+router.get('/pets/:id', secure.isAuthenticated, petsMid.petExists, pets.get);
+router.delete('/pets/:id', secure.isAuthenticated, petsMid.petExists, pets.delete);
+router.put('/pets/:id', secure.isAuthenticated, petsMid.petExists, pets.update);
 
 
 //USERS ROUTES
 
-router.get('/users', secure.isAuthenticated, users.list);
+router.get('/users', secure.isAuthenticated, secure.checkRole('admin'), users.list);
 router.post('/users', users.create);
 router.get('/users/:id', usersMid.userExists, secure.isAuthenticated, users.get);
 router.delete('/users/:id', usersMid.userExists, secure.isAuthenticated, users.delete);
@@ -35,9 +37,9 @@ router.get('/activate', users.activate);
 
 router.get('/posts', posts.list);
 router.post('/posts', secure.isAuthenticated, posts.create);
-router.get('/posts/:id', secure.isAuthenticated, posts.get);
-router.delete('/posts/:id', secure.isAuthenticated, posts.delete);
-router.put('/posts/:id', secure.isAuthenticated, posts.update);
+router.get('/posts/:id', secure.isAuthenticated, postsMid.postExists, posts.get);
+router.delete('/posts/:id', secure.isAuthenticated, postsMid.postExists, posts.delete);
+router.put('/posts/:id', secure.isAuthenticated, postsMid.postExists, posts.update);
 router.post('/posts/:postId/ratings', secure.isAuthenticated, ratings.create)
 
 

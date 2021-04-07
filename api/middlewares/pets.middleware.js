@@ -1,0 +1,15 @@
+const Pet = require('../models/pet.model');
+const createError = require('http-errors');
+
+module.exports.petExists = (req, res, next) => {
+    const petId = req.params.petId || req.params.id;
+    Pet.findById(petId)
+        .then(pet => { 
+            if (!pet) next(createError(404, 'User not found'))
+            else {
+                req.foundPet = pet;
+                next()
+            }
+        })
+        .catch(next);
+}
