@@ -39,9 +39,14 @@ module.exports.list = (req, res, next) => {
 module.exports.get = (req, res, next) => res.status(200).json(req.foundUser);
 
 module.exports.delete = (req, res, next) => {
-    req.foundUser.delete()
-        .then(() => res.status(204).end())
-        .catch(next)
+    if (req.user.role === 'admin' || req.user.id === req.foundUser.id) {
+        req.foundUser.delete()
+            .then(() => res.status(204).end())
+            .catch(next)
+    } else {
+        next(createError(403, 'Forbidden permissions'))
+    }
+
 }
 
 module.exports.update = (req, res, next) => {
@@ -50,9 +55,14 @@ module.exports.update = (req, res, next) => {
     }
     Object.assign(req.foundUser, req.body);
 
-    req.foundUser.save()
-        .then(user => res.json(user))
-        .catch(next)
+    if (req.user.role === 'admin' || req.user.id === req.foundUser.id) {
+        req.foundUser.save()
+            .then(user => res.json(user))
+            .catch(next)
+    } else {
+        next(createError(403, 'Forbidden permissions'))
+    }
+
 };
 
 module.exports.login = (req, res, next) => {

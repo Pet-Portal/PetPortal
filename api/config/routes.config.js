@@ -6,6 +6,7 @@ const ratings = require('../controllers/ratings.controller');
 const posts = require('../controllers/posts.controller');
 const messages = require('../controllers/messages.controller');
 const storageUsers = require('./storageUsers.config');
+const storagePets = require('./storagePets.config');
 const usersMid = require('../middlewares/users.middleware');
 const petsMid = require('../middlewares/pets.middleware');
 const postsMid = require('../middlewares/posts.middleware');
@@ -18,7 +19,8 @@ router.get('/users/:userId/pets', secure.isAuthenticated, pets.list);
 router.post('/pets', secure.isAuthenticated, pets.create);
 router.get('/pets/:id', secure.isAuthenticated, petsMid.petExists, pets.get);
 router.delete('/pets/:id', secure.isAuthenticated, petsMid.petExists, pets.delete);
-router.put('/pets/:id', secure.isAuthenticated, petsMid.petExists, pets.update);
+router.put('/pets/:id', secure.isAuthenticated, petsMid.petExists, storagePets.single('image'), pets.update);
+router.post('/pets/:petId/ratings', secure.isAuthenticated, ratings.create);
 
 
 //USERS ROUTES
@@ -36,11 +38,12 @@ router.get('/activate', users.activate);
 //POSTS ROUTES
 
 router.get('/posts', posts.list);
+router.get('/users/:userId/posts', secure.isAuthenticated, posts.listUserPosts);
 router.post('/posts', secure.isAuthenticated, posts.create);
 router.get('/posts/:id', secure.isAuthenticated, postsMid.postExists, posts.get);
 router.delete('/posts/:id', secure.isAuthenticated, postsMid.postExists, posts.delete);
 router.put('/posts/:id', secure.isAuthenticated, postsMid.postExists, posts.update);
-router.post('/posts/:postId/ratings', secure.isAuthenticated, ratings.create)
+router.post('/posts/:postId/ratings', secure.isAuthenticated, ratings.create);
 
 
 
