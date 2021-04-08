@@ -87,7 +87,7 @@ module.exports.activate = (req, res, next) => {
       if (!user) {
         next(createError(404, "Invalid activation token"));
       } else {
-        next();
+        res.status(204).end()
       }
     })
     .catch(next);

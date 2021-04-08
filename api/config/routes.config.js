@@ -44,6 +44,7 @@ router.get('/posts/:id', secure.isAuthenticated, postsMid.postExists, posts.get)
 router.delete('/posts/:id', secure.isAuthenticated, postsMid.postExists, postsMid.ownedByUser, posts.delete);
 router.put('/posts/:id', secure.isAuthenticated, postsMid.postExists, postsMid.ownedByUser, posts.update);
 router.post('/posts/:postId/ratings', secure.isAuthenticated, postsMid.postExists, ratings.create);
+/* router.post('/posts/:postId/offers/:id/accept', secure.isAuthenticated, postsMid.postExists, offers.accept); */
 
 
 

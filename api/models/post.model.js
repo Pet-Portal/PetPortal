@@ -66,7 +66,7 @@ const postSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    pet: [
+    pets: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Pet",
@@ -85,11 +85,7 @@ const postSchema = new Schema(
     },
   }
 );
-/*
-postSchema.virtual('messages', {
-    ref:
-})
-*/
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
