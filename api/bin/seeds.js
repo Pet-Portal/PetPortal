@@ -29,7 +29,7 @@ mongoose.connection.once('open', () => {
         })
         .then(([users, pets]) => {
             const postWithUserIds = postsData.map(post => {
-                post.user = users.find(user => user.email === post.user);
+                post.owner = users.find(user => user.email === post.owner);
                 post.pet = pets.find(pet => pet.name === post.pet);
                 return post
             })

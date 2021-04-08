@@ -18,15 +18,11 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.delete = (req, res, next) => {
-
-  if (req.user.role === 'admin' || req.user.id === req.foundPet.owner.id) {
     req.foundPet
       .delete()
       .then(() => res.status(204).end())
       .catch(next);
-  } else {
-    next(createError(403, 'Forbidden permissions'))
-  }
+  
 };
 
 module.exports.update = (req, res, next) => {
@@ -40,14 +36,11 @@ module.exports.update = (req, res, next) => {
   if (req.file) {
     req.body.image = req.file.path
   }
+  
   Object.assign(req.foundPet, req.body);
-  if (req.user.role === 'admin' || req.user.id === req.foundPet.owner.id) {
-    req.foundPet
+      req.foundPet
       .save()
       .then((pet) => res.json(pet))
       .catch(next);
-  } else {
-    next(createError(403, 'Forbidden permissions'))
-  }
 
 };

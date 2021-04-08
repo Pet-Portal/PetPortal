@@ -13,7 +13,11 @@ module.exports.create = (req, res, next) => {
     } else {
         const referenceModelName = petId ? Pet.modelName : User.modelName;
         const reference = petId || userId;
+/*
+        if (req.foundPost.state === "confirmed" && ) {
 
+        }
+*/
         Rating.create({
             ...req.body,
             referenceModelName,

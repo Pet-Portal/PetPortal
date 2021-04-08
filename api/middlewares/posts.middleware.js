@@ -14,3 +14,11 @@ module.exports.postExists = (req, res, next) => {
         })
         .catch(next);
 };
+
+module.exports.ownedByUser = (req, res, next) => {
+    if (req.user.role === 'admin' || req.user.id === req.foundPost.owner.id) {
+        next()
+      } else {
+        next(createError(403, 'Forbidden permissions'))
+      }
+}

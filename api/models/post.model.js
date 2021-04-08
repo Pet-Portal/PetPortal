@@ -1,85 +1,95 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const moment = require('moment');
+const moment = require("moment");
+const Message = require("./offer.model");
 
-
-const postSchema = new Schema({
+const postSchema = new Schema(
+  {
     title: {
-        type: String,
-        required: 'Title is required',
-        minlength: [5, 'Title needs at least 5 chars']
+      type: String,
+      required: "Title is required",
+      minlength: [5, "Title needs at least 5 chars"],
     },
     description: {
-        type: String,
-        required: 'A description is required',
-        minlength: [10, 'Your description needs at least 10 chars']
+      type: String,
+      required: "A description is required",
+      minlength: [10, "Your description needs at least 10 chars"],
     },
     image: {
+      type: String,
+      required: "An Image is required",
+      image: {
         type: String,
-        required: 'An Image is required',
-        image: {
-            type: String,
-            required: 'Image is required',
-            validate: {
-              validator: function (value) {
-                try {
-                  const url = new URL(value);
-                  return url.protocol === 'http:' || url.protocol === 'https:'
-                } catch(error) {
-                  return false;
-                }
-              },
-              message: props => `Invalid image URL`
+        required: "Image is required",
+        validate: {
+          validator: function (value) {
+            try {
+              const url = new URL(value);
+              return url.protocol === "http:" || url.protocol === "https:";
+            } catch (error) {
+              return false;
             }
-          }
+          },
+          message: (props) => `Invalid image URL`,
+        },
+      },
     },
     state: {
-        type: String,
-        enum: ['posted', 'pending', 'confirmed'],
-        default: function () {
-            return 'posted'
-        }
+      type: String,
+      enum: ["pending", "confirmed"],//TODO: FALTA ESTADO INTERMEDIO DE PAGO PENDIENTE 
+      default: "pending"
     },
     start: {
-        type: Date,
-        required: 'Start date is required',
-        validate: {
-            validator: function (value) {
-                return moment().startOf('day').isBefore(moment(value))
-            },
-            message: props => `Starting must not be in the past`
-        }
+      type: Date,
+      required: "Start date is required",
+      validate: {
+        validator: function (value) {
+          return moment().startOf("day").isBefore(moment(value));
+        },
+        message: (props) => `Starting must not be in the past`,
+      },
     },
     end: {
-        type: Date,
-        required: 'End date is required',
-        validate: {
-            validator: function (value) {
-                return moment(value).isAfter(moment(this.start)) || moment(value).isSame(moment(this.start))
-            },
-            message: props => `Ending must not be before the start date`
-        }
+      type: Date,
+      required: "End date is required",
+      validate: {
+        validator: function (value) {
+          return (
+            moment(value).isAfter(moment(this.start)) ||
+            moment(value).isSame(moment(this.start))
+          );
+        },
+        message: (props) => `Ending must not be before the start date`,
+      },
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+   owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-    pet: {
+    pet: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Pet'
-    }
-}, {
+        ref: "Pet",
+      },
+    ],
+  },
+  {
     timestamps: true,
     toJSON: {
-        transform: (doc, ret) => {
-          ret.id = doc._id;
-          delete ret._id;
-          delete ret.__v;
-          return ret
-        }
-      }
+      transform: (doc, ret) => {
+        ret.id = doc._id;
+        delete ret._id;
+        delete ret.__v;
+        return ret;
+      },
+    },
+  }
+);
+/*
+postSchema.virtual('messages', {
+    ref:
 })
-
-const Post = mongoose.model('Post', postSchema);
+*/
+const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
