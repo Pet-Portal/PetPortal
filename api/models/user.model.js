@@ -59,6 +59,9 @@ const userSchema = new Schema({
             type: String,
             default: () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         },
+    },
+    social: {
+        google: String
     }
 }, {
     timestamps: true,

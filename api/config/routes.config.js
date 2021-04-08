@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const users = require('../controllers/users.controller');
 const pets = require('../controllers/pets.controller');
 const ratings = require('../controllers/ratings.controller');
@@ -11,6 +12,10 @@ const usersMid = require('../middlewares/users.middleware');
 const petsMid = require('../middlewares/pets.middleware');
 const postsMid = require('../middlewares/posts.middleware');
 const secure = require('../middlewares/secure.middleware');
+const GOOGLE_SCOPES = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile'
+]
 
 
 //PETS ROUTES
@@ -33,7 +38,8 @@ router.put('/users/:id', usersMid.userExists, secure.isAuthenticated, storageUse
 router.post('/login', users.login);
 router.post('/logout', secure.isAuthenticated, users.logout);
 router.get('/activate', users.activate);
-
+router.get('/authenticate/google', passport.authenticate('google-auth', { scope: GOOGLE_SCOPES }));
+router.get('/authenticate/google/cb', users.loginWithGoogle)
 
 //POSTS ROUTES
 
