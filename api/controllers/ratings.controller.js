@@ -13,8 +13,26 @@ module.exports.create = (req, res, next) => {
     } else {
         const referenceModelName = petId ? Pet.modelName : User.modelName;
         const reference = petId || userId;
-
-        if (req.foundPost.state === "confirmed") {
+        const userWithRatings = req.foundPost.owner.ratings.find(rating => rating.owner == req.user.id);
+        const petWithRatings = req.foundPost.pets.find(pet => pet.ratings.find(rating => rating.owner == req.user.id));
+        if (req.foundPost.petsitter) {
+            petSitterWithRatings = req.foundPost.petsitter.ratings.find(rating => rating.owner == req.user.id);
+        }
+        const ownPet = req.foundPost.pets.find(pet => pet.owner == req.user.id);
+        console.log(petSitterWithRatings)
+        if (req.foundPost.state === "pending") {
+            next(createError(400, 'Rating not allowed when status is not confirmed'))
+        } else if (userId && userWithRatings) {
+            next(createError(400, 'You have already rated this User'))
+        } else if (petId && petWithRatings) {
+            next(createError(400, 'You have already rated this Pet'))
+        } else if (req.user.id === req.body.userId) {
+            next(createError(400, 'You cant vote yourself'))
+        } else if (userId && petSitterWithRatings) {
+            next(createError(400, 'You have already rated this Petsitter'))
+        } else if (petId && ownPet) {
+            next(createError(400, 'You cant vote your own Pet'))
+        } else {
             Rating.create({
                 ...req.body,
                 referenceModelName,
@@ -24,8 +42,6 @@ module.exports.create = (req, res, next) => {
             })
             .then(rating => res.status(201).json(rating))
             .catch(next)
-        } else {
-            next(createError(400, 'Rating not allowed when status is not confirmed'))
         }    
     }
 };

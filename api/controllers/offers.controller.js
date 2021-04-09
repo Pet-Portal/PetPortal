@@ -2,7 +2,6 @@ const createError = require("http-errors");
 const Offer = require("../models/offer.model");
 const mailer = require("../config/mailer.config");
 const Post = require("../models/post.model");
-const { post } = require("../config/routes.config");
 
 module.exports.create = (req, res, next) => {
   const { postId } = req.params;
