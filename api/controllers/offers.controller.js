@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const Offer = require("../models/offer.model");
 const mailer = require("../config/mailer.config");
 const Post = require("../models/post.model");
+const { post } = require("../config/routes.config");
 
 module.exports.create = (req, res, next) => {
   const { postId } = req.params;
@@ -25,17 +26,22 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.accept = (req, res, next) => {
-    
   Offer.findById(req.params.id)
     .then((offer) => {
+      if (req.foundPost.state === "pending") {
+        req.foundPost.petsitter = offer.owner;
+        req.foundPost.state = "confirmed";
         if (offer.state === "pending") {
-            req.foundPost.petsitter = offer.owner;
+          req.foundPost.save().then((post) => {
             offer.state = "accepted";
-            return res.status(204).end();  
+            return offer.save().then((offer) => res.json([offer, post]));
+          });
         } else {
-            next(createError(400, "State is already accepted"))
+          next(createError(400, "Offer state is already accepted"));
         }
-        
-  })
-    .catch(createError(404, "Offer not found"))
+      } else {
+        next(createError(400, "Post state is already confirmed"));
+      }
+    })
+    .catch(createError(404, "Offer not found"));
 };

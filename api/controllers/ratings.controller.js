@@ -9,7 +9,7 @@ module.exports.create = (req, res, next) => {
     if (!petId && !userId) {
         next(createError(400, 'petId or userId is required'))
     } else if (petId && userId) {
-        next(createError(400, 'only petId or userId is allowed'))
+        next(createError(400, 'Only petId or userId is allowed'))
     } else {
         const referenceModelName = petId ? Pet.modelName : User.modelName;
         const reference = petId || userId;
