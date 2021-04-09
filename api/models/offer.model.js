@@ -17,6 +17,7 @@ const offerSchema = new Schema(
     price: {
       type: Number,
       required: "Price per day is required",
+      min: [0, "Price must be a postive number"] 
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
@@ -28,7 +29,7 @@ const offerSchema = new Schema(
     },
     state: {
       type: String,
-      enum: ["pending", "acepted"],
+      enum: ["pending", "accepted"],
       default: "pending",
     },
 

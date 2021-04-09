@@ -46,3 +46,11 @@ module.exports.delete = (req, res, next) => {
 };
 
 module.exports.get = (req, res, next) => res.json(req.foundPost);
+
+module.exports.confirm = (req, res, next) => {
+  if (req.foundPost.state === "pending") {
+    req.foundPost.state = "confirmed";
+  } else {
+    next(createError(400, "State is already confirmed"))
+  }
+};

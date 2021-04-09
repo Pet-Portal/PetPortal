@@ -7,7 +7,7 @@
         "start": "2021-05-04T15:34:17.124+00:00",
         "end": "2021-05-14T15:34:17.124+00:00",
         "owner": "ironhackermodulo3@gmail.com",
-        "pet": "Rocky"
+        "pets": "Rocky"
     },
     {
         "title": "Mini needs a house for the weekend",
@@ -17,7 +17,7 @@
         "start": "2021-05-04T15:34:17.124+00:00",
         "end": "2021-05-06T15:34:17.124+00:00",
         "owner": "alex@example.com",
-        "pet": "Mini"
+        "pets": "Mini"
     },
     {
         "title": "Rafael looking forward to stay all Easter in a nice place",
@@ -27,7 +27,7 @@
         "start": "2021-04-25T15:34:17.124+00:00",
         "end": "2021-04-31T15:34:17.124+00:00",
         "owner": "jeremy@mail.com",
-        "pet": "Rafael"
+        "pets": "Rafael"
     },
     {
         "title": "Spertselina at the weekend",
@@ -37,7 +37,7 @@
         "start": "2021-09-25T15:34:17.124+00:00",
         "end": "2021-10-05T15:34:17.124+00:00",
         "owner": "lisathesuedout@mail.com",
-        "pet": "Spertselini"
+        "pets": "Spertselini"
     },
     {
         "title": "Finding nemo",
@@ -47,7 +47,7 @@
         "start": "2021-07-04T15:34:17.124+00:00",
         "end": "2021-07-28T15:34:17.124+00:00",
         "owner": "albatros34@mailito.com",
-        "pet": "Nemo"
+        "pets": "Nemo"
     },
     {
         "title": "Michu needs a house for the fist week of july",
@@ -57,7 +57,7 @@
         "start": "2021-06-01T15:34:17.124+00:00",
         "end": "2021-06-07T15:34:17.124+00:00",
         "owner": "sararea@mail.com",
-        "pet": "Michu"
+        "pets": "Michu"
     },
     {
         "title": "Miguelangelo needs a nice place for few days",
@@ -67,7 +67,7 @@
         "start": "2021-06-01T15:34:17.124+00:00",
         "end": "2021-06-07T15:34:17.124+00:00",
         "owner": "elleonardo@mailito.com",
-        "pet": "Miguelangelo"
+        "pets": "Miguelangelo"
     },
     {
         "title": "Splinter for the week ",
@@ -77,7 +77,7 @@
         "start": "2021-07-04T15:34:17.124+00:00",
         "end": "2021-07-09T15:34:17.124+00:00",
         "owner": "onacloud@mailexample.com",
-        "pet": "Splinter"
+        "pets": "Splinter"
     },
     {
         "title": "Blackpearl in a bowl",
@@ -87,7 +87,7 @@
         "start": "2021-05-15T15:34:17.124+00:00",
         "end": "2021-05-18T15:34:17.124+00:00",
         "owner": "elpesparrrago@mailito.com",
-        "pet": "Blackpearl"
+        "pets": "Blackpearl"
     },
     {
         "title": "Piolin needs a tree house",
@@ -97,7 +97,7 @@
         "start": "2021-05-24T15:34:17.124+00:00",
         "end": "2021-05-26T15:34:17.124+00:00",
         "owner": "caludini@mail.com",
-        "pet": "Piolin"
+        "pets": "Piolin"
     },
     {
         "title": "Filex needs a branch",
@@ -107,7 +107,7 @@
         "start": "2021-05-14T15:34:17.124+00:00",
         "end": "2021-05-16T15:34:17.124+00:00",
         "owner": "nikon25@mail.com",
-        "pet": "Filex"
+        "pets": "Filex"
     },
     {
         "title": "manfred the sneaky one",
@@ -117,6 +117,6 @@
         "start": "2021-05-10T15:34:17.124+00:00",
         "end": "2021-05-15T15:34:17.124+00:00",
         "owner": "nikon25@mail.com",
-        "pet": "Manfred"
+        "pets": "Manfred"
     }
 ]
