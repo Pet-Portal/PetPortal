@@ -19,19 +19,20 @@ module.exports.create = (req, res, next) => {
             petSitterWithRatings = req.foundPost.petsitter.ratings.find(rating => rating.owner == req.user.id);
         }
         const ownPet = req.foundPost.pets.find(pet => pet.owner == req.user.id);
-        console.log(petSitterWithRatings)
         if (req.foundPost.state === "pending") {
             next(createError(400, 'Rating not allowed when status is not confirmed'))
+        } else if (req.user.id === req.body.userId) {
+            next(createError(400, 'You cant vote yourself'))
         } else if (userId && userWithRatings) {
             next(createError(400, 'You have already rated this User'))
         } else if (petId && petWithRatings) {
             next(createError(400, 'You have already rated this Pet'))
-        } else if (req.user.id === req.body.userId) {
-            next(createError(400, 'You cant vote yourself'))
         } else if (userId && petSitterWithRatings) {
             next(createError(400, 'You have already rated this Petsitter'))
         } else if (petId && ownPet) {
             next(createError(400, 'You cant vote your own Pet'))
+        } else if (req.user.id !== req.foundPost.owner || req.user.id !== req.foundPost.petsitter) { 
+            next(createError(400, 'Not allow to rate in this post'))
         } else {
             Rating.create({
                 ...req.body,

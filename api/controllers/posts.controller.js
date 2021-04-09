@@ -3,13 +3,16 @@ const createError = require("http-errors");
 const User = require("../models/user.model");
 
 module.exports.create = (req, res, next) => {
+  if (req.file) {
+    req.body.avatar = req.file.path;
+  }
   User.findById(req.user.id)
     .populate("pets")
     .then((user) => {
       return Post.create({
         ...req.body,
         owner: req.user,
-        pet: user.pets[0].id,
+        pets: user.pets[0].id, //Como decidir qué mascota se añade al anuncio, si una o varias
       }).then((post) => {
         res.status(201).json(post);
       });
