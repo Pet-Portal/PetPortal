@@ -4,6 +4,7 @@ const createError = require('http-errors');
 module.exports.userExists = (req, res, next) => {
     const userId = req.params.userId || req.params.id;
     User.findById(userId)
+        .populate('ratings')
         .then(user => {
             if (!user) next(createError(404, 'User not found'))
             else {
@@ -20,4 +21,4 @@ module.exports.ownedByUser = (req, res, next) => {
       } else {
         next(createError(403, 'Forbidden permissions'))
       }
-}
+};

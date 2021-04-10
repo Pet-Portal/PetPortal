@@ -8,6 +8,7 @@ passport.serializeUser((user, next) => {
 
 passport.deserializeUser((id, next) => {
   User.findById(id)
+    .populate('pets')
     .then(user => next(null, user))
     .catch(next);
 });
@@ -17,6 +18,7 @@ passport.use('local-auth', new LocalStrategy({
   passwordField: 'password'
 }, (email, password, next) => {
   User.findOne({ email })
+    .populate('pets')
     .then(user => {
       if (!user) {
         next(null, null, { email: 'Invalid email or password' });

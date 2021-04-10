@@ -63,6 +63,7 @@ const userSchema = new Schema({
 }, {
     timestamps: true,
     toJSON: {
+        virtuals: true,
         transform: (doc, ret) => {
             ret.id = doc._id;
             delete ret._id;
@@ -73,15 +74,6 @@ const userSchema = new Schema({
             return ret
         }
     },
-    toObject: {
-        transform: (doc, ret) => {
-            ret.id = doc._id;
-            delete ret._id;
-            delete ret.__v;
-            delete ret.password;
-            return ret
-        }
-    }
 })
 
 userSchema.virtual('ratings', {

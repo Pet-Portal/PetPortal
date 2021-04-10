@@ -6,16 +6,12 @@ module.exports.create = (req, res, next) => {
   if (req.file) {
     req.body.avatar = req.file.path;
   }
-  User.findById(req.user.id)
-    .populate("pets")
-    .then((user) => {
-      return Post.create({
-        ...req.body,
-        owner: req.user,
-        pets: user.pets[0].id, //Como decidir qué mascota se añade al anuncio, si una o varias
-      }).then((post) => {
-        res.status(201).json(post);
-      });
+  Post.create({
+    ...req.body,
+    owner: req.user.id,
+  })
+    .then((post) => {
+      res.status(201).json(post);
     })
     .catch(next);
 };
