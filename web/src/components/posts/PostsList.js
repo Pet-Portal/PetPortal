@@ -1,44 +1,45 @@
 import { useState, useEffect } from 'react';
-import PetItem from './PetItem';
+import PostItem from './PostItem';
 
-import petsService from '../../services/pets-service';
+
+import postsService from '../../services/posts-service';
 import { Fragment } from 'react';
 
 
-function PetsList() {
+function PostsList() {
 
   const [state, setState] = useState({
-    pets: [],
+    posts: [],
     loading: false
   });
 
   useEffect(() => {
     // componentDidMount
 
-    async function fetchPets() {
-      console.log('Fetching pets...');
+    async function fetchPosts() {
+      console.log('Fetching posts...');
       setState(state => ({
         ...state,
         loading: true
       }))
-      const pets = await petsService.list();
+      const posts = await postsService.list();
 
         setState({
-          pets: pets,
+          posts: posts,
           loading: false
         })
     }
 
-      fetchPets();
+      fetchPosts();
     
   },[]);
 
-  const { pets } = state;
+  const { posts } = state;
   return (
     <Fragment>
       <div className="row row-cols-4">
-        {pets.map(pet => (
-          <div key={pet.id} className="col mb-4"><PetItem pet={pet} /></div>
+        {posts.map(post => (
+          <div key={post.id} className="col mb-4"><PostItem post={post} /></div>
         ))}
       </div>
     </Fragment>
@@ -46,4 +47,4 @@ function PetsList() {
   )
 }
 
-export default PetsList;
+export default PostsList;

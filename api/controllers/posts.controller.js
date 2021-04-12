@@ -18,6 +18,7 @@ module.exports.create = (req, res, next) => {
 
 module.exports.list = (req, res, next) => {
   Post.find()
+    .populate('owner pets')
     .then((posts) => res.status(200).json(posts))
     .catch(next);
 };

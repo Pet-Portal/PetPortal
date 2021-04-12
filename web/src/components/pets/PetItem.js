@@ -13,6 +13,4 @@ function PetItem({ pet: { id, name, image, gender, owner, description, age, spec
             </div>
         </div>
     )
-}
-
-export default PetItem;
+}export default PetItem;

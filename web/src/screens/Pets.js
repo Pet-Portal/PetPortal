@@ -1,6 +1,6 @@
 
 import { Fragment } from "react";
-import PetsList from '../components/pets/PetsList';
+import PetsList from '../components/posts/PostsList';
 
 function Pets() {
   return (
