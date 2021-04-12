@@ -1,9 +1,7 @@
 
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import Pets from './screens/Pets';
-import Users from './screens/Users';
 import Posts from './screens/Posts';
-import Login from './screens/Login';
+
 
 
 function App() {
