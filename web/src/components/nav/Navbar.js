@@ -3,10 +3,10 @@ import React from "react";
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-light bg-info">
+      <nav className="navbar navbar-light">
         <a className="navbar-brand" href="#">
           <img
-            src="/docs/4.0/assets/brand/bootstrap-solid.svg"
+            src=""
             width="30"
             height="30"
             alt=""

@@ -13,9 +13,9 @@ function PostItem({
 }) {
   return (
       
-    <div className="card shadow p-3 mb-5 bg-white rounded " style={{width: "18rem"}}>
-      <img src={image} className="card-img-top  " alt={title} />
-      <div className="card-body rounded-lg">
+    <div className="card shadow p-3 mb-5 bg-white" style={{width: "18rem"}}>
+      <img src={image} className="card-img-top" alt={title} />
+      <div className="card-body">
         <p className="card-text">{description}</p>
         <p className="card-text">{start}</p>
         <p className="card-text">{end}</p>
