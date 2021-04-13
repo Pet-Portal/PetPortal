@@ -3,7 +3,6 @@ import PostItem from './PostItem';
 
 
 import postsService from '../../services/posts-service';
-import { Fragment } from 'react';
 
 
 function PostsList() {
@@ -36,14 +35,11 @@ function PostsList() {
 
   const { posts } = state;
   return (
-    <Fragment>
       <div className="row row-cols-4">
         {posts.map(post => (
           <div key={post.id} className="col mb-4"><PostItem post={post} /></div>
         ))}
       </div>
-    </Fragment>
-    
   )
 }
 

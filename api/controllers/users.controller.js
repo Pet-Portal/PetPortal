@@ -13,7 +13,7 @@ module.exports.create = (req, res, next) => {
     .then((user) => {
       if (user) {
         next(
-          createError(400, { errors: { email: "This email already exists" } })
+          createError(400, { errors: { email: { message: "This email already exists" } } })
         );
       } else {
         return User.create(req.body).then((user) => {

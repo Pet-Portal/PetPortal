@@ -25,6 +25,25 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.accept = (req, res, next) => {
+  /* if (req.foundPost.state === "pending" && req.user.id === req.foundPost.owner.id) {
+    req.foundPost.state = "confirmed";
+    Offer.findById(req.params.id)
+      .then(offer => {
+        if (offer.state === "pending") {
+          offer.state = "accepted"
+          req.foundPost.petsitter = offer.owner;
+          return Promise.all([req.foundPost.save(), offer.save()])
+          .then(([post, offer]) => res.json(offer))
+        } else {
+          next(createError(400, "Offer state is already accepted"))
+        } 
+      })
+      .catch(next(createError(400, "Offer not found")))
+  } else {
+    next(createError(400, "Post state is already confirmed or you are not the owner of this Post"))
+  } */
+
+
   Offer.findById(req.params.id)
     .then((offer) => {
       if (req.foundPost.state === "pending") {
@@ -39,7 +58,7 @@ module.exports.accept = (req, res, next) => {
           next(createError(400, "Offer state is already accepted"));
         }
       } else {
-        next(createError(400, "Post state is already confirmed"));
+        next(createError(400, "Post state is already confirmed or you are not the owner of this post"));
       }
     })
     .catch(createError(404, "Offer not found"));

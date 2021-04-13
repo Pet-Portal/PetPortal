@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.homeBg {
+  background-image: url("https://res.cloudinary.com/djbn7xax3/image/upload/v1618314500/PetPortal/homeImg2_jecdh0.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1800px;
+}
+

@@ -37,7 +37,6 @@ app.use((error, req, res, next) => {
         Object.keys(error.errors)
             .reduce((errors, key) => ({ ...errors, [key]: error.errors[key].message }), {}) : 
             undefined;
-
     res.status(error.status || 500).json(data)
 });
 

@@ -21,7 +21,7 @@ passport.use('local-auth', new LocalStrategy({
     .populate('pets')
     .then(user => {
       if (!user) {
-        next(null, null, { email: 'Invalid email or password' });
+        next(null, null, { email: { message: 'Invalid email or password' }});
       } else {
         return user.checkPassword(password)
           .then(match => {
@@ -29,10 +29,10 @@ passport.use('local-auth', new LocalStrategy({
               if (user.verified && user.verified.date) {
                 next(null, user);
               } else {
-                next(null, null, { email: 'Your account is not validated jet, please check your email' });
+                next(null, null, { email: { message: 'Your account is not validated yet, please check your email' }});
               }
             } else {
-              next(null, null, { email: 'Invalid email or password' });
+              next(null, null, { email: { message: 'Invalid email or password' }});
             }
           })
       }
