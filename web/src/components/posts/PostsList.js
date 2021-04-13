@@ -39,7 +39,7 @@ function PostsList() {
     <Fragment>
       <div className="row row-cols-4">
         {posts.map(post => (
-          <div key={post.id} className="col mb-4"><PostItem post={post} /></div>
+          <div key={post.id} className="col mb-4 "><PostItem post={post} /></div>
         ))}
       </div>
     </Fragment>
