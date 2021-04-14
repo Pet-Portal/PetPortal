@@ -31,7 +31,7 @@ const petSchema = new Schema(
     species: {
       type: String,
       required: "Your pet species is required",
-      enum: ["Dog", "Cat", "Bird", "Fish", "Turtle", "Hamster", "Horse"],
+      enum: ["Dog", "Cat", "Bird", "Fish", "Turtle", "Hamster", "Horse", "Other"],
     },
     gender: {
       type: String,
