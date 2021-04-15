@@ -162,11 +162,8 @@ const RegisterForm = () => {
                     placeholder="Password" onBlur={handleBlur} onChange={handleChange} value={user.password} />
                 <div className="invalid-feedback">{errors.password}</div>
             </div>
-
-            <div className="d-grid gap-2">
+            
                 <button className="btn btn-primary" type="submit" disabled={!isValid()}>Register</button>
-            </div>
-
         </form>
     )
 

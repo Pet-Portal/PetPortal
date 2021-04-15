@@ -10,3 +10,5 @@ export const logout = () => http.post('/logout')
 export const profile = () => http.get('/users/me')
 
 export const userProfile = (userId) => http.get(`/users/${userId}`)
+
+export const update = (userId, user) => http.patch(`/users/${userId}`, user)

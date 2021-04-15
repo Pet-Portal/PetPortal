@@ -12,10 +12,11 @@ module.exports.list = (req, res, next) => {
 module.exports.get = (req, res, next) => res.json(req.foundPet);
 
 module.exports.create = (req, res, next) => {
+  const pet = req.body;
   if (req.file) {
-    req.body.avatar = req.file.path;
+    pet.image = req.file.path;
   }
-  Pet.create({ ...req.body, owner: req.user.id })
+  Pet.create({ ...pet, owner: req.user.id })
     .then((pet) => res.status(201).json(pet))
     .catch(next);
 };

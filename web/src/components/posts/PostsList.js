@@ -13,7 +13,6 @@ function PostsList() {
   });
 
   useEffect(() => {
-    // componentDidMount
 
     async function fetchPosts() {
       console.log('Fetching posts...');

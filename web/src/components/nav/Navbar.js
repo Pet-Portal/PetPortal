@@ -34,7 +34,6 @@ export const Navbar = () => {
               </Fragment>
             ) : (
               <Fragment>
-                <li className="nav-item"><Link className="nav-link text-light" to="/create-event"><i className="fa fa-plus" /></Link></li>
                 <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/profile">{user.email}</NavLink></li>
                 <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled" onClick={handleLogout}><img src="/iconmonstr-log-out-14.svg" alt=""/></button></li>
               </Fragment>

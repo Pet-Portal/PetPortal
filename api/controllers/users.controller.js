@@ -51,6 +51,13 @@ module.exports.delete = (req, res, next) => {
 };
 
 module.exports.update = (req, res, next) => {
+  const { location } = req.body;
+  if (location) {
+    req.body.location = {
+      type: 'Point',
+      coordinates: location
+    }
+  }
   if (req.file) {
     req.body.avatar = req.file.path;
   }
