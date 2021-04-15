@@ -128,7 +128,7 @@ const PetForm = () => {
   const { pet, errors, touch } = state;
 
   return (
-    <div calssName="form-container">
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
         <div className="input-group mb-2">
           <span className="input-group-text">
@@ -191,9 +191,18 @@ const PetForm = () => {
         <br />
 
         <div className="input-group mb-2">
-          <span className="input-group-text"><i className="fa fa-paw"></i></span>
-          <select id="species" className="form-control" name="species" value={pet.species}>
-            <option selected>Choose pet Species</option>
+          <span className="input-group-text">
+            <i className="fa fa-paw"></i>
+          </span>
+          <select
+            id="species"
+            className="form-control"
+            name="species"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={pet.species}
+          >
+            <option defaultValue >Choose pet Species</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
             <option value="Bird">Bird</option>
@@ -204,7 +213,7 @@ const PetForm = () => {
             <option value="Other">Other</option>
           </select>
         </div>
-        <br />     
+        <br />
         <div className="input-group mb-2">
           <span className="input-group-text">
             <i className="fa fa-venus-mars"></i>
@@ -221,7 +230,7 @@ const PetForm = () => {
             id="gender"
             placeholder="Gender"
           >
-            <option selected>Choose pet gender</option>
+            <option defaultValue>Choose pet gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
@@ -248,7 +257,7 @@ const PetForm = () => {
           <div className="invalid-feedback">{errors.age}</div>
         </div>
         <br />
-        <button className="btn btn-primary" type="submit">
+        <button className="btn btn-primary" type="submit" disabled={!isValid}>
           Submit
         </button>
       </form>
