@@ -30,7 +30,7 @@ router.get('/users', secure.isAuthenticated, secure.checkRole('admin'), users.li
 router.post('/users', users.create);
 router.get('/users/:id', usersMid.userExists, secure.isAuthenticated, users.get);
 router.delete('/users/:id', usersMid.userExists, secure.isAuthenticated, usersMid.ownedByUser, users.delete);
-router.put('/users/:id', usersMid.userExists, secure.isAuthenticated, usersMid.ownedByUser, storageUsers.single('avatar'), users.update);
+router.patch('/users/:id', usersMid.userExists, secure.isAuthenticated, usersMid.ownedByUser, storageUsers.single('avatar'), users.update);
 router.post('/login', users.login);
 router.post('/logout', secure.isAuthenticated, users.logout);
 router.get('/activate', users.activate);

@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { useHistory } from "react-router";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthStore";
+
 import service from "../../services/pets-service";
 
 const validations = {
@@ -8,45 +9,53 @@ const validations = {
     if (!value) {
       message = "A pet name is required";
     }
+    return message
   },
   image: (value) => {
     let message;
     if (!value) {
       message = "A pet image is required";
     }
+    return message
   },
   description: (value) => {
     let message;
     if (!value) {
       message = "A pet description is required";
     } else if (value.length < 10) {
-      message = "A pet description is required";
+      message = "A description needs at least 10 chars";
     }
+    return message
   },
   age: (value) => {
     let message;
     if (!value) {
       message = "A pet age is required";
-    } else if (Number(value) < 0 || Number(value) !== Number) {
-      message = "A pet age is required";
+    } else if (Number(value) < 0) {
+      message = "A pet age must be greater than 0";
     }
+    return message
   },
   species: (value) => {
     let message;
     if (!value) {
       message = "A pet species is required";
     }
+    return message
   },
   gender: (value) => {
     let message;
     if (!value) {
       message = "A pet gender is required";
     }
+    return message
   },
 };
 
-const PetForm = () => {
-  const history = useHistory();
+const PetForm = ({ togglePetForm }) => {
+
+  const { user, onUserChange } = useContext(AuthContext);
+
   const [state, setState] = useState({
     pet: {
       name: "",
@@ -69,7 +78,7 @@ const PetForm = () => {
 
   const isValid = () => {
     const { errors } = state;
-    return !Object.keys(errors).some((error) => errors[error]);
+    return !Object.keys(errors).some(error => errors[error]);
   };
 
   const handleChange = (event) => {
@@ -79,11 +88,11 @@ const PetForm = () => {
       value = event.target.files[0];
     }
 
-    setState((state) => {
+    setState(state => {
       return {
         ...state,
         pet: {
-          ...state.event,
+          ...state.pet,
           [name]: value,
         },
         errors: {
@@ -108,27 +117,27 @@ const PetForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (isValid()) {
-      try {
-        const { pet } = state;
-        await service.create(pet);
-        history.push("/profile");
-      } catch (error) {
-        const { message, errors } =
-          error && error.response ? error.response.data : error;
-        console.error(message);
-        setState((state) => ({
-          ...state,
-          errors: errors,
-        }));
-      }
+    try {
+      const { pet } = state;
+      const newPet = await service.create(pet);
+      user.pets.push(newPet)
+      onUserChange({ ...user })
+      togglePetForm()
+    } catch (error) {
+      const { message, errors } =
+        error && error.response ? error.response.data : error;
+      console.error(message);
+      setState((state) => ({
+        ...state,
+        errors: errors,
+      }));
     }
   };
 
   const { pet, errors, touch } = state;
 
   return (
-    <div className="form-container">
+    <div className="container w-50">
       <form onSubmit={handleSubmit}>
         <div className="input-group mb-2">
           <span className="input-group-text">
@@ -137,14 +146,13 @@ const PetForm = () => {
           <input
             name="name"
             type="text"
-            className={`form-control ${
-              touch.name && errors.name ? "is-invalid" : ""
-            }`}
+            className={`form-control ${touch.name && errors.name ? "is-invalid" : ""
+              }`}
             onBlur={handleBlur}
             onChange={handleChange}
             value={pet.name}
             id="name"
-            placeholder="Name"
+            placeholder="Pet Name"
           />
           <div className="invalid-feedback">{errors.name}</div>
         </div>
@@ -156,13 +164,11 @@ const PetForm = () => {
           </span>
           <input
             type="file"
-            className={`form-control ${
-              touch.image && errors.image ? "is-invalid" : ""
-            }`}
+            className={`form-control ${touch.image && errors.image ? "is-invalid" : ""
+              }`}
             id="image"
             placeholder="Examine file"
             name="image"
-            value={pet.image}
             onBlur={handleBlur}
             onChange={handleChange}
           />
@@ -173,14 +179,13 @@ const PetForm = () => {
           <span className="input-group-text">
             <i className="fa fa-edit fa-fw"></i>
           </span>
-          <input
+          <textarea
             name="description"
             type="text"
-            className={`form-control ${
-              touch.description && errors.description ? "is-invalid" : ""
-            }`}
+            className={`form-control ${touch.description && errors.description ? "is-invalid" : ""
+              }`}
             id="Description"
-            rows="5"
+            rows="3"
             onBlur={handleBlur}
             onChange={handleChange}
             value={pet.description}
@@ -202,7 +207,7 @@ const PetForm = () => {
             onBlur={handleBlur}
             value={pet.species}
           >
-            <option defaultValue >Choose pet Species</option>
+            <option defaultValue>Choose pet Species</option>
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
             <option value="Bird">Bird</option>
@@ -219,11 +224,10 @@ const PetForm = () => {
             <i className="fa fa-venus-mars"></i>
           </span>
           <select
-            name="name"
+            name="gender"
             type="text"
-            className={`form-control ${
-              touch.gender && errors.gender ? "is-invalid" : ""
-            }`}
+            className={`form-control ${touch.gender && errors.gender ? "is-invalid" : ""
+              }`}
             onBlur={handleBlur}
             onChange={handleChange}
             value={pet.gender}
@@ -245,9 +249,9 @@ const PetForm = () => {
           <input
             name="age"
             type="number"
-            className={`form-control ${
-              touch.age && errors.age ? "is-invalid" : ""
-            }`}
+            min="0"
+            className={`form-control ${touch.age && errors.age ? "is-invalid" : ""
+              }`}
             onBlur={handleBlur}
             onChange={handleChange}
             value={pet.age}
@@ -257,7 +261,7 @@ const PetForm = () => {
           <div className="invalid-feedback">{errors.age}</div>
         </div>
         <br />
-        <button className="btn btn-primary" type="submit" disabled={!isValid}>
+        <button className="btn btn-primary mb-3" type="submit" disabled={!isValid()}>
           Submit
         </button>
       </form>
@@ -267,12 +271,3 @@ const PetForm = () => {
 
 export default PetForm;
 
-/*
-//button inside
-disabled={!isValid}
- 
-        
-        
-        
-
-*/

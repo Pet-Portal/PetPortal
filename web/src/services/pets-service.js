@@ -4,7 +4,15 @@ const list = (userId) => http.get(`/users/${userId}/pets`)
 
 const get = (id) => http.get(`/pets/${id}`)
 
-const create = (pet) => http.post(`/pets`, pet)
+const create = (pet) => {
+  const data = new FormData()
+
+  Object.keys(pet).forEach(key => {
+    data.append(key, pet[key])
+  })
+
+  return http.post(`/pets`, data)
+}
 
 const remove = (id) => http.delete(`/pets/${id}`)
 
