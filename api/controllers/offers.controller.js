@@ -1,27 +1,29 @@
 const createError = require("http-errors");
 const Offer = require("../models/offer.model");
 const mailer = require("../config/mailer.config");
-const Post = require("../models/post.model");
 
 module.exports.create = (req, res, next) => {
   const { postId } = req.params;
-  Promise.all([
-    Post.findById(postId).populate("owner"),
-    Offer.create({ ...req.body, owner: req.user.id, post: postId }),
-  ])
-    .then(([post, offer]) => {
-      mailer.sendMessageEmail(
-        post.owner.email,
-        offer.title,
-        offer.text,
-        offer.price,
-        post.owner.name,
-        req.user.name,
-        post.title
-      );
-      return res.status(201).json(offer);
-    })
-    .catch(next);
+  const offer = req.body;
+
+  if (req.foundPost.offers.find(offer => offer.owner.id === req.user.id)) {
+    next(createError(400, { errors: { title: { message: "Your have already sent an Offer to this Post" } } }))
+  } else {
+    Offer.create({ ...offer, owner: req.user.id, post: postId })
+      .then(offer => {
+        mailer.sendMessageEmail(
+          req.foundPost.owner.email,
+          offer.title,
+          offer.text,
+          offer.price,
+          req.foundPost.owner.name,
+          req.user.name,
+          req.foundPost.title
+        );
+        return res.status(201).json(offer)
+      })
+      .catch(next)
+  }
 };
 
 module.exports.accept = (req, res, next) => {

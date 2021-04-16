@@ -3,11 +3,12 @@ const createError = require("http-errors");
 const User = require("../models/user.model");
 
 module.exports.create = (req, res, next) => {
+  const post = req.body
   if (req.file) {
-    req.body.avatar = req.file.path;
+    post.image = req.file.path;
   }
   Post.create({
-    ...req.body,
+    ...post,
     owner: req.user.id,
   })
     .then((post) => {

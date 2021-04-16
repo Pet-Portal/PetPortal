@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { register } from '../../services/users-service';
+import service from '../../services/users-service';
 
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^.{8,}$/;
@@ -109,7 +109,7 @@ const RegisterForm = () => {
             try {
                 const { user } = state;
                 user.location = [Number(user.longitude), Number(user.latitude)];
-                await register(user);
+                await service.register(user);
                 history.push('/login', { email: user.email });
             } catch (error) {
                 const { message, errors } = error && error.response ? error.response.data : error;

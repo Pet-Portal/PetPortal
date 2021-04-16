@@ -1,14 +1,14 @@
 import { AuthContext } from '../../contexts/AuthStore';
 import { Link, NavLink, useHistory } from 'react-router-dom';
 import { useContext, Fragment } from 'react';
-import { logout } from '../../services/users-service';
+import service from '../../services/users-service';
 
 
 export const Navbar = () => {
   const { user, isAuthenticated, onUserChange } = useContext(AuthContext);
   const history = useHistory();
   async function handleLogout() {
-    await logout();
+    await service.logout();
     onUserChange(undefined);
     history.push("/login");
   }
@@ -34,7 +34,7 @@ export const Navbar = () => {
               </Fragment>
             ) : (
               <Fragment>
-                <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/profile">{user.email}</NavLink></li>
+                <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/myProfile">{user.email}</NavLink></li>
                 <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled" onClick={handleLogout}><img src="/iconmonstr-log-out-14.svg" alt=""/></button></li>
               </Fragment>
             )}

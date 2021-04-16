@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const moment = require("moment");
+const Offer = require("./offer.model");
 
 const postSchema = new Schema(
   {
@@ -88,6 +89,12 @@ const postSchema = new Schema(
     },
   }
 );
+
+postSchema.virtual('offers', {
+  ref: Offer.modelName,
+  localField: '_id',
+  foreignField: 'post'
+});
 
 const Post = mongoose.model("Post", postSchema);
 

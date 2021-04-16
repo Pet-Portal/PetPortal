@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useHistory, useLocation } from "react-router";
-import { login } from "../../services/users-service";
+import service from "../../services/users-service";
 import { AuthContext } from "../../contexts/AuthStore";
 
 const LoginForm = () => {
@@ -32,7 +32,7 @@ const LoginForm = () => {
         event.preventDefault()
 
         try {
-            const user = await login(state.user.email, state.user.password);
+            const user = await service.login(state.user.email, state.user.password);
             onUserChange(user)
             history.push('/posts')
         } catch (error) {

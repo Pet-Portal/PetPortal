@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthStore";
-import { update } from "../../services/users-service";
+import service from "../../services/users-service";
 
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -31,7 +31,6 @@ const validations = {
 
 const UserForm = ({ toggleUserForm, toggleLoading }) => {
     const { user, onUserChange } = useContext(AuthContext)
-    console.log(user)
     const [state, setState] = useState({
         userProfile: {
             name: user.name,
@@ -55,6 +54,7 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
 
     const handleChange = (event) => {
         let { name, value } = event.target;
+        
         if (event.target.files) {
             value = event.target.files[0];
         }
@@ -94,8 +94,7 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
             try {
                 const userData = { ...state.userProfile };
                 userData.location = [Number(userData.longitude), Number(userData.latitude)];
-                console.log(userData)
-                await update(user.id, userData);
+                await service.update(user.id, userData);
                 onUserChange({ ...user, ...userData })
                 toggleUserForm()
                 toggleLoading()
@@ -114,7 +113,7 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
     const { userProfile, errors, touch } = state;
 
     return (
-        <div className="container w-50">
+        <div className="container">
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-4">
                     <span className="input-group-text">

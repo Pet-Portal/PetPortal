@@ -19,3 +19,7 @@ code {
   height: 1800px;
 }
 
+.postList:hover {
+  transform: scale(1.1);
+}
+

@@ -51,6 +51,6 @@ router.post('/posts/:postId/offers/:id/accept', secure.isAuthenticated, postsMid
 
 //OFFERS ROUTES
 
-router.post('/posts/:postId/offers', offers.create);
+router.post('/posts/:postId/offers', secure.isAuthenticated, postsMid.postExists, offers.create);
 
 module.exports = router;

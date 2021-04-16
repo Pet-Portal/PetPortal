@@ -28,7 +28,7 @@ const userSchema = new Schema({
     avatar: {
         type: String,
         default: function() {
-            return "https://res.cloudinary.com/djbn7xax3/image/upload/v1617121010/PetPortal/avatar_aowbin.png"
+            return `https://i.pravatar.cc/150?u=${this.id}`
         }
     },
     role: {

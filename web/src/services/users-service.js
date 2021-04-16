@@ -1,14 +1,25 @@
 
 import http from './base-api-service';
 
-export const login = (email, password) => http.post('/login', { email, password })
+const login = (email, password) => http.post('/login', { email, password })
 
-export const register = (user) => http.post('/users', user)
+const register = (user) => http.post('/users', user)
 
-export const logout = () => http.post('/logout')
+const logout = () => http.post('/logout')
 
-export const profile = () => http.get('/users/me')
+const profile = () => http.get('/users/me')
 
-export const userProfile = (userId) => http.get(`/users/${userId}`)
+const userProfile = (userId) => http.get(`/users/${userId}`)
 
-export const update = (userId, user) => http.patch(`/users/${userId}`, user)
+const update = (userId, user) => http.patch(`/users/${userId}`, user)
+
+const service = {
+    login,
+    register,
+    logout,
+    profile,
+    userProfile,
+    update
+}
+
+export default service;

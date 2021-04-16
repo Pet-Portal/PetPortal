@@ -25,6 +25,13 @@ module.exports.postExists = (req, res, next) => {
         model: "Rating",
       },
     })
+    .populate({
+      path: "offers",
+      populate: {
+        path: "owner",
+        model: "User",
+      },
+    })
     .then((post) => {
       if (!post) next(createError(404, "Post not found"));
       else {

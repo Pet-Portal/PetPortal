@@ -116,8 +116,8 @@ const PetForm = ({ togglePetForm, toggleLoading }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    toggleLoading()
     try {
+      toggleLoading()
       const { pet } = state;
       const newPet = await service.create(pet);
       user.pets.push(newPet)
@@ -138,7 +138,7 @@ const PetForm = ({ togglePetForm, toggleLoading }) => {
   const { pet, errors, touch } = state;
 
   return (
-    <div className="container w-50">
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <div className="input-group mb-2">
           <span className="input-group-text">

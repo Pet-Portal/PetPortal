@@ -7,9 +7,10 @@ import Navbar from './components/nav/Navbar';
 import Register from './screens/Register';
 import Login from './screens/Login';
 import AuthStore from './contexts/AuthStore';
-import Profile from './screens/Profile';
+import MyProfile from './screens/MyProfile';
 import PrivateRoute from './guards/PrivateRoute';
-
+import PostDetails from './screens/PostDetails';
+import Profile from './screens/Profile';
 
 
 function App() {
@@ -21,8 +22,10 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
-          <Route exact path="/posts" component={Posts} />
-          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute exact path="/posts" component={Posts} />
+          <PrivateRoute exact path="/myProfile" component={MyProfile} />
+          <PrivateRoute exact path="/profile/:id" component={Profile} />
+          <PrivateRoute exact path="/posts/:id" component={PostDetails} />
         </Switch>
       </AuthStore>
     </Router>

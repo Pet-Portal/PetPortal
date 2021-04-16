@@ -12,7 +12,6 @@ module.exports.create = (req, res, next) => {
   } else if (petId && userId) {
     next(createError(400, "Only petId or userId is allowed"));
   } else {
-    console.log(typeof req.foundPost.end);
     const userWithRatings = req.foundPost.owner.ratings.find(
       (rating) => rating.owner == req.user.id
     );
