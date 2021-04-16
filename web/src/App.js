@@ -8,6 +8,7 @@ import Register from './screens/Register';
 import Login from './screens/Login';
 import AuthStore from './contexts/AuthStore';
 import Profile from './screens/Profile';
+import PrivateRoute from './guards/PrivateRoute';
 
 
 
@@ -21,7 +22,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Home} />
           <Route exact path="/posts" component={Posts} />
-          <Route path="/profile" component={Profile} />
+          <PrivateRoute path="/profile" component={Profile} />
         </Switch>
       </AuthStore>
     </Router>

@@ -52,7 +52,7 @@ const validations = {
   },
 };
 
-const PetForm = ({ togglePetForm }) => {
+const PetForm = ({ togglePetForm, toggleLoading }) => {
 
   const { user, onUserChange } = useContext(AuthContext);
 
@@ -116,13 +116,14 @@ const PetForm = ({ togglePetForm }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    toggleLoading()
     try {
       const { pet } = state;
       const newPet = await service.create(pet);
       user.pets.push(newPet)
       onUserChange({ ...user })
       togglePetForm()
+      toggleLoading()
     } catch (error) {
       const { message, errors } =
         error && error.response ? error.response.data : error;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import PostItem from './PostItem';
 
 
@@ -22,23 +22,26 @@ function PostsList() {
       }))
       const posts = await postsService.list();
 
-        setState({
-          posts: posts,
-          loading: false
-        })
+      setState({
+        posts: posts,
+        loading: false
+      })
     }
 
-      fetchPosts();
-    
-  },[]);
+    fetchPosts();
 
-  const { posts } = state;
+  }, []);
+
+  const { posts, loading } = state;
   return (
+    <Fragment>
+      {loading && <div className="container d-flex justify-content-center align-items-center vh-100"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..."/></div>}
       <div className="row row-cols-4 ">
         {posts.map(post => (
           <div key={post.id} className="col mb-4"><PostItem post={post} /></div>
         ))}
       </div>
+    </Fragment>
   )
 }
 

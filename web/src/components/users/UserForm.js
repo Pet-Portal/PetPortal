@@ -29,7 +29,7 @@ const validations = {
     },
 }
 
-const UserForm = ({ toggleUserForm }) => {
+const UserForm = ({ toggleUserForm, toggleLoading }) => {
     const { user, onUserChange } = useContext(AuthContext)
     console.log(user)
     const [state, setState] = useState({
@@ -89,6 +89,7 @@ const UserForm = ({ toggleUserForm }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        toggleLoading()
         if (isValid()) {
             try {
                 const userData = { ...state.userProfile };
@@ -97,6 +98,7 @@ const UserForm = ({ toggleUserForm }) => {
                 await update(user.id, userData);
                 onUserChange({ ...user, ...userData })
                 toggleUserForm()
+                toggleLoading()
             } catch (error) {
                 const { message, errors } =
                     error && error.response ? error.response.data : error;
@@ -203,7 +205,7 @@ const UserForm = ({ toggleUserForm }) => {
                     {touch.longitude && errors.longitude && <div className="invalid-feedback">{errors.longitude}</div>}
                 </div>
 
-                <button className="btn btn-primary" type="submit">
+                <button className="btn btn-primary mb-3" type="submit">
                     Update
                 </button>
             </form>

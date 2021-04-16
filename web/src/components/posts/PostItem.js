@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthStore';
+
 function PostItem({
   post: {
     title,
@@ -11,12 +14,15 @@ function PostItem({
     petsitter,
   },
 }) {
+
+  const { user } = useContext(AuthContext);
+
   return (
-    
-    <div className="card " style={{width: "18rem"}}>
+
+    <div className={`card shadow-sm ${user?.id === owner?.id ? 'border border-primary' : 'rounded-0 border-0'}`} style={{ width: "18rem" }}>
       <img src={image} className="card-img-top" alt={title} />
       <div className="card-body">
-        <p className="card-text">{description}</p>
+        <p className="card-text"><b>{title}</b></p>
         <p className="card-text">{start}</p>
         <p className="card-text">{end}</p>
       </div>

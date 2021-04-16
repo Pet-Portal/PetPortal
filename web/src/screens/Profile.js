@@ -7,7 +7,8 @@ const Profile = () => {
 
   const [state, setState] = useState(({
     showPetForm: false,
-    showUserForm: false
+    showUserForm: false,
+    loading: false
   }))
 
   const togglePetForm = () => {
@@ -22,7 +23,13 @@ const Profile = () => {
     }))
   }
 
-  const { showPetForm, showUserForm } = state;
+  const toggleLoading = () => {
+    setState(state => ({
+      loading: !state.loading
+    }))
+  }
+
+  const { showPetForm, showUserForm, loading } = state;
   return (
     <Fragment>
       <ProfileItem/>
@@ -40,12 +47,14 @@ const Profile = () => {
         {state.showUserForm ? 'Close' : 'Update User'}
       </button>
       </div>
-      
+
+      {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..."/></div>}
+
       {showPetForm &&
-        <PetForm togglePetForm={togglePetForm} />
+        <PetForm togglePetForm={togglePetForm} toggleLoading={toggleLoading} />
       }
       {showUserForm &&
-        <UserForm toggleUserForm={toggleUserForm}/>
+        <UserForm toggleUserForm={toggleUserForm} toggleLoading={toggleLoading}/>
       }
     </Fragment>
   );
