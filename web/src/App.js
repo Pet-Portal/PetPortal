@@ -1,5 +1,5 @@
 
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import Posts from './screens/Posts';
 import Home from './screens/Home';
 import './index.css';
@@ -11,7 +11,7 @@ import MyProfile from './screens/MyProfile';
 import PrivateRoute from './guards/PrivateRoute';
 import PostDetails from './screens/PostDetails';
 import Profile from './screens/Profile';
-
+import Errors from './screens/Errors';
 
 function App() {
   return (
@@ -26,6 +26,11 @@ function App() {
           <PrivateRoute exact path="/myProfile" component={MyProfile} />
           <PrivateRoute exact path="/profile/:id" component={Profile} />
           <PrivateRoute exact path="/posts/:id" component={PostDetails} />
+
+          <Route exact path="/404" component={() => <Errors code={404} />} />
+          <Route exact path="/403" component={() => <Errors code={403} />} />
+          
+          <Redirect to="/404" />
         </Switch>
       </AuthStore>
     </Router>

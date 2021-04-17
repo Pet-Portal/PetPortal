@@ -5,10 +5,11 @@ const mailer = require("../config/mailer.config");
 
 module.exports.create = (req, res, next) => {
   const { location } = req.body;
-  req.body.location = {
+  location = {
     type: "Point",
     coordinates: location,
   };
+  
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (user) {
@@ -52,12 +53,14 @@ module.exports.delete = (req, res, next) => {
 
 module.exports.update = (req, res, next) => {
   const { location } = req.body;
+  location = location.split(",")
   if (location) {
     req.body.location = {
       type: 'Point',
       coordinates: location
     }
   }
+
   if (req.file) {
     req.body.avatar = req.file.path;
   }

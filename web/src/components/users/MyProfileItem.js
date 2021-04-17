@@ -3,6 +3,7 @@ import { AuthContext } from '../../contexts/AuthStore';
 import { useState } from 'react';
 import PetForm from '../pets/PetForm';
 import UserForm from './UserForm';
+import Modal from '../modals/Modal';
 
 const ProfileItem = () => {
     const { user } = useContext(AuthContext)
@@ -10,11 +11,12 @@ const ProfileItem = () => {
     const [state, setState] = useState({
         showPetForm: false,
         showUserForm: false,
-        loading: false
+        loading: false,
     })
 
     const togglePetForm = () => {
         setState((state) => ({
+            ...state,
             showPetForm: !state.showPetForm
         }))
     }
@@ -63,23 +65,20 @@ const ProfileItem = () => {
 
                     <div className="col-lg-12 d-flex flex-column">
                         <button
-                            className={`btn mb-2 ${showPetForm ? 'btn-danger' : 'btn-primary'}`}
+                            className="btn mb-2 btn-primary"
                             onClick={togglePetForm}
                         >
-                            {state.showPetForm ? 'Close' : 'Add Pet +'}
+                            Add Pet +
                         </button>
                         <button
-                            className={`btn mb-2 ${showUserForm ? 'btn-danger' : 'btn-primary'}`}
+                            className="btn mb-2 btn-primary"
                             onClick={toggleUserForm}
                         >
-                            {state.showUserForm ? 'Close' : 'Update User'}
+                            Update User
                         </button>
-                        {showPetForm &&
-                            <PetForm togglePetForm={togglePetForm} toggleLoading={toggleLoading} />
-                        }
-                        {showUserForm &&
-                            <UserForm toggleUserForm={toggleUserForm} toggleLoading={toggleLoading} />
-                        }
+                        <Modal isShowingModal={showPetForm} toggleModal={togglePetForm} component={<PetForm togglePetForm={togglePetForm} toggleLoading={toggleLoading} />} />
+
+                        <Modal isShowingModal={showUserForm} toggleModal={toggleUserForm} component={<UserForm toggleUserForm={toggleUserForm} toggleLoading={toggleLoading} />} />
                     </div>
                 </div>
             </div>

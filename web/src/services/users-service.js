@@ -11,7 +11,14 @@ const profile = () => http.get('/users/me')
 
 const userProfile = (userId) => http.get(`/users/${userId}`)
 
-const update = (userId, user) => http.patch(`/users/${userId}`, user)
+const update = (userId, user) => {
+    const data = new FormData()
+
+    Object.keys(user).forEach(key => {
+        data.append(key, user[key])
+    })
+    return http.patch(`/users/${userId}`, data)
+}
 
 const service = {
     login,

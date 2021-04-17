@@ -54,7 +54,6 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
 
     const handleChange = (event) => {
         let { name, value } = event.target;
-        
         if (event.target.files) {
             value = event.target.files[0];
         }
@@ -94,8 +93,8 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
             try {
                 const userData = { ...state.userProfile };
                 userData.location = [Number(userData.longitude), Number(userData.latitude)];
-                await service.update(user.id, userData);
-                onUserChange({ ...user, ...userData })
+                const updatedUser = await service.update(user.id, userData);
+                onUserChange({ ...user, ...updatedUser })
                 toggleUserForm()
                 toggleLoading()
             } catch (error) {

@@ -7,6 +7,7 @@ module.exports.create = (req, res, next) => {
   if (req.file) {
     post.image = req.file.path;
   }
+  post.pets = post.pets.split(",")
   Post.create({
     ...post,
     owner: req.user.id,
@@ -18,7 +19,13 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.list = (req, res, next) => {
-  Post.find()
+  const criteria = {};
+  const { search } = req.query;
+
+  if (search) {
+    criteria.title = new RegExp(search, 'i');
+  }
+  Post.find(criteria)
     .populate('owner pets')
     .then((posts) => res.status(200).json(posts))
     .catch(next);

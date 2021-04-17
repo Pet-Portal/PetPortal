@@ -13,9 +13,9 @@ code {
 }
 
 .homeBg {
-  background-image: url("https://res.cloudinary.com/djbn7xax3/image/upload/v1618314500/PetPortal/homeImg2_jecdh0.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position-x: right;
   height: 1800px;
 }
 
@@ -23,3 +23,62 @@ code {
   transform: scale(1.1);
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+.modal-wrapper {
+  display: inline-flex;
+  position: fixed;
+  top: 10%;
+  left: 25%;
+  bottom: 20%;
+  z-index: 1050;
+  width: 50%;
+  height: 80%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  margin: 0 auto;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.deleteModal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.deleteModal-wrapper {
+  display: inline-flex;
+  position: fixed;
+  top: 20%;
+  left: 40%;
+  bottom: 40%;
+  z-index: 1050;
+  width: 20%;
+  height: 20%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 2%;
+  display: flex;
+  justify-content: center;
+}

@@ -51,7 +51,7 @@ const validations = {
     },
 };
 
-const PostForm = () => {
+const PostForm = ({ openForm }) => {
 
 
     const [state, setState] = useState({
@@ -116,6 +116,11 @@ const PostForm = () => {
         try {
             const { post } = state;
             await service.create(post);
+            openForm({
+                showPostForm: false,
+                loading: false,
+                update: true
+            })
         } catch (error) {
             const { message, errors } =
                 error && error.response ? error.response.data : error;
@@ -128,14 +133,26 @@ const PostForm = () => {
     };
 
     const toggleBoxes = (event, pet) => {
-        console.log(event.target)
+
         if (event.target.checked) {
-            state.post.pets.push(pet.id)
+            setState(state => ({
+                ...state,
+                post: {
+                    ...state.post,
+                    pets: [...state.post.pets, pet.id]
+                }
+            }))
         } else {
-            
+            const newPets = state.post.pets.filter(newPet => newPet !== pet.id)
+            setState(state => ({
+                ...state,
+                post: {
+                    ...state.post,
+                    pets: newPets
+                }
+            }))
         }
     }
-
 
     const { user } = useContext(AuthContext);
     const { post, errors, touch } = state;
@@ -165,7 +182,7 @@ const PostForm = () => {
                             <div key={i} className="card col-lg-6 m-3" style={{ maxWidth: "12rem", maxHeight: "18rem" }}>
                                 <img className="card-img-top" src={pet.image} alt={pet.name} />
                                 <div className="card-body">
-                                    <span className="card-title"><b>{pet.name}</b> <input onClick={event => toggleBoxes(event, pet)} onBlur={handleBlur} type="checkbox" name="pets" /></span>
+                                    <span className="card-title"><b>{pet.name}</b> <input onChange={event => toggleBoxes(event, pet)} type="checkbox" name="pets" /></span>
                                 </div>
                             </div>
                         ))}

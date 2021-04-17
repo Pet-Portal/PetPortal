@@ -1,7 +1,8 @@
+import homeImage from '../images/homeImg.jpg'
 
 export const Home = () => {
     return (
-        <div className="homeBg">
+        <div className="homeBg" style={{backgroundImage: `url(${homeImage})`}}>
             <div className="container">
                 <div className="w-50">
                     <h1>Find someone to look after your Pets or become a Pet Sitter!</h1>

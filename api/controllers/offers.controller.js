@@ -65,3 +65,14 @@ module.exports.accept = (req, res, next) => {
     })
     .catch(createError(404, "Offer not found"));
 };
+
+
+module.exports.offerListFromPost = (req, res, next) => {
+  const { postId } = req.params;
+  Offer.find({ post: postId })
+    .populate("owner post")
+    .then(offers => {
+      res.status(200).json(offers)
+    })
+    .catch(next)
+}
