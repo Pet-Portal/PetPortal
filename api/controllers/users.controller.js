@@ -52,7 +52,7 @@ module.exports.delete = (req, res, next) => {
 };
 
 module.exports.update = (req, res, next) => {
-  const { location } = req.body;
+  let { location } = req.body;
   location = location.split(",")
   if (location) {
     req.body.location = {
