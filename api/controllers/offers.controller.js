@@ -47,13 +47,16 @@ module.exports.accept = (req, res, next) => {
 
 
   Offer.findById(req.params.id)
+    .populate("owner")
     .then((offer) => {
       if (req.foundPost.state === "pending") {
         req.foundPost.petsitter = offer.owner;
         req.foundPost.state = "confirmed";
         if (offer.state === "pending") {
           req.foundPost.save().then((post) => {
+            console.log(post)
             offer.state = "accepted";
+            mailer.offerAccepted(offer.owner.email, offer.owner.name, post.title)
             return offer.save().then((offer) => res.json([offer, post]));
           });
         } else {

@@ -20,13 +20,16 @@ const update = (userId, user) => {
     return http.patch(`/users/${userId}`, data)
 }
 
+const activateAccount = (token) => http.post(`/activate?token=${token}`)
+
 const service = {
     login,
     register,
     logout,
     profile,
     userProfile,
-    update
+    update,
+    activateAccount
 }
 
 export default service;

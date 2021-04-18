@@ -25,6 +25,12 @@ export const Navbar = () => {
             <li className="nav-item">
               <NavLink className="nav-link" activeClassName="active" to="/posts">Posts</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" to="/myPosts">MyPosts</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" to="/myOffers">MyOffers</NavLink>
+            </li>
           </ul>
           <ul className="navbar-nav d-flex">
             {!isAuthenticated() ? (

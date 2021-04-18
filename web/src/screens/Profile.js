@@ -4,7 +4,6 @@ import { Fragment } from "react";
 
 const Profile = () => {
 
-
   return (
     <Fragment>
             <ProfileItem />

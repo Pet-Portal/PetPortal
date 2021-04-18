@@ -34,11 +34,21 @@ module.exports.list = (req, res, next) => {
 module.exports.listUserPosts = (req, res, next) => {
   const { userId } = req.params;
   Post.find({ owner: userId })
+    .populate("owner petsitter")
     .then((posts) => res.status(200).json(posts))
     .catch(next);
 };
 
 module.exports.update = (req, res, next) => {
+  let post = req.body
+  if (req.file) {
+    post.image = req.file.path;
+  }
+  post.pets = post.pets.split(",")
+  post.pets = post.pets.map(pet => pet.id)
+  post.owner = post.owner.id
+  
+  console.log(post.pets)
   Object.assign(req.foundPost, req.body);
   req.foundPost
     .save()

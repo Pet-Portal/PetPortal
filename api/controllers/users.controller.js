@@ -5,11 +5,11 @@ const mailer = require("../config/mailer.config");
 
 module.exports.create = (req, res, next) => {
   const { location } = req.body;
-  location = {
+  req.body.location = {
     type: "Point",
     coordinates: location,
   };
-  
+
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (user) {

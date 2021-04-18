@@ -152,26 +152,6 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
                 </div>
 
 
-
-                {/* <div className="input-group mb-4">
-                    <span className="input-group-text">
-                        <i className="fa fa-lock fa-fw"></i>
-                    </span>
-                    <input
-                        name="password"
-                        type="password"
-                        className={`form-control ${touch.password && errors.password ? "is-invalid" : ""
-                            }`}
-                        id="password"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={userProfile.password}
-                        placeholder="Password"
-                    />
-                    <div className="invalid-feedback">{errors.password}</div>
-                </div> */}
-
-
                 <div className="input-group mb-4">
                     <span className="input-group-text">
                         <i className="fa fa-picture-o fa-fw"></i>

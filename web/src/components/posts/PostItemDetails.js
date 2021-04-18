@@ -5,12 +5,10 @@ import { AuthContext } from '../../contexts/AuthStore';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import service from '../../services/posts-service';
-import OfferForm from '../offers/OfferForm';
-import OfferList from '../offers/OfferList';
 import DeleteModal from '../modals/DeleteModal';
-import PetSitter from '../users/PetSitter';
+import UpdatePostModal from '../modals/UpdatePostModal';
 
-const PostItemDetails = () => {
+const PostItemDetails = ({ triggerPost }) => {
 
     const params = useParams();
     const { user } = useContext(AuthContext);
@@ -18,7 +16,8 @@ const PostItemDetails = () => {
     const [state, setState] = useState({
         post: "",
         loading: false,
-        showDeleteModal: false
+        showDeleteModal: false,
+        showUpdateModal: false
     });
     useEffect(() => {
 
@@ -29,23 +28,25 @@ const PostItemDetails = () => {
                 loading: true
             }))
             const post = await service.get(params.id);
+            triggerPost(post)
             if (!isUnmounted) {
                 setState({
                     post: post,
                     loading: false
-                })
+                }) 
             }
+            
         }
         let isUnmounted = false
         fetchPost();
-
         return () => {
             isUnmounted = true;
         }
 
     }, [params]);
 
-
+    
+    
     const toggleDeleteModal = () => {
         setState((state) => ({
             ...state,
@@ -53,8 +54,15 @@ const PostItemDetails = () => {
         }))
     }
 
+    const toggleUpdateModal = () => {
+        setState((state) => ({
+            ...state,
+            showUpdateModal: !state.showUpdateModal
+        }))
+    }
+
     
-    const { post, loading, showDeleteModal } = state;
+    const { post, loading, showDeleteModal, showUpdateModal } = state;
 
     return (
         <Fragment>
@@ -80,13 +88,14 @@ const PostItemDetails = () => {
                         <p className="badge rounded-pill bg-danger me-2 p-2" style={{ fontSize: '20px' }}>End: {moment(post.end).format('llll')}</p>
                         <p>{post.owner?.location}</p>
 
-                        <DeleteModal isShowingModal={showDeleteModal} toggleModal={toggleDeleteModal} post={post}/>
-                        {user.id === post.owner?.id && <button type="button" className="btn btn-danger mb-3" onClick={toggleDeleteModal}>Delete Post</button>}
+                        <UpdatePostModal isShowingModal={showUpdateModal} toggleModal={toggleUpdateModal} post={post}/>
 
+                        <DeleteModal isShowingModal={showDeleteModal} toggleModal={toggleDeleteModal} post={post}/>
+                        {user.id === post.owner?.id && post.state === "pending" && <button type="button" className="btn btn-info mb-3 me-2" onClick={toggleUpdateModal}>Update Post</button>}
+                        {user.id === post.owner?.id && <button type="button" className="btn btn-danger mb-3 ms-2" onClick={toggleDeleteModal}>Delete Post</button>}
                     </div>
                 </div>
-                {user.id !== post.owner?.id ? <OfferForm /> : <OfferList post={post}/>}
-                {post.state === "confirmed" && post.owner.id === user.id && <PetSitter post={post}/>}
+                
             </div>
         </Fragment>
     )

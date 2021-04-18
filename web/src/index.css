@@ -82,3 +82,76 @@ code {
   display: flex;
   justify-content: center;
 }
+
+.updateModal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.updateModal-wrapper {
+  display: inline-flex;
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  bottom: 40%;
+  z-index: 1050;
+  width: 40%;
+  height: 68%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.ratingModal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.ratingModal-wrapper {
+  display: inline-flex;
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  bottom: 40%;
+  z-index: 1050;
+  width: 40%;
+  height: 68%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.noHover {
+  pointer-events: none;
+}
+
+.star > input[type="radio"] {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}

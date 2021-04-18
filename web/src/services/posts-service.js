@@ -21,6 +21,20 @@ const acceptOffer = (postId, offerId) => http.post(`/posts/${postId}/offers/${of
 
 const remove = (id) => http.delete(`/posts/${id}`)
 
+const listUserPosts = (id) => http.get(`/users/${id}/posts`);
+
+const update = (post) => {
+    const data = new FormData()
+
+    Object.keys(post).forEach(key => {
+        data.append(key, post[key])
+    })
+
+    return http.patch(`/posts/${post.id}`, data)
+}
+
+const createRating = (id, rating) => http.post(`/posts/${id}/ratings`, rating)
+
 const service = {
     list,
     create,
@@ -28,7 +42,10 @@ const service = {
     offer,
     listOffersFromPost,
     acceptOffer,
-    remove
+    remove,
+    update,
+    listUserPosts,
+    createRating
 }
 
 export default service;

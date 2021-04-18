@@ -51,7 +51,7 @@ const validations = {
     },
 };
 
-const PostForm = ({ openForm }) => {
+const PostForm = ({ openForm, post: postToEdit = {} }) => {
 
 
     const [state, setState] = useState({
@@ -62,13 +62,14 @@ const PostForm = ({ openForm }) => {
             description: "",
             start: "",
             end: "",
+            ...postToEdit
         },
         errors: {
-            image: validations.image(),
-            title: validations.title(),
-            description: validations.description(),
-            start: validations.start(),
-            end: validations.end(),
+            image: validations.image(postToEdit.image),
+            title: validations.title(postToEdit.title),
+            description: validations.description(postToEdit.description),
+            start: validations.start(postToEdit.start),
+            end: validations.end(postToEdit.end),
         },
         touch: {},
     });
@@ -114,8 +115,9 @@ const PostForm = ({ openForm }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const { post } = state;
-            await service.create(post);
+            const postData = { ...state.post };
+            postData.id ? await service.update(postData) : await service.create(postData);
+
             openForm({
                 showPostForm: false,
                 loading: false,
@@ -236,7 +238,7 @@ const PostForm = ({ openForm }) => {
                         type="datetime-local"
                         id="start"
                         className={`form-control ${touch.start && errors.start ? "is-invalid" : ""
-                    }`}
+                            }`}
                         name="start"
                         placeholder="Start of cares"
                         onChange={handleChange}
@@ -255,7 +257,7 @@ const PostForm = ({ openForm }) => {
                         type="datetime-local"
                         id="end"
                         className={`form-control ${touch.end && errors.end ? "is-invalid" : ""
-                    }`}
+                            }`}
                         name="end"
                         placeholder="End of cares"
                         onChange={handleChange}
@@ -267,8 +269,9 @@ const PostForm = ({ openForm }) => {
                 </div>
 
                 <button className="btn btn-primary mb-3" type="submit" disabled={!isValid()}>
-                    Submit
-        </button>
+                    {post.id && <span>Update Event</span>}
+                    {!post.id && <span>Create Event</span>}
+                </button>
             </form>
         </div>
     );

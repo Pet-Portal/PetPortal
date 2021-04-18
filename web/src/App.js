@@ -12,6 +12,8 @@ import PrivateRoute from './guards/PrivateRoute';
 import PostDetails from './screens/PostDetails';
 import Profile from './screens/Profile';
 import Errors from './screens/Errors';
+import MyPosts from './screens/MyPosts';
+import ActivationAccount from './components/users/ActivationAccount';
 
 function App() {
   return (
@@ -21,11 +23,13 @@ function App() {
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route path="/activate" component={ActivationAccount} />
           <Route exact path="/" component={Home} />
           <PrivateRoute exact path="/posts" component={Posts} />
           <PrivateRoute exact path="/myProfile" component={MyProfile} />
           <PrivateRoute exact path="/profile/:id" component={Profile} />
           <PrivateRoute exact path="/posts/:id" component={PostDetails} />
+          <PrivateRoute exact path="/myPosts" component={MyPosts}/>
 
           <Route exact path="/404" component={() => <Errors code={404} />} />
           <Route exact path="/403" component={() => <Errors code={403} />} />
