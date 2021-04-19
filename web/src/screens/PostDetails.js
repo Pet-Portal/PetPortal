@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../contexts/AuthStore';
 import PostItemDetails from '../components/posts/PostItemDetails';
@@ -12,11 +12,11 @@ const PostDetails = () => {
         post: ""
     })
 
-    const triggerPost = (post) => {
+    const triggerPost = useCallback((post) => {
         setState({
             post: post
         })
-    }
+    }, [])
     const { user } = useContext(AuthContext);
     const { post } = state;
     return (

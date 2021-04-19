@@ -15,7 +15,7 @@ const PostUserList = () => {
     const [state, setState] = useState({
         posts: [],
         loading: false,
-        showRatingForm: false
+        showRatingForm: undefined
     })
 
     const { user } = useContext(AuthContext);
@@ -79,7 +79,7 @@ const PostUserList = () => {
                                     </div>
                                 </Link>
                             }
-                            <RatingModal isShowingModal={showRatingForm} toggleModal={toggleRatingForm} component={<RatingForm post={post}/>}/>
+                            <RatingModal isShowingModal={showRatingForm}  toggleModal={toggleRatingForm} component={<RatingForm post={post} reference={"userId"} referenceValue={post.petsitter.id}/>}/>
                             <button onClick={toggleRatingForm} className="btn btn-primary">Rate your Pet-Sitter!</button>
                         </div>
 

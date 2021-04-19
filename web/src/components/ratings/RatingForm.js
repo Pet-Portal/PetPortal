@@ -28,13 +28,14 @@ const validations = {
     },
 };
 
-const RatingForm = ({ post }) => {
+const RatingForm = ({ post, reference, referenceValue }) => {
 
     const [state, setState] = useState({
         rating: {
             title: "",
-            rate: "",
-            text: ""
+            rate: 0,
+            text: "",
+            [reference]: referenceValue
         },
         errors: {
             title: validations.title(),
@@ -49,6 +50,16 @@ const RatingForm = ({ post }) => {
         const { errors } = state;
         return !Object.keys(errors).some(error => errors[error]);
     };
+
+    const handleRatingChange = (rate) => {
+        setState((state) => ({
+            ...state,
+            rating: {
+                ...state.rating,
+                rate: rate
+            }
+        }))
+    }
 
     const handleChange = (event) => {
         let { name, value } = event.target;
@@ -97,6 +108,7 @@ const RatingForm = ({ post }) => {
     };
 
 
+
     const { rating, errors, touch } = state;
 
     return (
@@ -125,9 +137,7 @@ const RatingForm = ({ post }) => {
                         const ratingValue = i + 1;
                         return (
                             <label key={i} className="star">
-                                <input type="radio" name="rate" value={ratingValue} onClick={() => setState((state) => ({
-                                    ...state, ...ratingValue
-                                }))}/>
+                                <input type="radio" name="rate" value={ratingValue} onClick={() => handleRatingChange(ratingValue)}/>
                                 <FaStar size={50} color={ratingValue <= (hover || state.rating.rate) ? "#ffc107" : "#e4e5e9"}
                                 onMouseEnter={() => setHover(ratingValue)}
                                 onMouseLeave={() => setHover(null)}

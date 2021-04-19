@@ -8,11 +8,11 @@ const ActivationAccount = () => {
     const search = useLocation().search;
     const token = new URLSearchParams(search).get('token');
     useEffect(() => {
-        async function ActivateAccount () {   
+        async function activateAccount () {   
             await service.activateAccount(token)
             history.push('/login')
         }
-        ActivateAccount();
+        activateAccount();
     }, [token, history])
 
     return (

@@ -43,7 +43,7 @@ const PostItemDetails = ({ triggerPost }) => {
             isUnmounted = true;
         }
 
-    }, [params]);
+    }, [params, triggerPost]);
 
     
     

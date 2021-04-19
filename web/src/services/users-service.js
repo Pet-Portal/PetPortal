@@ -13,14 +13,17 @@ const userProfile = (userId) => http.get(`/users/${userId}`)
 
 const update = (userId, user) => {
     const data = new FormData()
-
     Object.keys(user).forEach(key => {
-        data.append(key, user[key])
+        if (typeof user[key] === Array) {
+            user[key].forEach(value => data.append(`${key}[]`, value))
+        } else {
+            data.append(key, user[key])
+        }
     })
     return http.patch(`/users/${userId}`, data)
 }
 
-const activateAccount = (token) => http.post(`/activate?token=${token}`)
+const activateAccount = (token) => http.get(`/activate?token=${token}`)
 
 const service = {
     login,
