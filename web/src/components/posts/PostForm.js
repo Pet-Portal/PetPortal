@@ -57,7 +57,7 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
     const [state, setState] = useState({
         post: {
             image: "",
-            pets: [],
+            pets: "",
             title: "",
             description: "",
             start: "",
@@ -116,7 +116,14 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
         event.preventDefault();
         try {
             const postData = { ...state.post };
-            postData.id ? await service.update(postData) : await service.create(postData);
+            const post = postData.id ? await service.update(postData) : await service.create(postData);
+            setState(state => ({
+                ...state,
+                post: {
+                    ...state.post,
+                    post: post
+                }
+            }))
 
             openForm({
                 showPostForm: false,
@@ -129,7 +136,10 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
             console.error(message);
             setState((state) => ({
                 ...state,
-                errors: errors,
+                errors: {
+                    ...errors,
+                    title: errors && message
+                },
             }));
         }
     };

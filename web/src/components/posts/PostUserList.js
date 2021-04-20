@@ -7,6 +7,7 @@ import service from '../../services/posts-service';
 import moment from 'moment';
 import RatingModal from '../modals/RatingModal';
 import RatingForm from '../ratings/RatingForm';
+import { Fragment } from 'react';
 
 
 
@@ -69,18 +70,22 @@ const PostUserList = () => {
                         </div>
                         <div className="col-lg-4">
                             {post.petsitter &&
-                                <Link className="text-decoration-none" to={`/profile/${post.petsitter.id}`}>
-                                    <div key={i} className="card shadow p-3 mb-5 bg-white" style={{ width: "15rem" }}>
-                                        <p className="badge badge-info fs-4"><b>Your Pet-Sitter!</b></p>
-                                        <img src={post.petsitter?.avatar} className="card-img-top" alt="petsitter" style={{ maxHeight: "10rem" }} />
-                                        <div className="card-body">
-                                            <p className="card-text"><b>{post.petsitter?.name}</b></p>
+                                <Fragment>
+                                    <Link className="text-decoration-none" to={`/profile/${post.petsitter.id}`}>
+                                        <div key={i} className="card shadow p-3 mb-5 bg-white" style={{ width: "15rem" }}>
+                                            <p className="badge badge-info fs-4"><b>Your Pet-Sitter!</b></p>
+                                            <img src={post.petsitter?.avatar} className="card-img-top" alt="petsitter" style={{ maxHeight: "10rem" }} />
+                                            <div className="card-body">
+                                                <p className="card-text"><b>{post.petsitter?.name}</b></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </Link>
+                                    </Link>
+                                    <RatingModal isShowingModal={showRatingForm} toggleModal={toggleRatingForm} component={<RatingForm post={post} reference={"userId"} referenceValue={post.petsitter?.id} />} />
+                                    <button onClick={toggleRatingForm} className="btn btn-primary">Rate your Pet-Sitter!</button>
+                                </Fragment>
                             }
-                            <RatingModal isShowingModal={showRatingForm}  toggleModal={toggleRatingForm} component={<RatingForm post={post} reference={"userId"} referenceValue={post.petsitter.id}/>}/>
-                            <button onClick={toggleRatingForm} className="btn btn-primary">Rate your Pet-Sitter!</button>
+
+
                         </div>
 
                     </div>

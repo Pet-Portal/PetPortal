@@ -1,6 +1,6 @@
 import http from './base-api-service';
 
-const list = (search) => http.get('/posts', { params: { search }});
+const list = (postSearch, speciesSearch) => http.get('/posts', { params: { postSearch, speciesSearch }});
 
 const create = (post) => {
     const data = new FormData()
@@ -27,13 +27,17 @@ const update = (post) => {
     const data = new FormData()
 
     Object.keys(post).forEach(key => {
-        data.append(key, post[key])
+        if (Array.isArray(post[key])) {
+          post[key].forEach(value => data.append(`${key}[]`, value))
+        } else data.append(key, post[key])
     })
 
     return http.patch(`/posts/${post.id}`, data)
 }
 
 const createRating = (id, rating) => http.post(`/posts/${id}/ratings`, rating)
+
+const listUserOffers = (id) => http.get(`/users/${id}/offers`)
 
 const service = {
     list,
@@ -45,7 +49,8 @@ const service = {
     remove,
     update,
     listUserPosts,
-    createRating
+    createRating,
+    listUserOffers
 }
 
 export default service;

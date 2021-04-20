@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaStar } from 'react-icons/fa'
 import service from "../../services/posts-service";
+import { useHistory } from 'react-router';
 
 const validations = {
     title: (value) => {
@@ -29,6 +30,8 @@ const validations = {
 };
 
 const RatingForm = ({ post, reference, referenceValue }) => {
+
+    const history = useHistory();
 
     const [state, setState] = useState({
         rating: {
@@ -94,8 +97,8 @@ const RatingForm = ({ post, reference, referenceValue }) => {
         event.preventDefault();
         try {
             const ratingData = { ...state.rating}
-            console.log(ratingData)
             await service.createRating(post.id, ratingData)
+            history.push('/myPosts')
         } catch (error) {
             const { message, errors } =
                 error && error.response ? error.response.data : error;

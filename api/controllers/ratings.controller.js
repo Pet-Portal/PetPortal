@@ -27,19 +27,19 @@ module.exports.create = (req, res, next) => {
       (pet) => pet.owner.id === req.user.id
     );
     if (req.foundPost.state === "pending") {
-      next(createError(400, "Rating not allowed when status is not confirmed"));
+      next(createError(400, {errors: { title: { message: "Rating not allowed when status is not confirmed"}}} ));
     } else if (req.user.id === req.body.userId) {
-      next(createError(400, "You cant vote yourself"));
+      next(createError(400, {errors: { title: { message: "You cant vote yourself"}}}));
     } else if (userId && userWithRatings) {
-      next(createError(400, "You have already rated this User"));
+      next(createError(400, {errors: { title: { message: "You have already rated this User"}}}));
     } else if (petId && petWithRatings) {
-      next(createError(400, "You have already rated this Pet"));
+      next(createError(400, {errors: { title: { message: "You have already rated this Pet"}}}));
     } else if (userId && petSitterWithRatings) {
-      next(createError(400, "You have already rated this Petsitter"));
+      next(createError(400, {errors: { title: { message: "You have already rated this Petsitter"}}}));
     } else if (petId && ownPet) {
-      next(createError(400, "You cant vote your own Pet"));
+      next(createError(400, {errors: { title: { message: "You cant vote your own Pet"}}}));
     } else if (moment().isBefore(moment(req.foundPost.end))) {
-      next(createError(400, "You cant rate in this post yet"));
+      next(createError(400, {errors: { title: { message: "You cant rate in this post yet"}}}));
     } else if (
       req.user.id === req.foundPost.owner.id ||
       req.user.id === req.foundPost.petsitter.id
@@ -56,7 +56,7 @@ module.exports.create = (req, res, next) => {
         .then((rating) => res.status(201).json(rating))
         .catch(next);
     } else {
-      next(createError(400, "Not allow to rate in this post"));
+      next(createError(400, {errors: { title: { message: "Not allow to rate in this post"}}}));
     }
   }
 };

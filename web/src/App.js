@@ -14,6 +14,7 @@ import Profile from './screens/Profile';
 import Errors from './screens/Errors';
 import MyPosts from './screens/MyPosts';
 import ActivationAccount from './components/users/ActivationAccount';
+import MyOffers from './screens/MyOffers';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <PrivateRoute exact path="/profile/:id" component={Profile} />
           <PrivateRoute exact path="/posts/:id" component={PostDetails} />
           <PrivateRoute exact path="/myPosts" component={MyPosts}/>
+          <PrivateRoute exact path="/myOffers" component={MyOffers} />
 
           <Route exact path="/404" component={() => <Errors code={404} />} />
           <Route exact path="/403" component={() => <Errors code={403} />} />

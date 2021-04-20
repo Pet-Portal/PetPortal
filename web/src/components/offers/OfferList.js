@@ -38,13 +38,7 @@ function OfferList({ post }) {
 
     const { offers, loading } = state;
     return (
-        
         <Fragment>
-            {/* {post.state === "confirmed" &&
-                <div>
-                    {post.petsitter?.name}
-                </div>
-            } */}
             {loading && <div className="container d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
 
             {post.state === "pending" && <h1>Your incoming Offers!</h1>}

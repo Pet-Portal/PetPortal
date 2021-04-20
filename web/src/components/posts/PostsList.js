@@ -12,7 +12,8 @@ function PostsList({ update, minSearchChars }) {
     loading: false
   });
 
-  const [search, setSearch] = useState('');
+  const [postSearch, setPostSearch] = useState('');
+  const [speciesSearch, setSpeciesSearch] = useState('');
 
   useEffect(() => {
 
@@ -22,7 +23,7 @@ function PostsList({ update, minSearchChars }) {
         ...state,
         loading: true
       }))
-      const posts = await postsService.list(search);
+      const posts = await postsService.list(postSearch, speciesSearch);
       if (!isUnmounted) {
         setState({
           posts: posts,
@@ -31,8 +32,8 @@ function PostsList({ update, minSearchChars }) {
       }
     }
     let isUnmounted = false;
-    
-    if (search.length >= minSearchChars || search.length === 0) {
+
+    if (postSearch.length >= minSearchChars || postSearch.length === 0) {
       fetchPosts();
     }
 
@@ -40,18 +41,25 @@ function PostsList({ update, minSearchChars }) {
       isUnmounted = true;
     }
 
-  }, [update, search, minSearchChars]);
+  }, [update, postSearch, minSearchChars, speciesSearch]);
 
-  const handleSearch = search => setSearch(search);
+  const handlePostSearch = postSearch => setPostSearch(postSearch);
+  const handleSpeciesSearch = speciesSearch => setSpeciesSearch(speciesSearch);
 
   const { posts, loading } = state;
   return (
     <Fragment>
-      <PostFilter className="mb-3" onSearch={handleSearch} loading={loading} />
-      {loading && <div className="container d-flex justify-content-center align-items-center vh-100"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
-      <div className="row row-cols-4 ">
+      <PostFilter className="mb-3" onPostSearch={handlePostSearch} onSpeciesSearch={handleSpeciesSearch} loading={loading} />
+      {loading &&
+        <div className="container d-flex justify-content-center align-items-center vh-100">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." />
+        </div>
+      }
+      <div className="row">
         {posts.map(post => (
-          <div key={post.id} className="col mb-4"><PostItem post={post} /></div>
+          <div key={post.id} className="col-lg-4 mb-4">
+            <PostItem post={post} />
+          </div>
         ))}
       </div>
     </Fragment>
