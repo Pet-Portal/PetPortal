@@ -1,21 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
-function PostFilter({ className, onPostSearch, onSpeciesSearch, loading }) {
+function PostFilter({ className, onFilterChange, loading }) {
 
-    const [postSearch, setPostSearch] = useState("");
-    const [speciesSearch, setSpeciesSearch] = useState("")
 
-    const handlePostChange = (event) => {
+    const [filter, setFilter] = useState({
+        title: '',
+        specie: ''
+    });
+
+    const handleTitleChange = (event) => {
         const { value } = event.target;
-        setPostSearch(value);
-        onPostSearch(value);
+        setFilter((filter) => {
+            const newState = {
+                ...filter,
+                title: value
+            }
+            return newState;
+        });
     };
 
-    const handleSpeciesChange = (event) => {
-        setSpeciesSearch(event);
-        onSpeciesSearch(event);
+    const handleSpeciesChange = (specie) => {
+        setFilter((filter) => ({
+            ...filter,
+            specie
+        }));
     };
+
+    useEffect(() => {
+        onFilterChange(filter);
+    }, [filter]);
+
+    const { title } = filter;
+
     return (
         <div className={`row ${className}`}>
             <div className="col-lg-3">
@@ -30,8 +47,8 @@ function PostFilter({ className, onPostSearch, onSpeciesSearch, loading }) {
                         name="title"
                         className="form-control"
                         placeholder="Search by title..."
-                        value={postSearch}
-                        onChange={handlePostChange}
+                        value={title}
+                        onChange={handleTitleChange}
                     />
                 </div>
             </div>

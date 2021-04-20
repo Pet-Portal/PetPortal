@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect, Fragment, useCallback } from 'react';
 import PostItem from './PostItem';
 import postsService from '../../services/posts-service';
 import PostFilter from './PostFilter';
@@ -12,8 +12,10 @@ function PostsList({ update, minSearchChars }) {
     loading: false
   });
 
-  const [postSearch, setPostSearch] = useState('');
-  const [speciesSearch, setSpeciesSearch] = useState('');
+  const [postFilter, setPostFilter] = useState({
+    title: '',
+    species: ''
+  });
 
   useEffect(() => {
 
@@ -23,7 +25,7 @@ function PostsList({ update, minSearchChars }) {
         ...state,
         loading: true
       }))
-      const posts = await postsService.list(postSearch, speciesSearch);
+      const posts = await postsService.list(postFilter);
       if (!isUnmounted) {
         setState({
           posts: posts,
@@ -33,7 +35,7 @@ function PostsList({ update, minSearchChars }) {
     }
     let isUnmounted = false;
 
-    if (postSearch.length >= minSearchChars || postSearch.length === 0) {
+    if (postFilter.title.length >= minSearchChars || postFilter.title.length === 0) {
       fetchPosts();
     }
 
@@ -41,15 +43,14 @@ function PostsList({ update, minSearchChars }) {
       isUnmounted = true;
     }
 
-  }, [update, postSearch, minSearchChars, speciesSearch]);
+  }, [update, postFilter, minSearchChars]);
 
-  const handlePostSearch = postSearch => setPostSearch(postSearch);
-  const handleSpeciesSearch = speciesSearch => setSpeciesSearch(speciesSearch);
+  const handlePostFilter = useCallback(postFilter => setPostFilter(postFilter), []);
 
   const { posts, loading } = state;
   return (
     <Fragment>
-      <PostFilter className="mb-3" onPostSearch={handlePostSearch} onSpeciesSearch={handleSpeciesSearch} loading={loading} />
+      <PostFilter className="mb-3" onFilterChange={handlePostFilter} loading={loading} />
       {loading &&
         <div className="container d-flex justify-content-center align-items-center vh-100">
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." />

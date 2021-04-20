@@ -19,22 +19,22 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.list = (req, res, next) => {
-  const titleCriteria = {};
-  const speciesCriteria = {};
-  const { postSearch, speciesSearch } = req.query;
+  const criterial = {};
+  const { title, specie } = req.query;
 
-  if (titleCriteria) {
-    titleCriteria.title = new RegExp(postSearch, 'i');
+  if (title) {
+    criterial.title = new RegExp(title, 'i');
   }
 
-  if (speciesSearch) {
-    speciesCriteria.species = new RegExp(speciesSearch, 'i');
-  }
-
-  Post.find(titleCriteria, speciesCriteria)
+  Post.find(criterial)
     .populate('owner pets')
     .sort({ start: 1 })
-    .then((posts) => res.status(200).json(posts))
+    .then((posts) => {
+      if (specie) {
+        posts = posts.filter(post => post.pets.some(pet => pet.species === specie));
+      }
+      res.status(200).json(posts);
+    })
     .catch(next);
 };
 

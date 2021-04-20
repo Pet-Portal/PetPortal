@@ -1,6 +1,6 @@
 import http from './base-api-service';
 
-const list = (postSearch, speciesSearch) => http.get('/posts', { params: { postSearch, speciesSearch }});
+const list = (postFilter) => http.get('/posts', { params: postFilter });
 
 const create = (post) => {
     const data = new FormData()
