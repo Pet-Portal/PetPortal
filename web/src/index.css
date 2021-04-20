@@ -155,3 +155,10 @@ code {
   cursor: pointer;
   transition: color 200ms;
 }
+
+
+/** CUSTOM */
+
+.input-group .invalid-feedback {
+  padding-left: 55px;
+}

@@ -30,12 +30,12 @@ function App() {
           <PrivateRoute exact path="/myProfile" component={MyProfile} />
           <PrivateRoute exact path="/profile/:id" component={Profile} />
           <PrivateRoute exact path="/posts/:id" component={PostDetails} />
-          <PrivateRoute exact path="/myPosts" component={MyPosts}/>
+          <PrivateRoute exact path="/myPosts" component={MyPosts} />
           <PrivateRoute exact path="/myOffers" component={MyOffers} />
 
           <Route exact path="/404" component={() => <Errors code={404} />} />
           <Route exact path="/403" component={() => <Errors code={403} />} />
-          
+
           <Redirect to="/404" />
         </Switch>
       </AuthStore>

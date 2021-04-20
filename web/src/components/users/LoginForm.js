@@ -48,6 +48,7 @@ const LoginForm = () => {
 
     const { user, errors } = state;
 
+    /*
     return (
         <form className="mt-3 mb-3" onSubmit={handleSubmit}>
             <div className="input-group mb-2">
@@ -66,6 +67,50 @@ const LoginForm = () => {
                 <button className="btn btn-primary" type="submit" >Login</button>
             </div>
         </form>      
+    )
+    */
+    return (
+        <form className="form" onSubmit={handleSubmit}>
+            <div className="card-header card-header-primary text-center">
+                <h4 className="card-title">Login</h4>
+                <div className="social-line">
+                    <a href="#pablo" className="btn btn-just-icon btn-link">
+                        <i className="fa fa-facebook-square"></i>
+                    </a>
+                    <a href="#pablo" className="btn btn-just-icon btn-link">
+                        <i className="fa fa-twitter"></i>
+                    </a>
+                    <a href="#pablo" className="btn btn-just-icon btn-link">
+                        <i className="fa fa-google-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <p className="description text-center">Or Be Classical</p>
+            <div className="card-body">
+                <div className="input-group">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text">
+                            <i className="material-icons">mail</i>
+                        </span>
+                    </div>
+                    <input type="email" name="email" className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                        required placeholder="user@example.org" onChange={handleChange} value={user.email} />
+                    <div className="invalid-feedback">{errors.email}</div>
+                </div>
+                <div className="input-group">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text">
+                            <i className="material-icons">lock_outline</i>
+                        </span>
+                    </div>
+                    <input type="password" name="password" className="form-control"
+                        required placeholder="Password" onChange={handleChange} value={user.password} />
+                </div>
+            </div>
+            <div className="footer text-center">
+                <button type="submit" className="btn btn-primary btn-link btn-wd btn-lg">Login</button>
+            </div>
+        </form>
     )
 };
 
