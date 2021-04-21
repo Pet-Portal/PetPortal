@@ -21,7 +21,7 @@ const Posts = () => {
 
     const { showPostForm } = state;
     return (
-        <MainLayout title="The pets to take care!!" bgImage="/assets/img/postPageImg-1.png">
+        <MainLayout title="The pets to take care!" bgImage="/assets/img/postPageImg-1.png">
             <button
                 className="btn btn-primary mb-3 mt-3"
                 onClick={togglePostForm}
@@ -30,7 +30,6 @@ const Posts = () => {
                     <i class="material-icons">post_add</i>
                 </div>
             </button>
-
             <CreatePostModal isShowingModal={showPostForm} toggleModal={togglePostForm} component={<PostForm openForm={setState} />} />
             <PostList update={state.update} />
         </MainLayout>
