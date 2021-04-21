@@ -10,7 +10,6 @@ const OfferUserList = () => {
     const [state, setState] = useState({
         offers: [],
         loading: false,
-        showRatingForm: undefined
     })
 
     const { user } = useContext(AuthContext);
@@ -40,21 +39,13 @@ const OfferUserList = () => {
         }
     }, [user])
 
-    /* const toggleRatingForm = () => {
-        setState((state) => ({
-            ...state,
-            showRatingForm: !state.showRatingForm
-        }))
-    } */
 
     const { offers, loading } = state;
     return (
         <div>
             {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
             {offers.map((offer, i) => (
-                <div key={i} className="container">
-                    <OfferItem offer={offer}/>
-                </div>
+                    <OfferItem key={i} offer={offer}/>
             ))}
         </div>
     )

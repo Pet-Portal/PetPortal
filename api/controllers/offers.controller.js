@@ -84,6 +84,7 @@ module.exports.listUserOffers = (req, res, next) => {
   const { userId } = req.params;
   Offer.find({ owner: userId })
     .populate("post owner")
+    
     .then(offers => res.status(200).json(offers))
     .catch(next)
 }

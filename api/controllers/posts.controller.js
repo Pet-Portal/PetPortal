@@ -27,7 +27,14 @@ module.exports.list = (req, res, next) => {
   }
 
   Post.find(criterial)
-    .populate('owner pets')
+    .populate('pets')
+    .populate({
+      path: "owner",
+      populate: {
+        path: "ratings",
+        model: "Rating",
+      },
+    })
     .sort({ start: 1 })
     .then((posts) => {
       if (specie) {

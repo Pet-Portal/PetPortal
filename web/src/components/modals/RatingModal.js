@@ -8,6 +8,7 @@ const RatingModal = ({
     styles,
     component,
     toggleModal,
+    text
 }) => {
 
     return isShowingModal
@@ -26,7 +27,7 @@ const RatingModal = ({
                             <button className="btn btn-danger m-2" onClick={toggleModal}>X</button>
                         </div>
                         <div className="container">
-                            <h1>Send a rate to your Pet-Sitter!</h1>
+                            <h3 className="title">{text}</h3>
                         </div>
                         {component}
                     </div>

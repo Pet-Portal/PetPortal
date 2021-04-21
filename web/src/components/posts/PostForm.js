@@ -190,18 +190,15 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
                 </div>
                 <div className="input-group mb-3">
                     <fieldset className="row">
-                        
                             <legend><h3 className="title">Click your Pets!</h3></legend>
                             {user?.pets?.map((pet, i) => (
                                 <div key={i} className="card col-lg-3 m-3">
-                                    <img className="card-img-top" style={{ width: "100%", maxWidth: "16rem" }} src={pet.image} alt={pet.name} />
+                                    <img className="card-img-top" style={{ width: "100%", maxWidth: "55rem" }} src={pet.image} alt={pet.name} />
                                     <div className="card-body">
                                         <span className="card-title"><b>{pet.name}</b> <input onChange={event => toggleBoxes(event, pet)} type="checkbox" name="pets" /></span>
                                     </div>
                                 </div>
                             ))}
-                        
-
                     </fieldset>
                     <div className="invalid-feedback">{errors.image}</div>
                 </div>

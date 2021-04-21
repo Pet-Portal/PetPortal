@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import RatingStars from '../ratings/RatingStars';
 
 
 function PostItem({
@@ -14,11 +15,9 @@ function PostItem({
   },
 }) {
 
-
   return (
     <div className="card card-nav-tabs">
       <div className="card-header card-header-info">
-        {/*  <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" --> */}
         <div className="nav-tabs-navigation">
           <div className="nav-tabs-wrapper">
             <ul className="nav nav-tabs" data-tabs="tabs">
@@ -52,6 +51,7 @@ function PostItem({
             <Link to={`/profile/${owner.id}`}><img src={owner.avatar} style={{ maxHeight: "15rem", width: "100%" }} alt="owner"/></Link>
             <p>{owner.name}</p>
             <p>{owner.email}</p>
+            <RatingStars user={owner}/>
           </div>
         </div>
       </div>

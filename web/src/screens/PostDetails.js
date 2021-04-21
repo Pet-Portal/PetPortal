@@ -22,17 +22,22 @@ const PostDetails = () => {
     const { post } = state;
     return (
 
-       <MainLayout title="Post Details" bgImage="/assets/img/profileBackground.png">
-           <PostItemDetails triggerPost={triggerPost} />
-           {user.id === post.owner?.id && post.state === "pending" && <OfferList post={post} />}
-           {user.id !== post.owner?.id && post.state === "pending" && <div><h3 className="title">Send an Offer</h3><OfferForm /></div>}
+        <MainLayout title="Post Details" bgImage="/assets/img/profileBackground.png">
+            <PostItemDetails triggerPost={triggerPost} />
+            {user.id === post.owner?.id && post.state === "pending" && <OfferList post={post} />}
+            {user.id !== post.owner?.id && post.state === "pending" && <div><h3 className="title">Send an Offer</h3><OfferForm /></div>}
 
-           {post.state === "confirmed" && post.owner.id === user.id && <div><h3 className="title">Your new Pet-Sitter!</h3><PetSitter post={post} /></div>}
+            {post.state === "confirmed" && post.owner.id === user.id && <div><h3 className="title">Your new Pet-Sitter!</h3><PetSitter post={post} /></div>}
 
-           {post.state === "confirmed" && post.petsitter.id === user.id && <div><h3 className="title">You are the new Pet-Sitter!</h3><PetSitter post={post} /></div>}
+            {post.state === "confirmed" && post.petsitter.id === user.id &&
+                <div>
+                    <h3 className="title">You are the new Pet-Sitter!</h3>
+                    <PetSitter post={post} />
+                </div>
+            }
 
-       </MainLayout>
-        
+        </MainLayout>
+
 
 
     )
