@@ -51,8 +51,7 @@ module.exports.update = (req, res, next) => {
   if (req.file) {
     post.image = req.file.path;
   }
-  console.log(post)
-  post.pets = post.pets.split(",")
+  console.log(post.pets)
   post.pets = post.pets.map(pet => pet.id)
   post.owner = post.owner.id
   

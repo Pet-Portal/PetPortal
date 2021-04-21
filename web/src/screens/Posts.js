@@ -27,7 +27,7 @@ const Posts = () => {
                 onClick={togglePostForm}
             >   <div className="d-flex align-items-center">
                     <span className="mr-2">Add Post</span>
-                    <i class="material-icons">post_add</i>
+                    <i className="material-icons">post_add</i>
                 </div>
             </button>
             <CreatePostModal isShowingModal={showPostForm} toggleModal={togglePostForm} component={<PostForm openForm={setState} />} />

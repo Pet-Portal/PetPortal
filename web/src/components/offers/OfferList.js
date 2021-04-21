@@ -41,7 +41,7 @@ function OfferList({ post }) {
         <Fragment>
             {loading && <div className="container d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
 
-            {post.state === "pending" && <h1>Your incoming Offers!</h1>}
+            {post.state === "pending" && <h3 className="title">Your incoming Offers!</h3>}
 
             {offers.map(offer => (
                 <div key={offer.id} className="row row-cols-4 ">

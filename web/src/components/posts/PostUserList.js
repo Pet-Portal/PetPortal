@@ -10,7 +10,6 @@ import RatingForm from '../ratings/RatingForm';
 import { Fragment } from 'react';
 
 
-
 const PostUserList = () => {
 
     const [state, setState] = useState({
@@ -98,10 +97,10 @@ const PostUserList = () => {
         <div>
             {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
             {posts.map((post, i) => (
-                <div key={i} className="container pb-2 mt-3 ml-5">
+                <div key={i} className="container pb-2 mt-2 ml-5 border rounded">
                     <div className="row shadow p-3 mb-5 bg-white">
                         <div className="col-lg-8">
-                            <img style={{ maxHeight: "15rem", width: "20rem" }} src={post.image} alt={post.title} className="rounded mt-1"/>
+                            <img style={{ maxHeight: "23rem", width: "100%" }} src={post.image} alt={post.title} className="rounded mt-1"/>
                             <h2>{post.title}</h2>
                             <p className="font-size-14px">{post.description}</p>
                             <p className="badge rounded-pill bg-info m-2 p-2" style={{ fontSize: "18px" }}>Start: {moment(post.start).format('llll')}</p>
@@ -120,7 +119,8 @@ const PostUserList = () => {
                                         </div>
                                     </Link>
                                     <RatingModal isShowingModal={showRatingForm} toggleModal={toggleRatingForm} component={<RatingForm post={post} reference={"userId"} referenceValue={post.petsitter?.id} />} />
-                                    <button onClick={toggleRatingForm} className="btn btn-primary">Rate your Pet-Sitter!</button>
+                                    {moment().isAfter(post.end) && <button onClick={toggleRatingForm} className="btn btn-primary">Rate your Pet-Sitter!</button>}
+                                    
                                 </Fragment>
                             }
                         </div>

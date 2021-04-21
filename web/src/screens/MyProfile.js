@@ -41,15 +41,12 @@ const MyProfile = () => {
   return (
     <Fragment>
       {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
-      <MainLayout title="Your Profile" bgImage="/assets/img/profileBackground.png"></MainLayout>
-      <div className="main main-raised">
-        <div className="profile-content">
-          <div className="container">
+      <MainLayout title="Your Profile" bgImage="/assets/img/profileBackground.png">
             <div className="row">
               <div className="col-md-6 ml-auto mr-auto">
                 <div className="profile">
                   <div className="avatar text-center">
-                    <img src={user.avatar} style={{ width: "50%", maxWidth: "180px", marginTop: "-80px" }} alt="avatar" className="img-raised rounded-circle img-fluid" />
+                    <img src={user.avatar} style={{ width: "50%", maxWidth: "180px", marginTop: "4rem" }} alt="avatar" className="img-raised rounded-circle img-fluid" />
                   </div>
                   <div className="name text-center">
                     <h3 className="title">{user.name}</h3>
@@ -80,12 +77,11 @@ const MyProfile = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+        
       <CreatePetModal isShowingModal={showPetForm} toggleModal={togglePetForm} component={<PetForm togglePetForm={togglePetForm} toggleLoading={toggleLoading} />} />
 
       <UpdateProfileModal isShowingModal={showUserForm} toggleModal={toggleUserForm} component={<UserForm toggleUserForm={toggleUserForm} toggleLoading={toggleLoading} />} />
+      </MainLayout>
     </Fragment>
   )
 };

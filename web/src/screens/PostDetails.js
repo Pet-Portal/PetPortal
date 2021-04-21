@@ -5,6 +5,7 @@ import PostItemDetails from '../components/posts/PostItemDetails';
 import OfferList from '../components/offers/OfferList';
 import OfferForm from '../components/offers/OfferForm';
 import PetSitter from '../components/users/PetSitter';
+import MainLayout from '../components/layouts/MainLayout';
 
 const PostDetails = () => {
 
@@ -21,19 +22,17 @@ const PostDetails = () => {
     const { post } = state;
     return (
 
-        <div className="container">
-            <PostItemDetails triggerPost={triggerPost} />
-            {user.id === post.owner?.id && <OfferList post={post} />}
-            {user.id !== post.owner?.id && post.state === "pending" && <OfferForm />}
+       <MainLayout title="Post Details" bgImage="/assets/img/profileBackground.png">
+           <PostItemDetails triggerPost={triggerPost} />
+           {user.id === post.owner?.id && post.state === "pending" && <OfferList post={post} />}
+           {user.id !== post.owner?.id && post.state === "pending" && <div><h3 className="title">Send an Offer</h3><OfferForm /></div>}
 
-            {post.state === "confirmed" && post.owner.id === user.id && <div><h1>Your new Pet-Sitter!</h1></div>}
+           {post.state === "confirmed" && post.owner.id === user.id && <div><h3 className="title">Your new Pet-Sitter!</h3><PetSitter post={post} /></div>}
 
-            {post.state === "confirmed" && post.owner.id === user.id && <PetSitter post={post} />}
+           {post.state === "confirmed" && post.petsitter.id === user.id && <div><h3 className="title">You are the new Pet-Sitter!</h3><PetSitter post={post} /></div>}
 
-            {post.state === "confirmed" && post.petsitter.id === user.id && <div><h1>You are the new Pet-Sitter!</h1></div>}
-
-            {post.state === "confirmed" && post.petsitter.id === user.id && <PetSitter post={post} />}
-        </div>
+       </MainLayout>
+        
 
 
     )
