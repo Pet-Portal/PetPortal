@@ -1,25 +1,10 @@
 import LoginForm from '../components/users/LoginForm';
 
 
-/*
-export const Login = () => {
-  return (
-    <div className="row">
-      <div className="col-12 col-sm-4 mx-auto">
-        <LoginForm />
-        <hr/>
-        <div className="d-grid gap-2">
-          <Link className="btn btn-secondary" type="button" to="/register">Register</Link>
-        </div>
-      </div>
-    </div>
-  );
-};
-*/
 
 export const Login = () => {
   return (
-    <div className="page-header header-filter">
+    <div className="page-header header-filter" data-parallax="true" style={{ backgroundImage: "url('/assets/img/photo-1566806986629-33d23de90fce.jpg')"}}>
       <div className="container">
         <div className="row">
           <div className="col-lg-4 col-md-6 ml-auto mr-auto">
