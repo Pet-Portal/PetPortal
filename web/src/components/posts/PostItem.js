@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthStore';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
@@ -11,25 +9,53 @@ function PostItem({
     state,
     start,
     end,
-    owner,
+    owner
   },
 }) {
 
-  const { user } = useContext(AuthContext);
 
   return (
-
-    <div className={`postList card shadow p-3 mb-5 bg-white ${user?.id === owner?.id ? 'border-3 border-success' : 'rounded-0 border-0'} ${state === "confirmed" ? 'noHover' : ''}`} style={{ width: "18rem" }}>
-      <Link to={`/posts/${id}`}><img style={{maxHeight: "15rem"}} src={image} className="card-img-top" alt={title} /></Link>
+    <div className="card card-nav-tabs">
+      <div className="card-header card-header-info">
+        {/*  <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" --> */}
+        <div className="nav-tabs-navigation">
+          <div className="nav-tabs-wrapper">
+            <ul className="nav nav-tabs" data-tabs="tabs">
+              <li className="nav-item">
+                <a className="nav-link active d-flex align-items-center" href={`#${id}`} data-toggle="tab">
+                  <i className="material-icons">import_contacts</i>
+                  <span>Post</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link d-flex align-items-center" href={`#${id}`} data-toggle="tab">
+                  <i className="material-icons">face</i>
+                  <span>Owner</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div className="card-body">
-        <p className="card-text"><b>{title}</b></p>
-        <p className="card-text badge rounded-pill bg-primary me-2 p-2">{moment(start).format('llll')}</p>
-        <p className="card-text badge rounded-pill bg-success me-2 p-2">{moment(end).format('llll')}</p>
-        {state === "confirmed" && <div><p className="badge badge-danger fw-bold fs-4">POST CLOSED</p></div>}
+        <div className="tab-content text-center">
+          <div className="tab-pane active" id={`#${id}`}>
+            <div className="card-img-top">
+              <Link to={`/posts/${id}`}><img className="rounded" style={{ maxHeight: "15rem", width: "100%" }} src={image} alt="postImg" /></Link>
+            </div>
+            <h5>{title}</h5>
+            <p className="card-text badge rounded-pill bg-primary mr-2 p-2">{moment(start).format('llll')}</p>
+            <p className="card-text badge rounded-pill bg-success mr-2 p-2">{moment(end).format('llll')}</p>
+          </div>
+          <div className="tab-pane" id={`${id}`}>
+            <Link to={`/profile/${owner.id}`}><img src={owner.avatar} style={{ maxHeight: "15rem", width: "100%" }} alt="owner"/></Link>
+            <p>{owner.name}</p>
+            <p>{owner.email}</p>
+          </div>
+        </div>
       </div>
     </div>
-
-  );
+  )
 }
 
 export default PostItem;

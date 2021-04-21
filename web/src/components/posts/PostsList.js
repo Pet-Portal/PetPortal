@@ -50,18 +50,24 @@ function PostsList({ update, minSearchChars }) {
   const { posts, loading } = state;
   return (
     <Fragment>
-      <PostFilter className="mb-3" onFilterChange={handlePostFilter} loading={loading} />
       {loading &&
         <div className="container d-flex justify-content-center align-items-center vh-100">
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." />
         </div>
       }
       <div className="row">
-        {posts.map(post => (
-          <div key={post.id} className="col-lg-4 mb-4">
-            <PostItem post={post} />
+        <div className="col-lg-2">
+          <PostFilter className="mb-3" onFilterChange={handlePostFilter} loading={loading} />
+        </div>
+        <div className="col-lg-10">
+          <div className="row">
+            {posts.map(post => (
+              <div key={post.id} className="col-lg-4 mb-4">
+                <PostItem post={post} />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </Fragment>
   )

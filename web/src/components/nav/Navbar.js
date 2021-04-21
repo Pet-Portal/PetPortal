@@ -13,45 +13,6 @@ export const Navbar = () => {
     history.push("/login");
   }
 
-  /*
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/"><img style={{width: "5rem"}} src="https://res.cloudinary.com/djbn7xax3/image/upload/v1618339864/PetPortal/petportal_Alejandro_7163_epb0fg.png" alt="PetPortal"/></Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarScroll">
-          <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
-            <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" to="/posts">Posts</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" to="/myPosts">MyPosts</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" activeClassName="active" to="/myOffers">MyOffers</NavLink>
-            </li>
-          </ul>
-          <ul className="navbar-nav d-flex">
-            {!isAuthenticated() ? (
-              <Fragment>
-                <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/login">Sign In</NavLink></li>
-                <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/register">Sign Up</NavLink></li>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to="/myProfile">{user.email}</NavLink></li>
-                <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled" onClick={handleLogout}><img src="/iconmonstr-log-out-14.svg" alt=""/></button></li>
-              </Fragment>
-            )}
-          </ul>
-        </div>
-      </div>
-    </nav>
-  )
-  */
-
 
   return (
     <nav className="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
@@ -81,7 +42,7 @@ export const Navbar = () => {
             {isAuthenticated() && (
               <Fragment>
                 <li className="dropdown nav-item">
-                  <a href="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <a href="#dropdown" className="dropdown-toggle nav-link" data-toggle="dropdown">
                     <i className="material-icons">user</i> {user.email}
                   </a>
                   <div className="dropdown-menu dropdown-with-icons">
@@ -90,7 +51,7 @@ export const Navbar = () => {
                     <Link className="dropdown-item" to="/myOffers">My Offers</Link>
                   </div>
                 </li>
-                <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled" onClick={handleLogout}><img src="/iconmonstr-log-out-14.svg" alt="Logout" /></button></li>
+                <li className="nav-item"><button type="submit" className="btn btn-info btn-sm link-unstyled" onClick={handleLogout}><img src="/iconmonstr-log-out-14.svg" alt="Logout" /></button></li>
               </Fragment>
             )}
             

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PostList from '../components/posts/PostsList';
 import PostForm from '../components/posts/PostForm';
-import Modal from '../components/modals/Modal';
+import CreatePostModal from '../components/modals/CreatePostModal';
 import MainLayout from '../components/layouts/MainLayout';
 
 const Posts = () => {
@@ -21,15 +21,17 @@ const Posts = () => {
 
     const { showPostForm } = state;
     return (
-        <MainLayout title="Posts super chulos!!" bgImage="/assets/img/profile_city.jpg">
+        <MainLayout title="The pets to take care!!" bgImage="/assets/img/postPageImg-1.png">
             <button
                 className="btn btn-primary mb-3 mt-3"
                 onClick={togglePostForm}
-            > Add Post +</button>
+            >   <div className="d-flex align-items-center">
+                    <span className="mr-2">Add Post</span>
+                    <i class="material-icons">post_add</i>
+                </div>
+            </button>
 
-            <Modal isShowingModal={showPostForm} toggleModal={togglePostForm} component={<PostForm openForm={setState} />} />
-
-            <h3 className="mb-3">Posts list</h3>
+            <CreatePostModal isShowingModal={showPostForm} toggleModal={togglePostForm} component={<PostForm openForm={setState} />} />
             <PostList update={state.update} />
         </MainLayout>
     )

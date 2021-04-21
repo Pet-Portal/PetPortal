@@ -23,7 +23,7 @@ code {
   transform: scale(1.1);
 }
 
-.modal-overlay {
+.createPostModal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -33,15 +33,15 @@ code {
   background-color: #000;
   opacity: 0.5;
 }
-.modal-wrapper {
+.createPostModal-wrapper {
   display: inline-flex;
   position: fixed;
   top: 10%;
-  left: 25%;
+  left: 30%;
   bottom: 20%;
   z-index: 1050;
-  width: 50%;
-  height: 80%;
+  width: 35%;
+  height: 65%;
   overflow-x: hidden;
   overflow-y: auto;
   outline: 0;
@@ -143,6 +143,66 @@ code {
   justify-content: center;
 }
 
+.createPetModal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.createPetModal-wrapper {
+  display: inline-flex;
+  position: fixed;
+  top: 20%;
+  left: 33%;
+  bottom: 40%;
+  z-index: 1050;
+  width: 35%;
+  height: 58%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.updateProfileModal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.updateProfileModal-wrapper {
+  display: inline-flex;
+  position: fixed;
+  top: 20%;
+  left: 33%;
+  bottom: 40%;
+  z-index: 1050;
+  width: 35%;
+  height: 40%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 2%;
+  display: flex;
+  justify-content: center;
+}
+
 .noHover {
   pointer-events: none;
 }
@@ -162,3 +222,4 @@ code {
 .input-group .invalid-feedback {
   padding-left: 55px;
 }
+
