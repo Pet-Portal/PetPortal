@@ -2,21 +2,7 @@ import { Fragment } from 'react';
 
 
 export const Home = () => {
-    /* return (
-        <div className="homeBg" style={{backgroundImage: `url(${homeImage})`}}>
-            <div className="container">
-                <div className="w-50">
-                    <h1>Find someone to look after your Pets or become a Pet Sitter!</h1>
-                    <p>We have over 1000+ requests Posts everyday!</p>
-                    <p>Sign Up and be part of this animal lover community!</p>
-                </div>
-
-                <div></div>
-            </div>
-        </div>
-
-    ) */
-
+    
     return (
         <Fragment>
             <div className="page-header header-filter" data-parallax="true" style={{ backgroundImage: "url('/assets/img/homePage.png')" }}>

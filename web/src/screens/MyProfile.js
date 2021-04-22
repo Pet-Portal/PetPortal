@@ -6,15 +6,16 @@ import MainLayout from '../components/layouts/MainLayout';
 import CreatePetModal from '../components/modals/CreatePetModal';
 import UpdateProfileModal from '../components/modals/UpdateProfileModal';
 import RatingStars from '../components/ratings/RatingStars';
-import petService from '../services/pets-service';
+import DeletePetModal from '../components/modals/DeletePetModal';
 
 const MyProfile = () => {
 
-  const { user } = useContext(AuthContext);
+  const { user, onUserChange } = useContext(AuthContext);
 
   const [state, setState] = useState({
     showPetForm: false,
     showUserForm: false,
+    showDeletePet: false,
     loading: false,
   })
 
@@ -31,18 +32,49 @@ const MyProfile = () => {
     }))
   }
 
+  const toggleDeletePetForm = () => {
+    setState((state) => ({
+      showDeletePet: !state.showDeletePet
+    }))
+  }
+
   const toggleLoading = () => {
     setState(state => ({
       loading: !state.loading
     }))
   }
 
-  const handlePetDelete = (pet) => {
-    petService.remove(pet.id)
-  }
+  /* const handlePetDelete = async (pet) => {
+    await petService.remove(pet.id)
+    const newUser = { ...user, pets: user.pets.filter(item => item.id !== pet.id) }
+    onUserChange(newUser)
+  } */
 
+  const starsRate = (rate) => {
+    if (rate === 5) {
+        return <div className="icon icon-warning">
+            <span className="material-icons">star</span><span className="material-icons">star</span><span className="material-icons">star</span><span className="material-icons">star</span><span className="material-icons">star</span>
+        </div>
+    } else if (rate === 4) {
+        return <div className="icon icon-warning">
+        <span className="material-icons icon-warning">star</span><span className="material-icons">star</span><span className="material-icons">star</span><span className="material-icons">star</span><span className="material-icons">star_border</span>
+    </div>
+    } else if (rate === 3) {
+        return <div className="icon icon-warning">
+        <span className="material-icons icon-warning">star</span><span className="material-icons">star</span><span className="material-icons">star</span><span className="material-icons">star_border</span><span className="material-icons">star_border</span>
+    </div>
+    } else if (rate === 2) {
+        return <div className="icon icon-warning">
+        <span className="material-icons icon-warning">star</span><span className="material-icons">star</span><span className="material-icons">star_border</span><span className="material-icons">star_border</span><span className="material-icons">star_border</span>
+    </div>
+    } else if (rate === 1) {
+        return <div className="icon icon-warning">
+        <span className="material-icons icon-warning">star</span><span className="material-icons">star_border</span><span className="material-icons">star_border</span><span className="material-icons">star_border</span><span className="material-icons">star_border</span>
+    </div>
+    }
+}
   
-  const { showUserForm, showPetForm, loading } = state;
+  const { showUserForm, showPetForm, showDeletePet, loading } = state;
   return (
     <Fragment>
       {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
@@ -78,13 +110,25 @@ const MyProfile = () => {
                     <div key={i} className="col-md-3 mx-auto">
                       <p>{pet.name}</p>
                       <img src={pet.image} style={{ width: "100%", maxWidth: "15rem" }} className="rounded" alt={pet.name}/>
-                      <button className="btn btn-danger rounded-circle" onClick={() => handlePetDelete(pet)} >X</button>
+                      <button className="btn btn-danger rounded-circle" /* onClick={() => handlePetDelete(pet)} */ onClick={toggleDeletePetForm} >X</button>
+                      <DeletePetModal isShowingModal={showDeletePet} toggleModal={toggleDeletePetForm} user={user} onUserChange={onUserChange} pet={pet}/>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-        
+            <div className="row w-75">
+                    {user?.ratings && <h3 className="title">Ratings</h3>}
+                    {user?.ratings?.map((rating, i) => (
+                        <div key={i} className="col-md-12 border rounded mb-3">
+                            <h3><b>{rating?.title}</b></h3>
+                            {starsRate(rating?.rate)}
+                            <h4>{rating?.text}</h4>
+                            <p>{rating?.owner?.name}</p>
+                        </div>
+                    ))}
+                </div>
+      
       <CreatePetModal isShowingModal={showPetForm} toggleModal={togglePetForm} component={<PetForm togglePetForm={togglePetForm} toggleLoading={toggleLoading} />} />
 
       <UpdateProfileModal isShowingModal={showUserForm} toggleModal={toggleUserForm} component={<UserForm toggleUserForm={toggleUserForm} toggleLoading={toggleLoading} />} />

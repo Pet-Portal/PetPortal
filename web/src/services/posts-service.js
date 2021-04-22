@@ -25,14 +25,15 @@ const listUserPosts = (id) => http.get(`/users/${id}/posts`);
 
 const update = (post) => {
     const data = new FormData()
-
-    Object.keys(post).forEach(key => {
-        if (Array.isArray(post[key])) {
-          post[key].forEach(value => data.append(`${key}[]`, value))
-        } else data.append(key, post[key])
-    })
-
-    return http.patch(`/posts/${post.id}`, data)
+ 
+        Object.keys(post).forEach(key => {
+            if (Array.isArray(post[key])) {
+                console.log(post[key])
+              post[key].forEach(value => data.append(`${key}[]`, JSON.stringify(value)))
+            } else data.append(key, post[key])
+        })
+        console.log(data)
+        return http.patch(`/posts/${post.id}`, data)
 }
 
 const createRating = (id, rating) => http.post(`/posts/${id}/ratings`, rating)

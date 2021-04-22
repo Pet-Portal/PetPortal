@@ -5,7 +5,7 @@ import PostFilter from './PostFilter';
 
 
 
-function PostsList({ update, minSearchChars }) {
+function PostsList({ update, minSearchChars, openForm }) {
 
   const [state, setState] = useState({
     posts: [],

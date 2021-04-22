@@ -31,7 +31,7 @@ const Posts = () => {
                 </div>
             </button>
             <CreatePostModal isShowingModal={showPostForm} toggleModal={togglePostForm} component={<PostForm openForm={setState} />} />
-            <PostList update={state.update} />
+            <PostList update={state.update} openForm={setState}/>
         </MainLayout>
     )
 };

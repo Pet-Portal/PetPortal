@@ -28,8 +28,9 @@ const PostItemDetails = ({ triggerPost }) => {
                 loading: true
             }))
             const post = await service.get(params.id);
-            triggerPost(post)
+            
             if (!isUnmounted) {
+                triggerPost(post)
                 setState({
                     post: post,
                     loading: false

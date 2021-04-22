@@ -117,7 +117,7 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
         try {
             
             const postData = { ...state.post };
-            const post = postData.id ? await service.update(postData) : await service.create(postData);
+            const post = postData?.id ? await service.update(postData) : await service.create(postData);
             setState(state => ({
                 ...state,
                 post: {
@@ -125,12 +125,13 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
                     post: post
                 }
             }))
-
-            openForm({
-                showPostForm: false,
-                loading: false,
-                update: true
-            })
+            if (!postData.id) {
+                openForm({
+                    showPostForm: false,
+                    loading: false,
+                    update: true
+                })
+            }
         } catch (error) {
             const { message, errors } =
                 error && error.response ? error.response.data : error;

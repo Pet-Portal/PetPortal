@@ -51,7 +51,7 @@ export const Navbar = () => {
                     <Link className="dropdown-item" to="/myOffers">My Offers</Link>
                   </div>
                 </li>
-                <li className="nav-item"><button type="submit" className="btn btn-info btn-sm link-unstyled" onClick={handleLogout}><img src="/iconmonstr-log-out-14.svg" alt="Logout" /></button></li>
+                <li className="nav-item"><button type="submit" className="btn btn-link link-unstyled" onClick={handleLogout}><img src="/iconmonstr-log-out-14.svg" alt="Logout" /></button></li>
               </Fragment>
             )}
             

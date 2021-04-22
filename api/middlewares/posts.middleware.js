@@ -8,7 +8,7 @@ module.exports.postExists = (req, res, next) => {
       path: "owner",
       populate: {
         path: "ratings",
-        model: "Rating",
+        model: "Rating"
       },
     })
     .populate({

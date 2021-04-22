@@ -58,12 +58,14 @@ module.exports.update = (req, res, next) => {
   if (req.file) {
     post.image = req.file.path;
   }
-  console.log(post.pets)
-  post.pets = post.pets.map(pet => pet.id)
-  post.owner = post.owner.id
-  
-  console.log(post.pets)
-  Object.assign(req.foundPost, req.body);
+
+
+
+  /* post.pets = post.pets.map(pet => pet.id) */
+  post.pets = [JSON.parse(post?.pets)].map(pet => pet.id);
+  post.owner = req.user.id
+  console.log("POST", post)
+  Object.assign(req.foundPost, post);
   req.foundPost
     .save()
     .then((post) => res.json(post))

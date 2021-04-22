@@ -18,7 +18,7 @@ passport.use('local-auth', new LocalStrategy({
   passwordField: 'password'
 }, (email, password, next) => {
   User.findOne({ email })
-    .populate('pets')
+    .populate('pets ratings')
     .then(user => {
       if (!user) {
         next(null, null, { email: { message: 'Invalid email or password' }});

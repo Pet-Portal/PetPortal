@@ -44,9 +44,33 @@ const OfferUserList = () => {
     return (
         <div>
             {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
+
             {offers.map((offer, i) => (
-                    <OfferItem key={i} offer={offer}/>
+                <OfferItem key={i} offer={offer} />
             ))}
+
+            {offers.length === 0 &&
+                <div className="card card-nav-tabs card-plain">
+                    <div className="card-header card-header-info">
+                        <div className="nav-tabs-navigation">
+                            <div className="nav-tabs-wrapper">
+                                <ul className="nav nav-tabs d-flex justify-content-center">
+                                    <li className="nav-item">
+                                        <h3 className="title">You have sent any Offers yet!</h3>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card-body ">
+                        <div className="tab-content text-center">
+                            <div className="tab-pane active">
+                                <img className="rounded w-100" src="/assets/img/myoffers.jpg" alt="myoffers" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     )
 }
