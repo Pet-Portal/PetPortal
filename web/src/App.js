@@ -15,6 +15,7 @@ import Errors from './screens/Errors';
 import MyPosts from './screens/MyPosts';
 import ActivationAccount from './components/users/ActivationAccount';
 import MyOffers from './screens/MyOffers';
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
 
           <Redirect to="/404" />
         </Switch>
+        <Footer />
       </AuthStore>
     </Router>
   );

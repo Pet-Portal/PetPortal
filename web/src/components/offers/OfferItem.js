@@ -20,7 +20,7 @@ function OfferItem({
 
 }) {
     const [rating, setRating] = useState({
-        showRatingForm: undefined
+        showRatingForm: false
     })
     const { user } = useContext(AuthContext);
 
@@ -36,7 +36,7 @@ function OfferItem({
     const toggleRatingForm = () => {
         setRating((rating) => ({
             ...rating,
-            showRatingForm: !state.showRatingForm
+            showRatingForm: !rating.showRatingForm
         }))
     }
 
@@ -70,10 +70,9 @@ function OfferItem({
                 }
                 {user.id === owner.id && state === "accepted" && user.id === post.petsitter && moment().isAfter(post.end) &&
                     <div className="col-lg-4">
-                        <h4 className="title">You can now vote the Owner and Pet!</h4>
+                        <h4 className="title">You can now vote the Owner!</h4>
                         <button onClick={toggleRatingForm} className="btn btn-info">Rate the Owner</button>
-                        <button className="btn btn-success">Rate the Pet</button>
-                        <RatingModal isShowingModal={showRatingForm} toggleModal={toggleRatingForm} text="Rate the Owner!" component={<RatingForm post={post} reference={"userId"} referenceValue={post.petsitter?.id} />} />
+                        <RatingModal isShowingModal={showRatingForm} toggleModal={toggleRatingForm} text="Rate the Owner!" component={<RatingForm post={post} reference={"userId"} referenceValue={post?.owner} />} />
                     </div>
                 }
                 {user.id === owner.id && state === "accepted" && moment().isBefore(post.end) &&

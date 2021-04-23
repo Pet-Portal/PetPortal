@@ -125,48 +125,112 @@ const RegisterForm = () => {
     const { user, errors, touch } = state;
 
     return (
-        <form className="mt-3 mb-3" onSubmit={handleSubmit}>
+        
 
-            <div className="input-group mb-2">
-                <span className="input-group-text"><i className="fa fa-user fa-fw"></i></span>
-                <input type="text" name="name" className={`form-control ${touch.name && errors.name ? 'is-invalid' : ''}`}
-                    placeholder="Username" onBlur={handleBlur} onChange={handleChange} value={user.name} />
-                <div className="invalid-feedback">{errors.name}</div>
-            </div>
-
-            <div className="input-group mb-2">
-                <span className="input-group-text"><i className="fa fa-envelope fa-fw"></i></span>
-                <input type="text" name="email" className={`form-control ${touch.email && errors.email ? 'is-invalid' : ''}`}
-                    placeholder="Email" onBlur={handleBlur} onChange={handleChange} value={user.email} />
-                <div className="invalid-feedback">{errors.email}</div>
-            </div>
-
-            <div className="input-group mb-2">
-                <span className="input-group-text"><i className="fa fa-globe fa-fw"></i></span>
-
-                <span className="input-group-text">Latitude</span>
-                <input name="latitude" type="number" className={`form-control ${(touch.latitude && errors.latitude) ? 'is-invalid' : ''}`}
-                    value={user.latitude} onBlur={handleBlur} onChange={handleChange} />
-
-                <span className="input-group-text">Longitude</span>
-                <input name="longitude" type="number" className={`form-control ${(touch.longitude && errors.longitude) ? 'is-invalid' : ''}`}
-                    value={user.longitude} onBlur={handleBlur} onChange={handleChange} />
-
-                {touch.latitude && errors.latitude && <div className="invalid-feedback">{errors.latitude}</div>}
-                {touch.longitude && errors.longitude && <div className="invalid-feedback">{errors.longitude}</div>}
-            </div>
-
-            <div className="input-group mb-2">
-                <span className="input-group-text"><i className="fa fa-lock fa-fw"></i></span>
-                <input type="password" name="password" className={`form-control ${touch.password && errors.password ? 'is-invalid' : ''}`}
-                    placeholder="Password" onBlur={handleBlur} onChange={handleChange} value={user.password} />
-                <div className="invalid-feedback">{errors.password}</div>
-            </div>
-            
-                <button className="btn btn-primary" type="submit" disabled={!isValid()}>Register</button>
-        </form>
+    <form className="mt-3 mb-3 ml-3 mr-4" onSubmit={handleSubmit}>
+        <div className="card-header  card-header-primary text-center">
+          <h4 className="card-title">Sing Up</h4>
+          <div className="social-line">
+            <a href="#pablo" className="btn btn-just-icon btn-link">
+              <i className="fa fa-facebook-square"></i>
+            </a>
+            <a href="#pablo" className="btn btn-just-icon btn-link">
+              <i className="fa fa-twitter"></i>
+            </a>
+            <a href="#pablo" className="btn btn-just-icon btn-link">
+              <i className="fa fa-google-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div className="input-group mb-2">
+          <span className="input-group-text">
+            <i className="fa fa-user fa-fw"></i>
+          </span>
+          <input
+            type="text"
+            name="name"
+            className={`form-control ${
+              touch.name && errors.name ? "is-invalid" : ""
+            }`}
+            placeholder="Username"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={user.name}
+          />
+          <div className="invalid-feedback">{errors.name}</div>
+        </div>
+        <div className="input-group mb-2">
+          <span className="input-group-text">
+            <i className="fa fa-envelope fa-fw"></i>
+          </span>
+          <input
+            type="text"
+            name="email"
+            className={`form-control ${
+              touch.email && errors.email ? "is-invalid" : ""
+            }`}
+            placeholder="Email"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={user.email}
+          />
+          <div className="invalid-feedback">{errors.email}</div>
+        </div>
+        <div className="input-group mb-2">
+          <span className="input-group-text">
+            <i className="fa fa-globe fa-fw"></i>
+          </span>
+          <span className="input-group-text">Latitude</span>
+          <input
+            name="latitude"
+            type="number"
+            className={`form-control ${
+              touch.latitude && errors.latitude ? "is-invalid" : ""
+            }`}
+            value={user.latitude}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <span className="input-group-text">Longitude</span>
+          <input
+            name="longitude"
+            type="number"
+            className={`form-control ${
+              touch.longitude && errors.longitude ? "is-invalid" : ""
+            }`}
+            value={user.longitude}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          {touch.latitude && errors.latitude && (
+            <div className="invalid-feedback">{errors.latitude}</div>
+          )}
+          {touch.longitude && errors.longitude && (
+            <div className="invalid-feedback">{errors.longitude}</div>
+          )}
+        </div>
+        <div className="input-group mb-2">
+          <span className="input-group-text">
+            <i className="fa fa-lock fa-fw"></i>
+          </span>
+          <input
+            type="password"
+            name="password"
+            className={`form-control ${
+              touch.password && errors.password ? "is-invalid" : ""
+            }`}
+            placeholder="Password"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={user.password}
+          />
+          <div className="invalid-feedback">{errors.password}</div>
+        </div>
+        <button className="btn btn-primary" type="submit" disabled={!isValid()}>
+          Register
+        </button>
+      </form>
     )
-
 };
 
 export default RegisterForm;

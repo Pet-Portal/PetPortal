@@ -224,11 +224,11 @@ code {
 }
 
 .post-card .card-body {
-  min-height: 200px;
+  min-height: 150px;
   height: 100%;
 }
 
-.post-card .post-owner {
+.post-card .post-pet {
   position: absolute;
   bottom: 0;
   color: white;
@@ -240,4 +240,13 @@ code {
 
 .post-card .card-img-top {
   position: relative;
+}
+.post-card .post-owner {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  font-weight: 500px;
+  font-size: 24px;
+  left: 10px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
 }

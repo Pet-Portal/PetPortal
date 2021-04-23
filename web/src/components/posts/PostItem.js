@@ -25,8 +25,8 @@ function PostItem({
       <div className="tab-content">
         <div className="tab-pane active" id={`1${id}`}>
           <div className="card-img-top">
-            <Link to={`/posts/${id}`}><img style={{ maxHeight: "15rem", width: "100%" }} src={image} alt="postImg" /></Link>
-            <h3 className="post-owner">{pets[0].name}</h3>
+            <Link to={`/posts/${id}`}><img style={{ maxHeight: "170px", width: "100%" }} src={image} alt="postImg" /></Link>
+            <h3 className="post-pet">{pets[0].name}</h3>
           </div>
           <div className="card-body">
             <h5>{maxCharsTitle(title, 27)}</h5>
@@ -36,7 +36,7 @@ function PostItem({
         </div>
         <div className="tab-pane" id={`2${id}`}>
           <div className="card-img-top">
-            <Link to={`/profile/${owner.id}`}><img src={owner.avatar} style={{ maxHeight: "15rem", width: "100%" }} alt="owner" /></Link>
+            <Link to={`/profile/${owner.id}`}><img src={owner.avatar} style={{ maxHeight: "170px", width: "100%" }} alt="owner" /></Link>
             <h3 className="post-owner">{owner.name}</h3>
           </div>
           <div className="card-body">

@@ -83,7 +83,7 @@ const MyProfile = () => {
               <div className="col-md-6 ml-auto mr-auto">
                 <div className="profile">
                   <div className="avatar text-center">
-                    <img src={user.avatar} style={{ width: "50%", maxWidth: "180px", marginTop: "4rem" }} alt="avatar" className="img-raised rounded-circle img-fluid" />
+                    <img src={user.avatar} style={{ width: "50%", maxWidth: "180px" }} alt="avatar" className="img-raised rounded-circle img-fluid" />
                   </div>
                   <div className="name text-center">
                     <h3 className="title">{user.name}</h3>
@@ -104,7 +104,7 @@ const MyProfile = () => {
             </div>
             <div className="tab-content tab-space">
               <div className="tab-pane active text-center gallery" id="studio">
-                <h4 className="title">Your Pets</h4>
+                {user?.pets?.length !== 0 && <h4 className="title">Your Pets</h4>}
                 <div className="row">
                   {user.pets.map((pet, i) => (
                     <div key={i} className="col-md-3 mx-auto">
@@ -118,7 +118,7 @@ const MyProfile = () => {
               </div>
             </div>
             <div className="row w-75">
-                    {user?.ratings && <h3 className="title">Ratings</h3>}
+                    {user?.ratings?.length !== 0 && <h3 className="title">Ratings</h3>}
                     {user?.ratings?.map((rating, i) => (
                         <div key={i} className="col-md-12 border rounded mb-3">
                             <h3><b>{rating?.title}</b></h3>

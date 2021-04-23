@@ -98,7 +98,7 @@ const RatingForm = ({ post, reference, referenceValue }) => {
         try {
             const ratingData = { ...state.rating}
             await service.createRating(post.id, ratingData)
-            history.push('/myPosts')
+            history.push(`/profile/${referenceValue}`)
         } catch (error) {
             const { message, errors } =
                 error && error.response ? error.response.data : error;
