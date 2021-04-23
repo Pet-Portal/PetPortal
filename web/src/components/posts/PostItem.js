@@ -16,6 +16,10 @@ function PostItem({
   },
 }) {
 
+  const maxCharsTitle = (str, n) => {
+    return (str.length > n) ? str.substr(0, n-1) + '...' : str;
+  }
+
   return (
     <div className="card card-nav-tabs post-card">
       <div className="tab-content">
@@ -25,7 +29,7 @@ function PostItem({
             <h3 className="post-owner">{pets[0].name}</h3>
           </div>
           <div className="card-body">
-            <h5>{title}</h5>
+            <h5>{maxCharsTitle(title, 27)}</h5>
             <p className="card-text badge rounded-pill bg-primary mr-2 p-2">{moment(start).format('llll')}</p>
             <p className="card-text badge rounded-pill bg-success mr-2 p-2">{moment(end).format('llll')}</p>
           </div>

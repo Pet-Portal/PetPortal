@@ -62,7 +62,7 @@ module.exports.update = (req, res, next) => {
 
 
   /* post.pets = post.pets.map(pet => pet.id) */
-  post.pets = [JSON.parse(post?.pets)].map(pet => pet.id);
+  post.pets = [JSON.parse(post.pets)].map(pet => pet.id);
   post.owner = req.user.id
   console.log("POST", post)
   Object.assign(req.foundPost, post);
