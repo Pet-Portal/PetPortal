@@ -7,7 +7,6 @@ import service from '../../services/posts-service';
 import moment from 'moment';
 import RatingModal from '../modals/RatingModal';
 import RatingForm from '../ratings/RatingForm';
-import { Fragment } from 'react';
 
 
 
@@ -63,8 +62,9 @@ const PostUserList = () => {
                     <img src={user.avatar} style={{ width: "50%", maxWidth: "180px" }} alt="avatar" className="img-raised rounded-circle img-fluid" />
                 </div>
             </div>
+            {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
             {posts.map((post, i) => (
-                <div key={i} id={i} className="carousel slide mb-3" data-ride="carousel">
+                <div key={i} id={i} className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                         <li data-target={`#${i}`} data-slide-to="0" className="active"></li>
                         <li data-target={`#${i}`} data-slide-to="1"></li>
@@ -73,11 +73,11 @@ const PostUserList = () => {
                         <div className="carousel-item active">
                             <img style={{ maxHeight: "23rem", width: "100%" }} src={post.image} alt={post.title} className="rounded mt-1" />
                             <div className="carousel-caption d-md-block">
-                                <Link to={`/posts/${post.id}`}><h2 className="title text-white font-weight-bold">{post?.title}</h2></Link>
-                                <p>{post?.description}</p>
+                                <Link to={`/posts/${post.id}`}><p className="text-white font-weight-bold text-with-shadow" style={{fontSize: "1.5vw"}}>{post?.title}</p></Link>
+                                <p className="text-with-shadow" style={{fontSize: "1vw"}}>{post?.description}</p>
                                 <div>
-                                    <p className="badge rounded-pill bg-info m-2 p-2" style={{ fontSize: "1rem" }}>Start: {moment(post.start).format('llll')}</p>
-                                    <p className="badge rounded-pill bg-danger m-2 p-2" style={{ fontSize: "1rem" }}>End: {moment(post.end).format('llll')}</p>
+                                    <p className="badge rounded-pill bg-info m-2 p-2" style={{ fontSize: "0.7vw" }}>Start: {moment(post.start).format('llll')}</p>
+                                    <p className="badge rounded-pill bg-danger m-2 p-2" style={{ fontSize: "0.7vw" }}>End: {moment(post.end).format('llll')}</p>
                                 </div>
                             </div>
                         </div>
@@ -85,18 +85,18 @@ const PostUserList = () => {
                             <img style={{ maxHeight: "23rem", width: "100%" }} src={post.image} alt={post.title} className="rounded mt-1" />
                             <div className="carousel-caption d-md-block">
                                 {post?.petsitter &&
-                                    <div className="row bg-secondary rounded" style={{ maxHeight: "20rem" }}>
+                                    <div className="row rounded" style={{ maxHeight: "20vw", backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
                                         <div className="col-lg-3 p-0 m-0">
                                             <h4>Pet-Sitter</h4>
                                             <Link to={`/profile/${post.petsitter.id}`}>
-                                                <img src={post?.petsitter?.avatar} className="rounded" alt="petsitter" style={{ maxHeight: "10rem" }} />
+                                                <img src={post?.petsitter?.avatar} className="rounded" alt="petsitter" style={{ maxHeight: "5vw" }} />
                                             </Link>
                                             <h4 className="m-0">{post?.petsitter?.name}</h4>
                                         </div>
                                         {moment().isBefore(post?.end) &&
                                             <div className="col-lg-6 m-auto">
-                                                <p className="badge rounded-pill bg-info m-2 p-2" style={{ fontSize: "1rem" }}>Start: {moment(post.start).format('llll')}</p>
-                                                <p className="badge rounded-pill bg-danger m-2 p-2" style={{ fontSize: "1rem" }}>End: {moment(post.end).format('llll')}</p>
+                                                <p className="badge rounded-pill bg-info m-2 p-2" style={{ fontSize: "0.8vw" }}>Start: {moment(post.start).format('llll')}</p>
+                                                <p className="badge rounded-pill bg-danger m-2 p-2" style={{ fontSize: "0.8vw" }}>End: {moment(post.end).format('llll')}</p>
                                                 <p>{post?.petsitter?.email}</p>
                                             </div>
                                         }

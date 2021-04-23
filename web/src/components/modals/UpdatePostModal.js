@@ -22,9 +22,11 @@ const UpdatePostModal = ({
                 >
                     <div className="Modal" style={styles}>
                         <div className="container">
+                            <div className="d-flex justify-content-end">
+                                <button className="btn btn-danger" onClick={toggleModal}>X</button>
+                            </div>
                             <h1>Update your Post!</h1>
                             <PostForm post={post} />
-                            <button className="btn btn-info m-2" onClick={toggleModal}>NO!</button>
                         </div>
                     </div>
                 </div>

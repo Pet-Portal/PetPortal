@@ -17,7 +17,7 @@ function PostItem({
 }) {
 
   const maxCharsTitle = (str, n) => {
-    return (str.length > n) ? str.substr(0, n-1) + '...' : str;
+    return (str.length > n) ? str.substr(0, n - 1) + '...' : str;
   }
 
   return (
@@ -29,19 +29,21 @@ function PostItem({
             <h3 className="post-pet">{pets[0].name}</h3>
           </div>
           <div className="card-body">
-            <h5>{maxCharsTitle(title, 27)}</h5>
-            <p className="card-text badge rounded-pill bg-primary mr-2 p-2">{moment(start).format('llll')}</p>
-            <p className="card-text badge rounded-pill bg-success mr-2 p-2">{moment(end).format('llll')}</p>
+            <h5 className="text-center font-weight-bold">{maxCharsTitle(title, 27)}</h5>
+            <div className="text-center">
+              <p className="card-text badge rounded-pill bg-warning mr-2 p-2" style={{ fontSize: "0.7rem" }}>{moment(start).format('MMMM Do')}</p>
+              <i className="fa fa-arrow-right"></i>
+              <p className="card-text badge rounded-pill bg-success ml-2 p-2" style={{ fontSize: "0.7rem" }}>{moment(end).format('MMMM Do')}</p>
+            </div>
           </div>
         </div>
         <div className="tab-pane" id={`2${id}`}>
           <div className="card-img-top">
-            <Link to={`/profile/${owner.id}`}><img src={owner.avatar} style={{ maxHeight: "170px", width: "100%" }} alt="owner" /></Link>
+            <Link to={`/profile/${owner.id}`}><img src={owner.avatar} style={{ maxHeight: "320px", width: "100%", height: "320px" }} alt="owner" /></Link>
             <h3 className="post-owner">{owner.name}</h3>
-          </div>
-          <div className="card-body">
-            <p>{owner.email}</p>
-            <RatingStars user={owner} /* isSimplified={true} *//>
+            <div className="post-rating">
+              <RatingStars user={owner} isSimplified={true} />
+            </div>
           </div>
         </div>
       </div>

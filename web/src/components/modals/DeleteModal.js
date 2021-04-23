@@ -29,7 +29,7 @@ const DeleteModal = ({
                 >
                     <div className="Modal" style={styles}>
                         <div className="container">
-                            <h1>Are your sure that you want to delete your Post?</h1>
+                            <h3 className="title">Are your sure that you want to delete your Post?</h3>
                             <button onClick={handleDeletePost} className="btn btn-danger m-2">DELETE</button>
                             <button className="btn btn-info m-2" onClick={toggleModal}>NO!</button>
                         </div>

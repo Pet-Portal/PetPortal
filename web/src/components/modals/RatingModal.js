@@ -22,7 +22,7 @@ const RatingModal = ({
                     tabIndex={-1}
                     role="dialog"
                 >
-                    <div className="Modal" style={styles}>
+                    <div className="Modal w-100" style={styles}>
                         <div className="d-flex justify-content-end">
                             <button className="btn btn-danger m-2" onClick={toggleModal}>X</button>
                         </div>

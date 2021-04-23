@@ -48,27 +48,7 @@ const LoginForm = () => {
 
     const { user, errors } = state;
 
-    /*
-    return (
-        <form className="mt-3 mb-3" onSubmit={handleSubmit}>
-            <div className="input-group mb-2">
-                <span className="input-group-text"><i className="fa fa-envelope fa-fw"></i></span>
-                <input type="email" name="email" className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                    required placeholder="user@example.org" onChange={handleChange} value={user.email} />
-                <div className="invalid-feedback">{errors.email}</div>
-            </div>
 
-            <div className="input-group mb-2">
-                <span className="input-group-text"><i className="fa fa-lock fa-fw"></i></span>
-                <input type="password" name="password" className="form-control"
-                    required placeholder="Password" onChange={handleChange} value={user.password} />
-            </div>
-            <div className="d-grid gap-2">
-                <button className="btn btn-primary" type="submit" >Login</button>
-            </div>
-        </form>      
-    )
-    */
     return (
         <form className="form" onSubmit={handleSubmit}>
             <div className="card-header card-header-primary text-center">

@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthStore";
+import { useHistory } from 'react-router-dom';
 import service from "../../services/posts-service";
+import moment from "moment";
 
 const validations = {
     image: (value) => {
@@ -53,6 +55,7 @@ const validations = {
 
 const PostForm = ({ openForm, post: postToEdit = {} }) => {
 
+    const history = useHistory()
 
     const [state, setState] = useState({
         post: {
@@ -68,8 +71,8 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
             image: validations.image(postToEdit.image),
             title: validations.title(postToEdit.title),
             description: validations.description(postToEdit.description),
-            start: validations.start(postToEdit.start),
-            end: validations.end(postToEdit.end),
+            start: validations.start(moment(postToEdit.start).format("YYYY-MM-DDThh:mm")),
+            end: validations.end(moment(postToEdit.end).format("YYYY-MM-DDThh:mm")),
         },
         touch: {},
     });
@@ -118,6 +121,7 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
             
             const postData = { ...state.post };
             const post = postData?.id ? await service.update(postData) : await service.create(postData);
+            if (postData?.id) history.push(`/posts/${post.id}`)
             setState(state => ({
                 ...state,
                 post: {
@@ -280,8 +284,8 @@ const PostForm = ({ openForm, post: postToEdit = {} }) => {
                 </div>
 
                 <button className="btn btn-primary mb-3" type="submit" disabled={!isValid()}>
-                    {post.id && <span>Update Event</span>}
-                    {!post.id && <span>Create Event</span>}
+                    {post.id && <span>Update Post</span>}
+                    {!post.id && <span>Create Post</span>}
                 </button>
             </form>
         </div>

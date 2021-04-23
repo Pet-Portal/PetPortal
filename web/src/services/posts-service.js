@@ -28,11 +28,9 @@ const update = (post) => {
  
         Object.keys(post).forEach(key => {
             if (Array.isArray(post[key])) {
-                console.log(post[key])
               post[key].forEach(value => data.append(`${key}[]`, JSON.stringify(value)))
             } else data.append(key, post[key])
         })
-        console.log(data)
         return http.patch(`/posts/${post.id}`, data)
 }
 

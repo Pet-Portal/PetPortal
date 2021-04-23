@@ -1,10 +1,8 @@
 import { Link, useHistory } from 'react-router-dom';
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext } from 'react';
 import service from '../../services/posts-service';
 import moment from 'moment';
 import { AuthContext } from '../../contexts/AuthStore';
-import RatingModal from '../modals/RatingModal';
-import RatingForm from '../ratings/RatingForm';
 
 function OfferItem({
     offer: {
@@ -19,9 +17,7 @@ function OfferItem({
     },
 
 }) {
-    const [rating, setRating] = useState({
-        showRatingForm: false
-    })
+
     const { user } = useContext(AuthContext);
 
     const history = useHistory()
@@ -33,14 +29,9 @@ function OfferItem({
         }
     }
 
-    const toggleRatingForm = () => {
-        setRating((rating) => ({
-            ...rating,
-            showRatingForm: !rating.showRatingForm
-        }))
-    }
+    
 
-    const { showRatingForm } = rating;
+   
     return (
         <Fragment>
             <div className="shadow border rounded p-3 mb-5 bg-white w-100 row d-flex align-items-center" style={{ width: "18rem" }}>
@@ -68,16 +59,9 @@ function OfferItem({
                         </Link>
                     </div>
                 }
-                {user.id === owner.id && state === "accepted" && user.id === post.petsitter && moment().isAfter(post.end) &&
-                    <div className="col-lg-4">
-                        <h4 className="title">You can now vote the Owner!</h4>
-                        <button onClick={toggleRatingForm} className="btn btn-info">Rate the Owner</button>
-                        <RatingModal isShowingModal={showRatingForm} toggleModal={toggleRatingForm} text="Rate the Owner!" component={<RatingForm post={post} reference={"userId"} referenceValue={post?.owner} />} />
-                    </div>
-                }
                 {user.id === owner.id && state === "accepted" && moment().isBefore(post.end) &&
                     <div> 
-                        <span className="p-3 fs-3 badge badge-pill badge-success text-white" style={{ fontSize: "20px" }}>Your Post was ACCEPTED</span>
+                        <span className="p-3 fs-3 badge badge-pill badge-success text-white" style={{ fontSize: "20px" }}>Your Offer was ACCEPTED</span>
                     </div>
                 }
 

@@ -4,7 +4,6 @@ import { AuthContext } from '../contexts/AuthStore';
 import PostItemDetails from '../components/posts/PostItemDetails';
 import OfferList from '../components/offers/OfferList';
 import OfferForm from '../components/offers/OfferForm';
-import PetSitter from '../components/users/PetSitter';
 import MainLayout from '../components/layouts/MainLayout';
 
 const PostDetails = () => {
@@ -28,9 +27,9 @@ const PostDetails = () => {
             {user.id !== post.owner?.id && post.state === "pending" && <div><h3 className="title">Send an Offer</h3><OfferForm /></div>}
 
             {post.state === "confirmed" && post.petsitter.id === user.id &&
-                <div>
+                <div className="text-center">
                     <h3 className="title">You are the new Pet-Sitter!</h3>
-                    <PetSitter post={post} />
+                    <img className="rounded w-25" src={post?.petsitter?.avatar} alt={post?.petsitter?.name} />                   
                 </div>
             }
 

@@ -102,7 +102,7 @@ const OfferForm = () => {
     const { offer, errors, touch } = state;
 
     return(
-        <div className="w-50">
+        <div className="w-75">
             <form onSubmit={handleSubmit}>
                 <div className="input-group mb-3">
                     <span className="input-group-text">
@@ -161,7 +161,7 @@ const OfferForm = () => {
                     <div className="invalid-feedback">{errors.price}</div>
                 </div>
 
-                <button className="btn btn-primary mb-3" type="submit" disabled={!isValid()}>
+                <button className="btn btn-primary mb-3 ml-3" type="submit" disabled={!isValid()}>
                     Send Offer!
         </button>
             </form>

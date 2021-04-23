@@ -2,31 +2,25 @@
 
 const Footer = () => {
     return (
-        <footer class="footer footer-default">
-            <div class="container">
-                <nav class="float-left">
+        <footer className="footer footer-default">
+            <div className="container">
+                <nav className="float-left">
                     <ul>
                         <li>
-                            <a href="http://localhost:3000/">
-                                petCreative
-            </a>
+                            <a href="http://localhost:3000/">petCreative</a>
                         </li>
                         <li>
-                            <a href="http://localhost:3000">
-                                About Us
-            </a>
+                            <a href="http://localhost:3000">About Us</a>
                         </li>
                         <li>
-                            <a href="https://localhost:3000">
-                                Blog
-            </a>
+                            <a href="https://localhost:3000">Blog</a>
                         </li>
                     </ul>
                 </nav>
-                <div class="copyright float-right">
+                <div className="copyright float-right">
                     &copy;
-         made with <i class="fa fa-paw"> by Alejandro Puerta & Juan Berrondo</i> 
-      </div>
+         made with <i className="fa fa-paw"> by Alejandro Puerta & Juan Berrondo</i>
+                </div>
             </div>
         </footer>
     )

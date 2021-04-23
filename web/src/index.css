@@ -131,8 +131,8 @@ code {
   left: 30%;
   bottom: 40%;
   z-index: 1050;
-  width: 40%;
-  height: 68%;
+  width: 30%;
+  height: 40%;
   overflow-x: hidden;
   overflow-y: auto;
   outline: 0;
@@ -249,4 +249,28 @@ code {
   font-size: 24px;
   left: 10px;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.post-card .post-rating {
+  position: absolute;
+  top: 0;
+  color: white;
+  font-weight: 500px;
+  font-size: 24px;
+  left: 260px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.text-with-shadow {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.pet-profile {
+  position: relative;
+}
+
+.pet-delete {
+  position: absolute;
+  top: 25px;
+  right: 10px;
 }

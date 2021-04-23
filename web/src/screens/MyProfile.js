@@ -104,13 +104,13 @@ const MyProfile = () => {
             </div>
             <div className="tab-content tab-space">
               <div className="tab-pane active text-center gallery" id="studio">
-                {user?.pets?.length !== 0 && <h4 className="title">Your Pets</h4>}
+                {user?.pets?.length !== 0 && <h3 className="title">Your Pets</h3>}
                 <div className="row">
                   {user.pets.map((pet, i) => (
-                    <div key={i} className="col-md-3 mx-auto">
-                      <p>{pet.name}</p>
+                    <div key={i} className="col-md-3 mx-auto pet-profile">
+                      <p className="font-weight-bold" style={{fontSize: "1rem"}}>{pet.name}</p>
                       <img src={pet.image} style={{ width: "100%", maxWidth: "15rem" }} className="rounded" alt={pet.name}/>
-                      <button className="btn btn-danger rounded-circle" /* onClick={() => handlePetDelete(pet)} */ onClick={toggleDeletePetForm} >X</button>
+                      <button className="btn btn-link link-unstyled pet-delete text-danger p-0" onClick={toggleDeletePetForm} ><h1 class="material-icons" style={{fontSize: "30px"}}>delete</h1></button>
                       <DeletePetModal isShowingModal={showDeletePet} toggleModal={toggleDeletePetForm} user={user} onUserChange={onUserChange} pet={pet}/>
                     </div>
                   ))}
