@@ -1,11 +1,19 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthStore";
 import service from "../../services/users-service";
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
 const validations = {
+    name: (value) => {
+        let message;
+        if (!value) {
+            message = "Name is required";
+        }
+        return message;
+    },
     email: (value) => {
         let message;
         if (!EMAIL_PATTERN.test(value)) {
@@ -15,18 +23,12 @@ const validations = {
     },
     latitude: (value) => {
         let message;
-        if (Math.abs(Number(value)) > 90) {
-            message = 'Latitude must be between -90 and 90';
+        if (!value) {
+            message = 'Your location is required';
         }
         return message;
     },
-    longitude: (value) => {
-        let message;
-        if (Math.abs(Number(value)) > 180) {
-            message = 'Longitude must be between -180 and 180';
-        }
-        return message;
-    },
+    
 }
 
 const UserForm = ({ toggleUserForm, toggleLoading }) => {
@@ -38,14 +40,35 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
             avatar: user.avatar,
             longitude: user.location[0],
             latitude: user.location[1],
+            place: user.place
         },
         errors: {
+            name: validations.name(user.name),
             email: validations.email(user.email),
-            longitude: validations.longitude(user.location[0]),
             latitude: validations.latitude(user.location[1])
         },
         touch: {},
     });
+    const [address, setAddress] = useState("");
+
+    const handleSelect = async (value) => {
+        const results = await geocodeByAddress(value);
+        const latLng = await getLatLng(results[0])
+        setAddress(value)
+        setState(state => ({
+            ...state,
+            userProfile: {
+                ...userProfile,
+                longitude: latLng.lng,
+                latitude: latLng.lat,
+                place: value
+            },
+            errors: {
+                ...state.errors,
+                latitude: validations.latitude && validations.latitude(value)
+            }
+        }))
+    }
 
     const isValid = () => {
         const { errors } = state;
@@ -129,6 +152,7 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
                         id="name"
                         placeholder="Name"
                     />
+                    <div className="invalid-feedback">{errors.name}</div>
                 </div>
 
 
@@ -168,22 +192,27 @@ const UserForm = ({ toggleUserForm, toggleLoading }) => {
                     />
                 </div>
 
-                <div className="input-group mb-4">
-                    <span className="input-group-text"><i className="fa fa-globe fa-fw"></i></span>
+                <PlacesAutocomplete onChange={setAddress} onSelect={handleSelect} value={address}>
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div className="input-group mb-2">
+                        <span className="input-group-text">
+                            <i className="fa fa-globe fa-fw"></i>
+                        </span>
+                        <input {...getInputProps({ placeholder: "Enter a place" })} name="latitude" onBlur={handleBlur} className={`form-control ${touch.latitude && errors.latitude ? "is-invalid" : ""
+                        }`}/>
+                            <div className="invalid-feedback">{errors.latitude}</div>
+                        <div>
+                            {loading && <div>...loading</div>}
+                            {suggestions.map((suggestion, i) => {
+                                const style = { backgroundColor: suggestion.active ? "rgba(152, 71, 179, 0.4)" : "#fff" }
+                                return <div key={i} {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>
+                            })}
+                        </div>
+                    </div>
+                )}
+            </PlacesAutocomplete>
 
-                    <span className="input-group-text">Latitude</span>
-                    <input name="latitude" type="number" className={`form-control ${(touch.latitude && errors.latitude) ? 'is-invalid' : ''}`}
-                        value={userProfile.latitude} onBlur={handleBlur} onChange={handleChange} />
-
-                    <span className="input-group-text">Longitude</span>
-                    <input name="longitude" type="number" className={`form-control ${(touch.longitude && errors.longitude) ? 'is-invalid' : ''}`}
-                        value={userProfile.longitude} onBlur={handleBlur} onChange={handleChange} />
-
-                    {touch.latitude && errors.latitude && <div className="invalid-feedback">{errors.latitude}</div>}
-                    {touch.longitude && errors.longitude && <div className="invalid-feedback">{errors.longitude}</div>}
-                </div>
-
-                <button className="btn btn-primary mb-3" type="submit">
+                <button className="btn btn-primary mb-3" type="submit" disabled={!isValid()}>
                     Update
                 </button>
             </form>

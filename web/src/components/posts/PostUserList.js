@@ -60,7 +60,7 @@ const PostUserList = () => {
         <div>
             <div className="profile">
                 <div className="avatar text-center" style={{ height: "150px" }}>
-                    <img src={user.avatar} style={{ width: "50%", maxWidth: "180px" }} alt="avatar" className="img-raised rounded-circle img-fluid" />
+                    <Link to={"/myProfile"}><img src={user.avatar} style={{ width: "50%", maxWidth: "180px" }} alt="avatar" className="img-raised rounded-circle img-fluid" /></Link>
                 </div>
             </div>
             {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}

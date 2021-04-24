@@ -89,9 +89,11 @@ const PostItemDetails = ({ triggerPost }) => {
                     <div className="p-2">
                         <h3 className="title">{post.title}</h3>
                         <p style={{ fontSize: "1.3rem" }}>{post.description}</p>
-                        <p className="badge rounded-pill bg-info mr-2 p-2" style={{ fontSize: "20px" }}>Start: {moment(post.start).format('llll')}</p>
-                        <p className="badge rounded-pill bg-danger mr-2 p-2" style={{ fontSize: '20px' }}>End: {moment(post.end).format('llll')}</p>
-                        <p className="font-weight-bold" style={{fontSize: "18px"}}>{post?.owner?.place}</p>
+                        <div className="text-center">
+                            <p className="badge rounded-pill bg-info mr-2 p-2" style={{ fontSize: "20px" }}>Start: {moment(post.start).format('llll')}</p>
+                            <p className="badge rounded-pill bg-danger mr-2 p-2" style={{ fontSize: '20px' }}>End: {moment(post.end).format('llll')}</p>
+                        </div>
+                        <p className="font-weight-bold" style={{ fontSize: "18px" }}>{post?.owner?.place}</p>
                     </div>
 
                     <DeleteModal isShowingModal={showDeleteModal} toggleModal={toggleDeleteModal} post={post} />

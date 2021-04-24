@@ -55,14 +55,14 @@ const OfferUserList = () => {
         <div>
             <div className="profile">
                 <div className="avatar text-center" style={{ height: "150px" }}>
-                    <Link to={`/profile/${user.id}`}><img src={user.avatar} style={{ width: "50%", maxWidth: "180px" }} alt="avatar" className="img-raised rounded-circle img-fluid" /></Link>
+                    <Link to={"/myProfile"}><img src={user.avatar} style={{ width: "50%", maxWidth: "180px" }} alt="avatar" className="img-raised rounded-circle img-fluid" /></Link>
                 </div>
             </div>
             {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
 
             {offers.map((offer, i) => (
                 <div key={i} id={i} className="carousel slide mb-3" data-ride="carousel">
-                    {user.id === offer.owner.id && offer.state === "accepted" && user.id === offer.post.petsitter && moment().isAfter(offer.post.end) &&
+                    {user.id === offer?.owner?.id && offer.state === "accepted" && user.id === offer?.post?.petsitter && moment().isAfter(offer?.post?.end) &&
                         <ol className="carousel-indicators">
                             <li data-target={`#${i}`} data-slide-to="0" className="active"></li>
                             <li data-target={`#${i}`} data-slide-to="1"></li>
@@ -70,20 +70,20 @@ const OfferUserList = () => {
                     }
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img style={{ maxHeight: "23rem", width: "100%" }} src={offer.post.image} alt={offer.title} className="rounded mt-1" />
+                            <img style={{ maxHeight: "23rem", width: "100%" }} src={offer?.post?.image} alt={offer.title} className="rounded mt-1" />
                             <div className="carousel-caption d-md-block">
                                 <Link to={`/posts/${offer?.post?.id}`}><h2 className="title text-white font-weight-bold text-with-shadow" style={{ fontSize: "1.5vw" }}>{offer?.title}</h2></Link>
                                 <h3 className="text-with-shadow" style={{ fontSize: "1vw" }}>{offer?.text}</h3>
                                 <p className="text-with-shadow" style={{ fontSize: "1vw" }}>{offer?.price}€ /d</p>
                                 <p className="text-with-shadow" style={{ fontSize: "1vw" }}>{moment(offer.createdAt).fromNow()}</p>
-                                {user.id === offer.owner.id && offer.state === "accepted" && moment().isBefore(offer.post.end) &&
-                                    <span className="badge badge-pill badge-success text-white" style={{ fontSize: "1.3vw" }}>Your Offer was ACCEPTED</span>
+                                {user.id === offer?.owner?.id && offer?.state === "accepted" && moment().isBefore(offer?.post?.end) &&
+                                    <span className="badge badge-pill badge-success text-white" style={{ fontSize: "1vw" }}>Your Offer was ACCEPTED</span>
                                 }
                             </div>
                         </div>
-                        {user.id === offer.owner.id && offer.state === "accepted" && user.id === offer.post.petsitter && moment().isAfter(offer.post.end) &&
+                        {user.id === offer?.owner?.id && offer?.state === "accepted" && user.id === offer?.post?.petsitter && moment().isAfter(offer.post.end) &&
                             <div className="carousel-item">
-                                <img style={{ maxHeight: "23rem", width: "100%" }} src={offer?.post?.image} alt={offer.title} className="rounded mt-1" />
+                                <img style={{ maxHeight: "23rem", width: "100%" }} src={offer?.post?.image} alt={offer?.title} className="rounded mt-1" />
                                 <div className="carousel-caption d-md-block">
                                     <div className="offer-rate">
                                     <Link to={`/profile/${offer?.post?.owner?.id}`}><img src={offer?.post?.owner?.avatar} alt={offer?.post?.owner?.name} style={{ maxHeight: "8vw" }} className="mt-2 rounded" /></Link>

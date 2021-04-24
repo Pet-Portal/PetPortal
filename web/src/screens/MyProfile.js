@@ -92,10 +92,10 @@ const MyProfile = () => {
           </div>
         </div>
         <div className="description text-center">
-          <p>{user.email}</p>
+          <p style={{ fontSize: "1.5rem" }} className="mb-5">{user.email}</p>
         </div>
         <div className="text-center">
-          <button onClick={togglePetForm} className="btn btn-info">New Pet</button>
+          <button onClick={togglePetForm} className="btn btn-info mr-2">New Pet</button>
           <button onClick={toggleUserForm} className="btn btn-info">Update Profile</button>
         </div>
         <div className="tab-content tab-space">
@@ -106,7 +106,7 @@ const MyProfile = () => {
                 <div key={i} className="col-md-3 mx-auto pet-profile">
                   <p className="font-weight-bold" style={{ fontSize: "1rem" }}>{pet.name}</p>
                   <img src={pet.image} style={{ width: "100%", maxWidth: "15rem" }} className="rounded" alt={pet.name} />
-                  <button className="btn btn-link link-unstyled pet-delete text-danger p-0" onClick={toggleDeletePetForm} ><h1 class="material-icons" style={{ fontSize: "30px" }}>delete</h1></button>
+                  <button className="btn btn-link link-unstyled pet-delete text-danger p-0" onClick={toggleDeletePetForm} ><h1 className="material-icons" style={{ fontSize: "30px" }}>delete</h1></button>
                   <DeletePetModal isShowingModal={showDeletePet} toggleModal={toggleDeletePetForm} user={user} onUserChange={onUserChange} pet={pet} />
                 </div>
               ))}

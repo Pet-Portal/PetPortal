@@ -50,8 +50,10 @@ export const Home = () => {
                                                             <img className="rounded" style={{ maxHeight: "15rem", width: "100%" }} src="/assets/img/examplePostImg.jpg" alt="postImg" />
                                                         </div>
                                                         <h5>Two days off for Mini</h5>
-                                                        <p className="card-text badge rounded-pill bg-primary mr-2 p-2 text-white">SUN, JUL 4, 2021 5:34 PM</p>
-                                                        <p className="card-text badge rounded-pill bg-success mr-2 p-2 text-white">FRI, JUL 9, 2021 5:34 PM</p>
+                                                        <p className="card-text badge rounded-pill bg-warning mr-2 p-2 text-white">JUL 4TH</p>
+                                                        <i className="fa fa-arrow-right mr-2"></i>
+                                                        <p className="card-text badge rounded-pill bg-success mr-2 p-2 text-white">JUL 9TH</p>
+                                                        <p>Madrid, España</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,6 +128,9 @@ export const Home = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="w-100 d-flex justify-content-center">
+                        <img src="https://res.cloudinary.com/djbn7xax3/image/upload/v1618339864/PetPortal/petportal_Alejandro_7163_epb0fg.png" alt="logo"/>
                     </div>
 
                     <div className="section section-contacts">
