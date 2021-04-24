@@ -1,9 +1,9 @@
 
 import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthStore';
+import { Link } from 'react-router-dom';
 import service from '../../services/posts-service';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 import RatingModal from '../modals/RatingModal';
 import RatingForm from '../ratings/RatingForm';
 
@@ -85,6 +85,10 @@ const OfferUserList = () => {
                             <div className="carousel-item">
                                 <img style={{ maxHeight: "23rem", width: "100%" }} src={offer?.post?.image} alt={offer.title} className="rounded mt-1" />
                                 <div className="carousel-caption d-md-block">
+                                    <div className="offer-rate">
+                                    <Link to={`/profile/${offer?.post?.owner?.id}`}><img src={offer?.post?.owner?.avatar} alt={offer?.post?.owner?.name} style={{ maxHeight: "8vw" }} className="mt-2 rounded" /></Link>
+                                        <p className="offer-rate-name">{offer?.post?.owner?.name}</p>
+                                    </div>
                                     <h3 className="text-with-shadow">You can now vote the Owner!</h3>
                                     <button onClick={toggleRatingForm} className="btn btn-info">Rate the Owner</button>
                                     <RatingModal isShowingModal={showRatingForm} toggleModal={toggleRatingForm} text="Rate the Owner!" component={<RatingForm post={offer.post} reference={"userId"} referenceValue={offer?.post?.owner} />} />

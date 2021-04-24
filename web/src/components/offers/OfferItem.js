@@ -37,7 +37,7 @@ function OfferItem({
             <div className="shadow border rounded p-3 mb-5 bg-white w-100 row d-flex align-items-center" style={{ width: "18rem" }}>
                 {user.id !== owner.id &&
                     <Link to={`/profile/${owner.id}`} className="col-lg-3">
-                        <img src={owner?.avatar} alt="owner" style={{ maxHeight: "18rem", maxWidth: "15rem" }} />
+                        <img src={owner?.avatar} alt="owner" className="rounded" style={{ maxHeight: "18rem", maxWidth: "15rem" }} />
                     </Link>
                 }
                 <div className="col-lg-4">

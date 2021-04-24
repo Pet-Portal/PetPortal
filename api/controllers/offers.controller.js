@@ -83,7 +83,14 @@ module.exports.offerListFromPost = (req, res, next) => {
 module.exports.listUserOffers = (req, res, next) => {
   const { userId } = req.params;
   Offer.find({ owner: userId })
-    .populate("post owner")
+    .populate("owner")
+    .populate({
+      path: "post",
+      populate: {
+        path: "owner",
+        model: "User"
+      }
+    })
     
     .then(offers => res.status(200).json(offers))
     .catch(next)

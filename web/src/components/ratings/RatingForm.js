@@ -154,7 +154,7 @@ const RatingForm = ({ post, reference, referenceValue }) => {
                     <span className="input-group-text">
                         <i className="fa fa-edit fa-fw"></i>
                     </span>
-                    <input
+                    <textarea
                         name="text"
                         type="text"
                         className={`form-control ${touch.text && errors.text ? "is-invalid" : ""
@@ -164,7 +164,8 @@ const RatingForm = ({ post, reference, referenceValue }) => {
                         value={rating.text}
                         id="text"
                         placeholder="Rating Text"
-                    />
+                        rows="4"
+                    ></textarea>
                     <div className="invalid-feedback">{errors.text}</div>
                 </div>
 

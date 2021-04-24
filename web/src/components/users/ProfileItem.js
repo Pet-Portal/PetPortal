@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router';
 import service from '../../services/users-service';
 import RatingStars from '../ratings/RatingStars';
+import moment from 'moment';
 
 const ProfileItem = () => {
 
@@ -76,7 +77,7 @@ const ProfileItem = () => {
                 </div>
             </div>
             <div className="description text-center">
-                <p style={{fontSize: "1.5rem"}}>{user.email}</p>
+                <p style={{ fontSize: "1.5rem" }}>{user.email}</p>
             </div>
             <div className="tab-content tab-space">
                 <div className="tab-pane active text-center gallery" id="studio">
@@ -84,7 +85,7 @@ const ProfileItem = () => {
                     <div className="row">
                         {user?.pets?.map((pet, i) => (
                             <div key={i} className="col-md-3 mx-auto">
-                                <p className="font-weight-bold" style={{fontSize: "1rem"}}>{pet.name}</p>
+                                <p className="font-weight-bold" style={{ fontSize: "1rem" }}>{pet.name}</p>
                                 <img src={pet.image} style={{ width: "100%", maxWidth: "15rem" }} className="rounded" alt={pet.name} />
                             </div>
                         ))}
@@ -97,7 +98,10 @@ const ProfileItem = () => {
                             <h3><b>{rating?.title}</b></h3>
                             {starsRate(rating?.rate)}
                             <h4>{rating?.text}</h4>
-                            <p>{rating?.owner?.name}</p>
+                            <div className="d-flex justify-content-start">
+                                <p className="mr-2 font-weight-bold">{rating?.owner?.name}</p>
+                                <p>{moment(rating?.createdAt).fromNow()}</p>
+                            </div>
                         </div>
                     ))}
                 </div>

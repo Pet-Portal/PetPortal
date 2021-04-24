@@ -3,8 +3,8 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 const mapKey = process.env.YOUR_GOOGLE_MAPS_API_KEY
 
 const containerStyle = {
-  width: '800px',
-  height: '400px'
+  width: '100%',
+  height: '500px'
 };
 
 const center = {
@@ -34,7 +34,7 @@ function PostMap({ posts }) {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={5}
+        zoom={6}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >

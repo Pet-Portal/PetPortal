@@ -53,15 +53,15 @@ function PostFilter({ className, onFilterChange, loading }) {
                 </div>
             </div>
             <div className="col-lg-12 text-center">
-                <button onClick={() => handleSpeciesChange("")} className="btn btn-info btn-round me-1">All</button>
-                <button onClick={() => handleSpeciesChange("Dog")} className="btn btn-info btn-round me-1">Dogs</button>
-                <button onClick={() => handleSpeciesChange("Cat")} className="btn btn-info btn-round me-1">Cats</button>
-                <button onClick={() => handleSpeciesChange("Bird")} className="btn btn-info btn-round me-1">Birds</button>
-                <button onClick={() => handleSpeciesChange("Fish")} className="btn btn-info btn-round me-1">Fishes</button>
-                <button onClick={() => handleSpeciesChange("Turtle")} className="btn btn-info btn-round me-1">Turtles</button>
-                <button onClick={() => handleSpeciesChange("Hamster")} className="btn btn-info btn-round me-1">Hamsters</button>
-                <button onClick={() => handleSpeciesChange("Horse")} className="btn btn-info btn-round me-1">Horses</button>
-                <button onClick={() => handleSpeciesChange("Other")} className="btn btn-info btn-round me-1">Other</button>
+                <button onClick={() => handleSpeciesChange("")} className="btn btn-info btn-round me-1 w-75 text-center">All</button>
+                <button onClick={() => handleSpeciesChange("Dog")} className="btn btn-info btn-round me-1 w-75 text-center">Dogs</button>
+                <button onClick={() => handleSpeciesChange("Cat")} className="btn btn-info btn-round me-1 w-75 text-center">Cats</button>
+                <button onClick={() => handleSpeciesChange("Bird")} className="btn btn-info btn-round me-1 w-75 text-center">Birds</button>
+                <button onClick={() => handleSpeciesChange("Fish")} className="btn btn-info btn-round me-1 w-75 text-center">Fishes</button>
+                <button onClick={() => handleSpeciesChange("Turtle")} className="btn btn-info btn-round me-1 w-75 text-center">Turtles</button>
+                <button onClick={() => handleSpeciesChange("Hamster")} className="btn btn-info btn-round me-1 w-75 text-center">Hamsters</button>
+                <button onClick={() => handleSpeciesChange("Horse")} className="btn btn-info btn-round me-1 w-75 text-center">Horses</button>
+                <button onClick={() => handleSpeciesChange("Other")} className="btn btn-info btn-round me-1 w-75 text-center">Other</button>
             </div>
         </div>
     );

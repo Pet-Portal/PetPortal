@@ -57,7 +57,7 @@ function PostsList({ update, minSearchChars }) {
   const handlePostFilter = useCallback(postFilter => setPostFilter(postFilter), []);
 
   const { posts, loading, showMap } = state;
-  const postMarkers = posts.map(post => <Marker onClick={() => history.push(`/posts/${post.id}`)} position={{ lng: post?.owner?.location[0], lat: post?.owner?.location[1] }} />)
+  const postMarkers = posts.map((post, i) => <Marker key={i} onClick={() => history.push(`/posts/${post.id}`)} position={{ lng: post?.owner?.location[0], lat: post?.owner?.location[1] }} />)
 
 
   return (

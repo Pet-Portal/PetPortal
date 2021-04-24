@@ -139,7 +139,7 @@ code {
   bottom: 40%;
   z-index: 1050;
   width: 30%;
-  height: 40%;
+  height: 45%;
   overflow-x: hidden;
   overflow-y: auto;
   outline: 0;
@@ -282,16 +282,20 @@ code {
   right: 10px;
 }
 
-.carousel-object {
-  position: relative;
-}
-
-.carousel-content {
-  position: absolute;
-  bottom: 50px;
-  left: 20px;
-}
-
 #map {
   height: 100%;
+}
+
+.offer-rate {
+  position: relative;
+  width: 25%;
+  margin: auto;
+}
+
+.offer-rate-name {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
 }

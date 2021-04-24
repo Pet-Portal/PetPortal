@@ -40,6 +40,7 @@ module.exports.list = (req, res, next) => {
       if (specie) {
         posts = posts.filter(post => post.pets.some(pet => pet.species === specie));
       }
+      posts = posts.filter(post => post.state === "pending")
       res.status(200).json(posts);
     })
     .catch(next);
@@ -58,10 +59,7 @@ module.exports.update = (req, res, next) => {
   if (req.file) {
     post.image = req.file.path;
   }
-
-
-
-  /* post.pets = post.pets.map(pet => pet.id) */
+  
   post.pets = [JSON.parse(post.pets)].map(pet => pet.id);
   post.owner = req.user.id
   console.log("POST", post)
