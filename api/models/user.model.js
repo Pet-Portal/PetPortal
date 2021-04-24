@@ -36,6 +36,9 @@ const userSchema = new Schema({
         enum: ["guest", "admin"],
         default: 'guest'
     },
+    place: {
+        type: String,
+    },
     location: {
         type: {
           type: String,

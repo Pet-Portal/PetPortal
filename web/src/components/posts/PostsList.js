@@ -2,20 +2,23 @@ import { useState, useEffect, Fragment, useCallback } from 'react';
 import PostItem from './PostItem';
 import postsService from '../../services/posts-service';
 import PostFilter from './PostFilter';
-
-
-
-function PostsList({ update, minSearchChars, openForm }) {
+import PostMap from '../maps/Map';
+import { Marker } from '@react-google-maps/api';
+import { useHistory } from 'react-router';
+function PostsList({ update, minSearchChars }) {
 
   const [state, setState] = useState({
     posts: [],
-    loading: false
+    loading: false,
+    showMap: false
   });
 
   const [postFilter, setPostFilter] = useState({
     title: '',
     species: ''
   });
+
+  const history = useHistory();
 
   useEffect(() => {
 
@@ -45,9 +48,18 @@ function PostsList({ update, minSearchChars, openForm }) {
 
   }, [update, postFilter, minSearchChars]);
 
+  const handleMap = () => {
+    setState((state) => ({
+      ...state,
+      showMap: !state.showMap
+    }))
+  }
   const handlePostFilter = useCallback(postFilter => setPostFilter(postFilter), []);
 
-  const { posts, loading } = state;
+  const { posts, loading, showMap } = state;
+  const postMarkers = posts.map(post => <Marker onClick={() => history.push(`/posts/${post.id}`)} position={{ lng: post?.owner?.location[0], lat: post?.owner?.location[1] }} />)
+
+
   return (
     <Fragment>
       {loading &&
@@ -55,6 +67,15 @@ function PostsList({ update, minSearchChars, openForm }) {
           <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." />
         </div>
       }
+      <button className="btn btn-info ml-3" onClick={() => handleMap()}>
+        <i className="fa fa-globe fa-fw"></i>Pet Map!
+        </button>
+      {showMap &&
+        <div className="mb-3">
+          <PostMap posts={postMarkers} />
+        </div>
+      }
+
       <div className="row">
         <div className="col-lg-2">
           <PostFilter className="mb-3" onFilterChange={handlePostFilter} loading={loading} />

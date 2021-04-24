@@ -7,6 +7,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -273,4 +280,18 @@ code {
   position: absolute;
   top: 25px;
   right: 10px;
+}
+
+.carousel-object {
+  position: relative;
+}
+
+.carousel-content {
+  position: absolute;
+  bottom: 50px;
+  left: 20px;
+}
+
+#map {
+  height: 100%;
 }

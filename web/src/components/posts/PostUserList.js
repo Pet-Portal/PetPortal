@@ -65,16 +65,12 @@ const PostUserList = () => {
             {loading && <div className="d-flex justify-content-center align-items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Loading_2.gif" alt="Loading..." /></div>}
             {posts.map((post, i) => (
                 <div key={i} id={i} className="carousel slide" data-ride="carousel">
-                    <ol className="carousel-indicators">
-                        <li data-target={`#${i}`} data-slide-to="0" className="active"></li>
-                        <li data-target={`#${i}`} data-slide-to="1"></li>
-                    </ol>
-                    <div className="carousel-inner">
-                        <div className="carousel-item active">
+                    <div /* className="carousel-inner" */>
+                        <div className="carousel-item active carousel-object">
                             <img style={{ maxHeight: "23rem", width: "100%" }} src={post.image} alt={post.title} className="rounded mt-1" />
-                            <div className="carousel-caption d-md-block">
-                                <Link to={`/posts/${post.id}`}><p className="text-white font-weight-bold text-with-shadow" style={{fontSize: "1.5vw"}}>{post?.title}</p></Link>
-                                <p className="text-with-shadow" style={{fontSize: "1vw"}}>{post?.description}</p>
+                            <div /* className="carousel-caption d-md-block" */ className="carousel-content text-center">
+                                <Link to={`/posts/${post.id}`}><p className="text-white font-weight-bold text-with-shadow" style={{fontSize: "1.8vw"}}>{post?.title}</p></Link>
+                                <p className="text-with-shadow text-white" style={{fontSize: "1.2vw"}}>{post?.description}</p>
                                 <div>
                                     <p className="badge rounded-pill bg-info m-2 p-2" style={{ fontSize: "0.7vw" }}>Start: {moment(post.start).format('llll')}</p>
                                     <p className="badge rounded-pill bg-danger m-2 p-2" style={{ fontSize: "0.7vw" }}>End: {moment(post.end).format('llll')}</p>

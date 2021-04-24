@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import service from '../../services/users-service';
-
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 const EMAIL_PATTERN = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PASSWORD_PATTERN = /^.{8,}$/;
 
@@ -34,21 +34,11 @@ const validations = {
     latitude: (value) => {
         let message;
         if (!value) {
-            message = 'Latitude is required';
-        } else if (Math.abs(Number(value)) > 90) {
-            message = 'Latitude must be between -90 and 90';
+            message = 'Your location is required';
         }
         return message;
     },
-    longitude: (value) => {
-        let message;
-        if (!value) {
-            message = 'Longitude is required';
-        } else if (Math.abs(Number(value)) > 180) {
-            message = 'Longitude must be between -180 and 180';
-        }
-        return message;
-    },
+
 }
 
 const RegisterForm = () => {
@@ -59,17 +49,39 @@ const RegisterForm = () => {
             email: '',
             password: '',
             latitude: '',
-            longitude: ''
+            longitude: '',
+            place: ""
         },
         errors: {
             name: validations.name(),
             email: validations.email(),
             password: validations.password(),
             latitude: validations.latitude(),
-            longitude: validations.longitude()
         },
         touch: {}
     })
+
+    const [address, setAddress] = useState("");
+
+
+    const handleSelect = async (value) => {
+        const results = await geocodeByAddress(value);
+        const latLng = await getLatLng(results[0])
+        setAddress(value)
+        setState(state => ({
+            ...state,
+            user: {
+                ...user,
+                longitude: latLng.lng,
+                latitude: latLng.lat,
+                place: value
+            },
+            errors: {
+                ...state.errors,
+                latitude: validations.latitude && validations.latitude(value)
+            }
+        }))
+    }
 
     const isValid = () => {
         const { errors } = state;
@@ -125,111 +137,96 @@ const RegisterForm = () => {
     const { user, errors, touch } = state;
 
     return (
-        
 
-    <form className="mt-3 mb-3 ml-3 mr-4" onSubmit={handleSubmit}>
-        <div className="card-header  card-header-primary text-center">
-          <h4 className="card-title">Sing Up</h4>
-          <div className="social-line">
-            <a href="#pablo" className="btn btn-just-icon btn-link">
-              <i className="fa fa-facebook-square"></i>
-            </a>
-            <a href="#pablo" className="btn btn-just-icon btn-link">
-              <i className="fa fa-twitter"></i>
-            </a>
-            <a href="#pablo" className="btn btn-just-icon btn-link">
-              <i className="fa fa-google-plus"></i>
-            </a>
-          </div>
-        </div>
-        <div className="input-group mb-2">
-          <span className="input-group-text">
-            <i className="fa fa-user fa-fw"></i>
-          </span>
-          <input
-            type="text"
-            name="name"
-            className={`form-control ${
-              touch.name && errors.name ? "is-invalid" : ""
-            }`}
-            placeholder="Username"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={user.name}
-          />
-          <div className="invalid-feedback">{errors.name}</div>
-        </div>
-        <div className="input-group mb-2">
-          <span className="input-group-text">
-            <i className="fa fa-envelope fa-fw"></i>
-          </span>
-          <input
-            type="text"
-            name="email"
-            className={`form-control ${
-              touch.email && errors.email ? "is-invalid" : ""
-            }`}
-            placeholder="Email"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={user.email}
-          />
-          <div className="invalid-feedback">{errors.email}</div>
-        </div>
-        <div className="input-group mb-2">
-          <span className="input-group-text">
-            <i className="fa fa-globe fa-fw"></i>
-          </span>
-          <span className="input-group-text">Latitude</span>
-          <input
-            name="latitude"
-            type="number"
-            className={`form-control ${
-              touch.latitude && errors.latitude ? "is-invalid" : ""
-            }`}
-            value={user.latitude}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          <span className="input-group-text">Longitude</span>
-          <input
-            name="longitude"
-            type="number"
-            className={`form-control ${
-              touch.longitude && errors.longitude ? "is-invalid" : ""
-            }`}
-            value={user.longitude}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          {touch.latitude && errors.latitude && (
-            <div className="invalid-feedback">{errors.latitude}</div>
-          )}
-          {touch.longitude && errors.longitude && (
-            <div className="invalid-feedback">{errors.longitude}</div>
-          )}
-        </div>
-        <div className="input-group mb-2">
-          <span className="input-group-text">
-            <i className="fa fa-lock fa-fw"></i>
-          </span>
-          <input
-            type="password"
-            name="password"
-            className={`form-control ${
-              touch.password && errors.password ? "is-invalid" : ""
-            }`}
-            placeholder="Password"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={user.password}
-          />
-          <div className="invalid-feedback">{errors.password}</div>
-        </div>
-        <button className="btn btn-primary" type="submit" disabled={!isValid()}>
-          Register
+
+        <form className="mt-3 mb-3 ml-3 mr-4" onSubmit={handleSubmit}>
+            <div className="card-header  card-header-primary text-center">
+                <h4 className="card-title">Sing Up</h4>
+                <div className="social-line">
+                    <a href="#pablo" className="btn btn-just-icon btn-link">
+                        <i className="fa fa-facebook-square"></i>
+                    </a>
+                    <a href="#pablo" className="btn btn-just-icon btn-link">
+                        <i className="fa fa-twitter"></i>
+                    </a>
+                    <a href="#pablo" className="btn btn-just-icon btn-link">
+                        <i className="fa fa-google-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <div className="input-group mb-2">
+                <span className="input-group-text">
+                    <i className="fa fa-user fa-fw"></i>
+                </span>
+                <input
+                    type="text"
+                    name="name"
+                    className={`form-control ${touch.name && errors.name ? "is-invalid" : ""
+                        }`}
+                    placeholder="Username"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={user.name}
+                />
+                <div className="invalid-feedback">{errors.name}</div>
+            </div>
+            <div className="input-group mb-2">
+                <span className="input-group-text">
+                    <i className="fa fa-envelope fa-fw"></i>
+                </span>
+                <input
+                    type="text"
+                    name="email"
+                    className={`form-control ${touch.email && errors.email ? "is-invalid" : ""
+                        }`}
+                    placeholder="Email"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={user.email}
+                />
+                <div className="invalid-feedback">{errors.email}</div>
+            </div>
+             
+            <div className="input-group mb-2">
+                <span className="input-group-text">
+                    <i className="fa fa-lock fa-fw"></i>
+                </span>
+                <input
+                    type="password"
+                    name="password"
+                    className={`form-control ${touch.password && errors.password ? "is-invalid" : ""
+                        }`}
+                    placeholder="Password"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    value={user.password}
+                />
+                <div className="invalid-feedback">{errors.password}</div>
+            </div>
+            <PlacesAutocomplete onChange={setAddress} onSelect={handleSelect} value={address}>
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div className="input-group mb-2">
+                        <span className="input-group-text">
+                            <i className="fa fa-globe fa-fw"></i>
+                        </span>
+                        <input {...getInputProps({ placeholder: "Enter a place" })} name="latitude" onBlur={handleBlur} className={`form-control ${touch.latitude && errors.latitude ? "is-invalid" : ""
+                        }`}/>
+                            <div className="invalid-feedback">{errors.latitude}</div>
+                        <div>
+                            {loading && <div>...loading</div>}
+                            {suggestions.map((suggestion, i) => {
+                                const style = { backgroundColor: suggestion.active ? "rgba(152, 71, 179, 0.4)" : "#fff" }
+                                return <div key={i} {...getSuggestionItemProps(suggestion, { style })}>{suggestion.description}</div>
+                            })}
+                        </div>
+                    </div>
+                )}
+            </PlacesAutocomplete>
+
+            <button className="btn btn-primary" type="submit" disabled={!isValid()}>
+                Register
         </button>
-      </form>
+        </form>
     )
 };
 

@@ -91,7 +91,7 @@ const PostItemDetails = ({ triggerPost }) => {
                         <p style={{ fontSize: "1.3rem" }}>{post.description}</p>
                         <p className="badge rounded-pill bg-info mr-2 p-2" style={{ fontSize: "20px" }}>Start: {moment(post.start).format('llll')}</p>
                         <p className="badge rounded-pill bg-danger mr-2 p-2" style={{ fontSize: '20px' }}>End: {moment(post.end).format('llll')}</p>
-                        <p>Location: {post.owner?.location}</p>
+                        <p>{post?.owner?.place}</p>
                     </div>
 
                     <DeleteModal isShowingModal={showDeleteModal} toggleModal={toggleDeleteModal} post={post} />
