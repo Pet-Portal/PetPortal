@@ -12,6 +12,8 @@ const usersMid = require('../middlewares/users.middleware');
 const petsMid = require('../middlewares/pets.middleware');
 const postsMid = require('../middlewares/posts.middleware');
 const secure = require('../middlewares/secure.middleware');
+const app = require('../app');
+const createError = require('http-errors');
 
 
 //PETS ROUTES
@@ -55,3 +57,8 @@ router.get('/users/:userId/offers', secure.isAuthenticated, offers.listUserOffer
 router.post('/posts/:postId/offers', secure.isAuthenticated, postsMid.postExists, offers.create);
 router.get('/posts/:postId/offers', secure.isAuthenticated, offers.offerListFromPost);
 module.exports = router;
+
+/* Handle 404 Errors */
+router.use((req, res, next) => {
+    next(createError(404, 'Route not found'));
+});
