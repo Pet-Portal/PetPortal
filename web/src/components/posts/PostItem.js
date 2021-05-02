@@ -31,9 +31,9 @@ function PostItem({
           <div className="card-body">
             <h5 className="text-center font-weight-bold">{maxCharsTitle(title, 25)}</h5>
             <div className="text-center">
-              <p className="card-text badge rounded-pill bg-warning mr-2 p-2" style={{ fontSize: "0.7rem" }}>{moment(start).format('MMMM Do')}</p>
+              <p className="card-text badge rounded-pill bg-warning mr-2 p-2" style={{ fontSize: "0.7rem" }}>{moment(start).format('MMM Do')}</p>
               <i className="fa fa-arrow-right"></i>
-              <p className="card-text badge rounded-pill bg-success ml-2 p-2" style={{ fontSize: "0.7rem" }}>{moment(end).format('MMMM Do')}</p>
+              <p className="card-text badge rounded-pill bg-success ml-2 p-2" style={{ fontSize: "0.7rem" }}>{moment(end).format('MMM Do')}</p>
               <p>{maxCharsTitle(owner.place, 30)}</p>
             </div>
           </div>
