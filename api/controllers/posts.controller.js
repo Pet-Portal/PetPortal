@@ -1,5 +1,4 @@
 const Post = require("../models/post.model");
-const createError = require("http-errors");
 const User = require("../models/user.model");
 
 module.exports.create = (req, res, next) => {

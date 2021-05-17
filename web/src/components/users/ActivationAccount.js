@@ -22,4 +22,4 @@ const ActivationAccount = () => {
     )
 }
 
-export default ActivationAccount
+export default ActivationAccount;

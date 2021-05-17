@@ -1,4 +1,3 @@
-const createError = require("http-errors");
 const Pet = require("../models/pet.model");
 
 module.exports.list = (req, res, next) => {

@@ -38,9 +38,9 @@ module.exports.create = (req, res, next) => {
       next(createError(400, {errors: { title: { message: "You have already rated this Petsitter"}}}));
     } else if (petId && ownPet) {
       next(createError(400, {errors: { title: { message: "You cant vote your own Pet"}}}));
-    } /* else if (moment().isBefore(moment(req.foundPost.end))) {
+    } else if (moment().isBefore(moment(req.foundPost.end))) {
       next(createError(400, {errors: { title: { message: "You cant rate in this post yet"}}}));
-    } */ else if (
+    } else if (
       req.user.id === req.foundPost.owner.id ||
       req.user.id === req.foundPost.petsitter.id
     ) {

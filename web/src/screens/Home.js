@@ -10,7 +10,7 @@ export const Home = () => {
                     <div className="row">
                         <div className="col-md-6">
                             <h1 className="title">The new House for your Pets!</h1>
-                            <h4>Find with us someone to take care of your Pets! Or maybe become a Pet-Sitter and show your inner love fo them!.</h4>
+                            <h4>Find with us someone to take care of your Pets! Or maybe become a Pet-Sitter and show your inner love for them!</h4>
                             <br />
                             <a href="/register" className="btn btn-info btn-raised btn-lg">
                                 <i className="fa fa-sign-in mr-3"></i>Get Started!
